@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+}
+
+:root {
+  --font-main: #141416;
+  --font-title: #456caa;
+  --font-nav-nonactive: #D7DCD8;
+  --font-nav-active: #88a2ce;
+  --bgc:	#F7F7F7;
+  --bgc-element: white;
+  --bgc-nav-hover: #ecf2fd;
+  --bgc-btn: #88a2ce;
+  --bgc-btn-hover: #456caa;
+  --box-shadow: #b8b8b8;
+}

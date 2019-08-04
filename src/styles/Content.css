@@ -1,0 +1,14 @@
+.content-container {
+  display: flex;
+  height: 100%;
+}
+
+.navigation {
+width: 250px;
+background-color: #bbbbbb;
+}
+
+.page {
+flex-grow: 1;
+background-color: #ccc;
+}
