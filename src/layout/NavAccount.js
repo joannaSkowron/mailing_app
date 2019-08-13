@@ -2,7 +2,12 @@ import React from 'react';
 
 const NavAccount = () => {
   return (
-    <div>navaccount</div>
+    <>
+      <header>
+        <h1 className='nav-header'>Account</h1>
+      </header>
+      <div>navaccount</div>
+    </>
   );
 }
 

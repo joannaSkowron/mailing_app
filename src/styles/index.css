@@ -14,14 +14,22 @@ body {
 }
 
 :root {
-  --font-main: #141416;
-  --font-title: #456caa;
-  --font-nav-nonactive: #D7DCD8;
-  --font-nav-active: #88a2ce;
-  --bgc:	#F7F7F7;
-  --bgc-element: white;
-  --bgc-nav-hover: #ecf2fd;
-  --bgc-btn: #88a2ce;
-  --bgc-btn-hover: #456caa;
-  --box-shadow: #b8b8b8;
+  --bgc-trans: rgba(256, 256, 256, 0.2);
+  --font-main: white;
+  --font-active: rgb(255, 251, 233);
+  --font-trans-black: rgba(0, 0, 0, 0.2);
+  --font-trans-white: rgba(256, 256, 256, 0.8);
+  
+  --color1: white;
+  --color1-02: rgba(256, 256, 256, 0.2);
+  --color1-04: rgba(256, 256, 256, 0.4);
+  --color1-05: rgba(256, 256, 256, 0.5);
+  --color1-08: rgba(256, 256, 256, 0.8);
+
+  --color2: black;
+  --color2-02: rgba(0, 0, 0, 0.2);
+  --color2-05: rgba(0, 0, 0, 0.5);
+
+  --color3: rgb(255, 251, 233);
+
 }

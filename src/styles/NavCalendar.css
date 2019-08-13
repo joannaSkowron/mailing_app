@@ -1,0 +1,110 @@
+.calendar {
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 250px;
+  max-width: 250px;
+}
+
+.calendar-month_header	{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+
+}
+
+.calendar-month_header_title {
+  /* .is-prev - when is the previous month button
+  .is-next - when is the next month button
+  .is-disabled - when the button is disabled */
+  margin: 10px;
+  font-size: 14px;
+  color: var(--color1);
+  letter-spacing: 1.2px;
+}
+
+.calendar-header_button.is-next::after {
+  content: '>';
+}
+
+.calendar-header_button.is-prev::before {
+  content: '<';
+}
+
+.calendar-header_button.is-next,
+.calendar-header_button.is-prev {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color1-02);
+  color: var(--color1);
+  font-size: 14px;
+  box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);
+  transition: .2s ease;
+    
+}
+
+
+.calendar-days_of_week {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 0 7px 0;
+  font-size: 12px;
+  color: var(--color1);
+  font-weight: 600;
+}
+
+/* .calendar-days_of_week_day
+ .is-weekend - when the day is the weekend 
+.calendar-month */
+
+.calendar-week {
+  display: flex;
+
+}
+
+.calendar-day {
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  font-size: 14px;
+  background-color: transparent;
+  color: var(--color1-08);
+  outline: none;
+  cursor: pointer;
+  /* .is-selected - when the date is selected
+.is-highlighted - when the date is highlighted
+.is-today - when the date is current one
+.is-start_selection - when the date is start day of selection
+.is-end_selection - when the date is end day of selection
+.is-current_month - when the date belongs to the current month
+.is-prev_month - when the date belongs to the previous month
+.is-next_month - when the date belongs to the next month
+.is-weekend - when the date is the weekend
+.is-working_day - when the date is the working day
+.is-selectable - when the date can be selected
+.is-not_selectable - when the date can't be selected */
+}
+
+.calendar-day:hover {
+  border: 1px solid var(--color2-02);
+}
+
+.is-today {
+ background-color: var(--color2-02);
+}
+
+.is-prev_month, .is-next_month {
+  color: var(--color1-04);
+}
+
+.is-selected, .is-start_selection, .is-end_selection {
+  background-color: var(--color1-02);
+  color: var(--color2-05);
+}

@@ -11,11 +11,15 @@ const menuItems = [
 
 const Menubar = () => {
   const menu = menuItems.map(menuItem => (
-    <li key={menuItem.name} className='menu-item'>
+    <div key={menuItem.name} className="menu-item-container">
+
       <NavLink to={menuItem.path} exact={menuItem.exact ? menuItem.exact : false}>
-        {menuItem.icon}
+        <li className='menu-item'>
+          {menuItem.icon}
+        </li>
       </NavLink>
-    </li>
+
+    </div>
   ))
 
   return (

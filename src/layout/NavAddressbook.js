@@ -2,9 +2,14 @@ import React from 'react';
 
 const NavAddressbook = () => {
   return (
-    <div>
-      navaddressbook
+    <>
+      <header>
+        <h1 className='nav-header'>Contacts</h1>
+      </header>
+      <div>
+        navaddressbook
     </div>
+    </>
   );
 }
 
