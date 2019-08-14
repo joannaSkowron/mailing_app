@@ -31,7 +31,7 @@ const NavEmail = () => {
           <li className='nav-item nav-item-btn'>
             <NavLink to='/email/compose' exact>
               <i class='fas fa-plus'></i>Compose
-      </NavLink> </li>
+            </NavLink> </li>
           {navigation}
         </ul>
       </nav>
