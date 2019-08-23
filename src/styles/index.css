@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,19 +15,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
+  height: 100%;
 }
 
 :root {
-  --bgc-trans: rgba(256, 256, 256, 0.2);
+  /* --bgc-trans: rgba(256, 256, 256, 0.2);
   --font-main: white;
   --font-active: rgb(255, 251, 233);
   --font-trans-black: rgba(0, 0, 0, 0.2);
-  --font-trans-white: rgba(256, 256, 256, 0.8);
+  --font-trans-white: rgba(256, 256, 256, 0.8); */
   
   --color1: white;
   --color1-02: rgba(256, 256, 256, 0.2);
   --color1-04: rgba(256, 256, 256, 0.4);
   --color1-05: rgba(256, 256, 256, 0.5);
+  --color1-06: rgba(256, 256, 256, 0.6);
   --color1-08: rgba(256, 256, 256, 0.8);
 
   --color2: black;

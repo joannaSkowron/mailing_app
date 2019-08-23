@@ -1,0 +1,39 @@
+.emails-table {
+ width: 100%;
+ color: var(--color2-05);
+}
+
+.emails-table-header {
+ color: var(--color2-05);
+ font-size: 14px;
+ text-align: left;
+}
+
+.emails-table-td {
+  /* width: 10%; */
+  height: 20px;
+  line-height: 20px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emails-table-row {
+ cursor: pointer;
+}
+
+.emails-table-sender {
+ width: 20%;
+}
+
+.emails-table-title {
+ width: 30%;
+}
+
+.emails-table-body {
+ width: 30%;
+}
+
+.emails-table-date {
+ width: 20%;
+}

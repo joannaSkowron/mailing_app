@@ -4,8 +4,8 @@ import '../styles/Nav.css';
 
 const navItems = [
   { name: 'Inbox', path: '/email/inbox', exact: true, icon: <i class='far fa-envelope-open'></i> },
-  { name: 'Sent', path: '/email/sent', icon: <i class='far fa-paper-plane'></i> },
-  { name: 'Drafts', path: '/email/drafts', icon: <i class='fas fa-pencil-ruler'></i> },
+  { name: 'Sent', path: '/email/outbox', icon: <i class='far fa-paper-plane'></i> },
+  { name: 'Drafts', path: '/email/draft', icon: <i class='fas fa-pencil-ruler'></i> },
   { name: 'Bin', path: '/email/bin', icon: <i class='far fa-trash-alt'></i> },
   { name: 'Spam', path: '/email/spam', icon: <i class='fas fa-ban'></i> },
 ]
@@ -28,10 +28,12 @@ const NavEmail = () => {
       <nav className='nav-container'>
 
         <ul className='nav'>
-          <li className='nav-item nav-item-btn'>
+          <div className='nav-item nav-item-btn'>
             <NavLink to='/email/compose' exact>
               <i class='fas fa-plus'></i>Compose
-            </NavLink> </li>
+            </NavLink>
+          </div>
+
           {navigation}
         </ul>
       </nav>

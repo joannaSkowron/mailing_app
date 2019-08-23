@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EmailListItem.js = () => {
+const EmailListItem = () => {
   return (
     <div>
       email list item
@@ -8,4 +8,4 @@ const EmailListItem.js = () => {
   );
 }
 
-export default EmailListItem.js;
+export default EmailListItem;
