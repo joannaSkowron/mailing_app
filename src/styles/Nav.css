@@ -1,7 +1,6 @@
 .nav-header {
   display: block;
-  padding: 20px 0px 20px 30px;
-  margin: 0;
+  padding: 15px 0px 20px 30px;
   color: var(--color2-02);
   font-size: 40px;
   font-weight: 600;
@@ -41,6 +40,12 @@
   transition: .2s;
 }
 
+.nav-item:hover {
+  background-color: var(--color2-01);
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
 .nav-item .active, .nav-item .active i {
   color: var(--color3);
   text-shadow: 0px 0px 4px var(--color3);
@@ -58,7 +63,7 @@
 }
 
 .nav-item-btn:hover {
-  background-color: var(--color2-02);
+  background-color: var(--color2-01);
 }
 
 .nav-item-btn i {

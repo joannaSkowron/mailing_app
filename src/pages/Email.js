@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Search from '../components/Search';
+import Pager from '../components/Pager';
 import '../styles/Page.css';
 
 
@@ -54,17 +56,17 @@ class Email extends Component {
 
     const emails_table = items.map(item => (
       <tr key={item.id} className='emails-table-row'>
-        <td className='emails-table-td emails-table-sender'>
-          {item.from.address}
+        <td className='emails-table-sender'>
+          <div className='emails-table-td'>{item.from.address}</div>
         </td>
-        <td className='emails-table-td emails-table-title'>
-          {item.title}
+        <td className='emails-table-title'>
+          <div className='emails-table-td'>{item.title}</div>
         </td>
-        <td className='emails-table-td emails-table-body'>
-          {item.content}
+        <td className='emails-table-body'>
+          <div className='emails-table-td'>{item.content}</div>
         </td>
-        <td className='emails-table-td emails-table-date'>
-          {item.date}
+        <td className='emails-table-date'>
+          <div className='emails-table-td'>{new Date(item.date).toLocaleString()}</div>
         </td>
       </tr>
     ));
@@ -76,6 +78,11 @@ class Email extends Component {
 
     return (
       <>
+        <div className="tools-container">
+          <div className="search">{<Search />}</div>
+          <div className="pager">{<Pager />}</div>
+        </div>
+
         <table className='emails-table'>
           <tbody>
             <tr className='emails-table-header'>

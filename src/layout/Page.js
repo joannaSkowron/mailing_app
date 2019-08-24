@@ -15,25 +15,27 @@ import Error from '../pages/Error';
 const Page = () => {
 
   return (
+    <>
 
-    <Switch>
-      <Route path='/email/:folder' component={Email} />
-      <Route path='/email/compose' component={EmailCompose} />
+      <Switch>
+        <Route path='/email/:folder' component={Email} />
+        <Route path='/email/compose' component={EmailCompose} />
 
-      <Route path='/calendar' component={Calendar} />
+        <Route path='/calendar' component={Calendar} />
 
-      <Route path='/addressbook/favourites' component={Addressbook} />
-      <Route path='/addressbook/add' component={AddressbookAdd} />
-      <Route path='/addressbook/all' component={Addressbook} />
-      <Route path='/addressbook/deleted' component={Addressbook} />
+        <Route path='/addressbook/favourites' component={Addressbook} />
+        <Route path='/addressbook/add' component={AddressbookAdd} />
+        <Route path='/addressbook/all' component={Addressbook} />
+        <Route path='/addressbook/deleted' component={Addressbook} />
 
-      <Route path='/account/info' component={AccountInfo} />
-      <Route path='/account/edit' component={AccountEdit} />
-      <Route path='/account/signout' component={Signout} />
+        <Route path='/account/info' component={AccountInfo} />
+        <Route path='/account/edit' component={AccountEdit} />
+        <Route path='/account/signout' component={Signout} />
 
-      <Route component={Error} />
+        <Route component={Error} />
 
-    </Switch>
+      </Switch>
+    </>
   );
 }
 

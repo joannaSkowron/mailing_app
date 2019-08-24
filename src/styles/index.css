@@ -33,8 +33,10 @@ body {
   --color1-08: rgba(256, 256, 256, 0.8);
 
   --color2: black;
+  --color2-01: rgba(0, 0, 0, 0.1);
   --color2-02: rgba(0, 0, 0, 0.2);
   --color2-05: rgba(0, 0, 0, 0.5);
+  --color2-06: rgba(0, 0, 0, 0.6);
 
   --color3: rgb(255, 251, 233);
 

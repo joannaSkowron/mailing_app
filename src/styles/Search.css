@@ -1,0 +1,23 @@
+.search {
+width: 30%;
+}
+
+.input-search-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: none;
+  padding: 8px 12px 8px 8px;
+  background-color: var(--color2-01);
+  color: var(--color2-06);
+  border-radius: 25px;
+}
+
+.input-search {
+  flex-grow: 1;
+  margin: 0 5px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: var(--color2-06);
+}

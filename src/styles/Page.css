@@ -1,3 +1,14 @@
+.tools-container {
+  width: 100%;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pager {
+  width: 180px;
+}
+
 .emails-table {
  width: 100%;
  color: var(--color2-05);
@@ -9,8 +20,11 @@
  text-align: left;
 }
 
+/* .emails-table-header:last-of-type {
+  text-align: right;
+} */
+
 .emails-table-td {
-  /* width: 10%; */
   height: 20px;
   line-height: 20px;
   white-space: nowrap; 
@@ -36,4 +50,5 @@
 
 .emails-table-date {
  width: 20%;
+ text-align: right;
 }

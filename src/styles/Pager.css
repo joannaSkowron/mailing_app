@@ -1,0 +1,25 @@
+.pager-container {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color2-05);
+  font-size: 12px;
+}
+
+.pager-location {
+line-height: 35px;
+}
+
+.pager-btn {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color2-01);
+  font-size: 14px;
+  transition: .2s ease;
+  color: var(--color2-05);
+  outline: none;
+}
+

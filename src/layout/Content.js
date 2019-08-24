@@ -5,12 +5,12 @@ import '../styles/Content.css';
 
 const Content = () => {
   return (
-
-    <div className="content-container">
-      <div className="navigation"> {<Navigation />} </div>
-      <div className="page"> {<Page />}</div>
-    </div>
-
+    <>
+      <div className="content-container">
+        <div className="navigation"> {<Navigation />} </div>
+        <div className="page"> {<Page />}</div>
+      </div>
+    </>
   );
 }
 
