@@ -10,9 +10,9 @@ class Pager extends Component {
     return (
       <>
         <div className="pager-container">
-          <p className="pager-location">page 1 of 1000</p>
-          <button className="pager-btn"><i class="fas fa-chevron-left"></i></button>
-          <button className="pager-btn"><i class="fas fa-chevron-right"></i></button>
+          <p className="pager-location">page {this.props.currentPage} of {this.props.pagesCount}</p>
+          <button className="pager-btn" onClick={() => this.props.handlePageChange(-1)}><i class="fas fa-chevron-left" ></i></button>
+          <button className="pager-btn" onClick={() => this.props.handlePageChange(1)}><i class="fas fa-chevron-right" ></i></button>
         </div>
       </>
     );

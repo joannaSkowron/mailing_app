@@ -9,10 +9,24 @@ class Email extends Component {
 
   state = {
     data: null,
+    skip: 0,
+    take: 20,
+    currentPage: 1,
+    pagesCount: null,
   };
 
-  fetchData(folder) {
-    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=0&take=20`;
+  setPagesCount() {
+    if (this.state.data !== null) {
+      const pagesCount = Math.ceil(this.state.data.itemsCount / this.state.take);
+      this.setState({
+        pagesCount,
+      })
+    }
+  }
+
+  fetchData(folder, skip, take) {
+    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}`;
+
 
     fetch(API, {
       method: 'GET'
@@ -27,26 +41,44 @@ class Email extends Component {
         this.setState(state => ({
           data
         }))
+
+        this.setPagesCount();
       })
       .catch(err => {
         console.log(err)
       })
   }
 
+  handlePageChange = (value) => {
+    const { take, currentPage, pagesCount } = this.state;
+    if (currentPage + value >= 1 && currentPage + value <= pagesCount) {
+      const newCurrentPage = currentPage + value;
+      const newSkip = (newCurrentPage - 1) * take;
+
+      this.setState({
+        currentPage: newCurrentPage,
+        skip: newSkip,
+      })
+
+
+      const folder = this.props.match.params.folder;
+      this.fetchData(folder, newSkip, take);
+    }
+  }
+
+
   componentWillReceiveProps(newProps) {
     const folder = newProps.match.params.folder;
-    this.fetchData(folder);
-    console.log("new props");
+    const { skip, take } = this.state;
+    this.fetchData(folder, skip, take);
   }
 
   componentDidMount(props) {
     const folder = this.props.match.params.folder;
-    this.fetchData(folder);
+    const { skip, take } = this.state;
+    this.fetchData(folder, skip, take);
   }
 
-  getItemsCount() {
-    return this.state.data !== null ? this.state.data.itemsCount : null;
-  }
 
   renderEmailsTable() {
 
@@ -80,7 +112,11 @@ class Email extends Component {
       <>
         <div className="tools-container">
           <div className="search">{<Search />}</div>
-          <div className="pager">{<Pager />}</div>
+          <div className="pager">{<Pager
+            pagesCount={this.state.pagesCount}
+            currentPage={this.state.currentPage}
+            handlePageChange={this.handlePageChange}
+          />}</div>
         </div>
 
         <table className='emails-table'>
@@ -94,7 +130,6 @@ class Email extends Component {
             {this.renderEmailsTable()}
           </tbody>
         </table>
-        {this.getItemsCount()}
       </>
     );
   }
