@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from '../components/Search';
 import Pager from '../components/Pager';
+import DateSorting from '../components/DateSorting';
 import '../styles/Page.css';
 
 
@@ -13,6 +14,7 @@ class Email extends Component {
     take: 20,
     currentPage: 1,
     pagesCount: null,
+    searchText: '',
   };
 
   setPagesCount() {
@@ -24,13 +26,10 @@ class Email extends Component {
     }
   }
 
-  fetchData(folder, skip, take) {
-    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}`;
+  fetchData(folder, skip, take, searchText) {
+    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}`;
 
-
-    fetch(API, {
-      method: 'GET'
-    })
+    fetch(API)
       .then(response => {
         if (response.ok) {
           return response
@@ -50,7 +49,7 @@ class Email extends Component {
   }
 
   handlePageChange = (value) => {
-    const { take, currentPage, pagesCount } = this.state;
+    const { take, currentPage, pagesCount, searchText } = this.state;
     if (currentPage + value >= 1 && currentPage + value <= pagesCount) {
       const newCurrentPage = currentPage + value;
       const newSkip = (newCurrentPage - 1) * take;
@@ -60,23 +59,32 @@ class Email extends Component {
         skip: newSkip,
       })
 
-
       const folder = this.props.match.params.folder;
-      this.fetchData(folder, newSkip, take);
+      this.fetchData(folder, newSkip, take, searchText);
     }
   }
 
+  handleSearch = (value) => {
+    console.log(value);
+    this.setState({
+      searchText: value,
+    });
+
+    const folder = this.props.match.params.folder;
+    const { skip, take } = this.state;
+    this.fetchData(folder, skip, take, value);
+  }
 
   componentWillReceiveProps(newProps) {
     const folder = newProps.match.params.folder;
-    const { skip, take } = this.state;
-    this.fetchData(folder, skip, take);
+    const { skip, take, searchText } = this.state;
+    this.fetchData(folder, skip, take, searchText);
   }
 
   componentDidMount(props) {
     const folder = this.props.match.params.folder;
-    const { skip, take } = this.state;
-    this.fetchData(folder, skip, take);
+    const { skip, take, searchText } = this.state;
+    this.fetchData(folder, skip, take, searchText);
   }
 
 
@@ -108,13 +116,17 @@ class Email extends Component {
 
   render() {
 
+    const { pagesCount, currentPage } = this.state;
+
     return (
       <>
         <div className="tools-container">
-          <div className="search">{<Search />}</div>
+          <div className="search">{<Search
+            handleSearch={this.handleSearch}
+          />}</div>
           <div className="pager">{<Pager
-            pagesCount={this.state.pagesCount}
-            currentPage={this.state.currentPage}
+            pagesCount={pagesCount}
+            currentPage={currentPage}
             handlePageChange={this.handlePageChange}
           />}</div>
         </div>
@@ -125,7 +137,7 @@ class Email extends Component {
               <th>From</th>
               <th>Title</th>
               <th>Content</th>
-              <th>Received on</th>
+              <th className='emails-table-header-date'>Received {<DateSorting />}</th>
             </tr>
             {this.renderEmailsTable()}
           </tbody>

@@ -20,9 +20,10 @@
  text-align: left;
 }
 
-/* .emails-table-header:last-of-type {
-  text-align: right;
-} */
+.emails-table-header-date {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .emails-table-td {
   height: 20px;

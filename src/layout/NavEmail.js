@@ -13,8 +13,9 @@ const navItems = [
 const NavEmail = () => {
 
   const navigation = navItems.map(navItem => (
-    <li key={navItem.name} className='nav-item'>
-      <NavLink to={navItem.path} exact={navItem.exact ? navItem.exact : false}>
+
+    <li key={navItem.name} className='nav-item' >
+      <NavLink to={navItem.path} exact={navItem.exact ? navItem.exact : false} className='nav-item-container' >
         {navItem.icon}{navItem.name}
       </NavLink>
     </li>
