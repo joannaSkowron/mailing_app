@@ -8,11 +8,10 @@ class DateSorting extends Component {
   }
 
   handleDateSorting = () => {
-    debugger;
     this.setState(prevState => ({
       newestFirst: !prevState.newestFirst,
-    }))
-
+    }));
+    this.props.handleDateSorting(!this.state.newestFirst);
   }
 
   render() {

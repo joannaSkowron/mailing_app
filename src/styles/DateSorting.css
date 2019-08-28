@@ -9,7 +9,10 @@
  border-radius: 50%;
  background-color: var(--color2-01);
  cursor: pointer;
- transition: .2s;
+}
+
+.date-sorting {
+  transition: .2s;
 }
 
 .date-sorting:hover {

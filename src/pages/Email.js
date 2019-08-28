@@ -15,6 +15,7 @@ class Email extends Component {
     currentPage: 1,
     pagesCount: null,
     searchText: '',
+    newestFirst: true,
   };
 
   setPagesCount() {
@@ -26,8 +27,8 @@ class Email extends Component {
     }
   }
 
-  fetchData(folder, skip, take, searchText) {
-    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}`;
+  fetchData(folder, skip, take, searchText, newestFirst) {
+    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}&newestFirst=${newestFirst}`;
 
     fetch(API)
       .then(response => {
@@ -49,7 +50,7 @@ class Email extends Component {
   }
 
   handlePageChange = (value) => {
-    const { take, currentPage, pagesCount, searchText } = this.state;
+    const { take, currentPage, pagesCount, searchText, newestFirst } = this.state;
     if (currentPage + value >= 1 && currentPage + value <= pagesCount) {
       const newCurrentPage = currentPage + value;
       const newSkip = (newCurrentPage - 1) * take;
@@ -60,31 +61,40 @@ class Email extends Component {
       })
 
       const folder = this.props.match.params.folder;
-      this.fetchData(folder, newSkip, take, searchText);
+      this.fetchData(folder, newSkip, take, searchText, newestFirst);
     }
   }
 
   handleSearch = (value) => {
-    console.log(value);
     this.setState({
       searchText: value,
     });
 
     const folder = this.props.match.params.folder;
-    const { skip, take } = this.state;
-    this.fetchData(folder, skip, take, value);
+    const { skip, take, newestFirst } = this.state;
+    this.fetchData(folder, skip, take, value, newestFirst);
+  }
+
+  handleDateSorting = (value) => {
+    this.setState({
+      newestFirst: value,
+    });
+
+    const folder = this.props.match.params.folder;
+    const { skip, take, searchText } = this.state;
+    this.fetchData(folder, skip, take, searchText, value);
   }
 
   componentWillReceiveProps(newProps) {
     const folder = newProps.match.params.folder;
-    const { skip, take, searchText } = this.state;
-    this.fetchData(folder, skip, take, searchText);
+    const { skip, take, searchText, newestFirst } = this.state;
+    this.fetchData(folder, skip, take, searchText, newestFirst);
   }
 
   componentDidMount(props) {
     const folder = this.props.match.params.folder;
-    const { skip, take, searchText } = this.state;
-    this.fetchData(folder, skip, take, searchText);
+    const { skip, take, searchText, newestFirst } = this.state;
+    this.fetchData(folder, skip, take, searchText, newestFirst);
   }
 
 
@@ -137,7 +147,9 @@ class Email extends Component {
               <th>From</th>
               <th>Title</th>
               <th>Content</th>
-              <th className='emails-table-header-date'>Received {<DateSorting />}</th>
+              <th className='emails-table-header-date'>Received {<DateSorting
+                handleDateSorting={this.handleDateSorting}
+              />}</th>
             </tr>
             {this.renderEmailsTable()}
           </tbody>
