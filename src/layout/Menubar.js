@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import '../styles/Menubar.css';
 
 const menuItems = [
-  { name: 'Email', path: '/email/', icon: <i class="far fa-envelope-open" title="Email"></i> },
-  { name: 'Calendar', path: '/calendar/', icon: <i class="far fa-calendar-alt" title="Calendar"></i> },
-  { name: 'Addressbook', path: '/addressbook/', icon: <i class="far fa-address-book" title="Addressbook"></i> },
-  { name: 'Account', path: '/account/', icon: <i class="far fa-user" title="Account info"></i> },
+  { name: 'Email', path: '/email/', icon: <i className="far fa-envelope-open" title="Email"></i> },
+  { name: 'Calendar', path: '/calendar/', icon: <i className="far fa-calendar-alt" title="Calendar"></i> },
+  { name: 'Addressbook', path: '/addressbook/', icon: <i className="far fa-address-book" title="Addressbook"></i> },
+  { name: 'Account', path: '/account/', icon: <i className="far fa-user" title="Account info"></i> },
 ]
 
 const Menubar = () => {

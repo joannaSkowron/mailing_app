@@ -1,0 +1,32 @@
+.email-view-tools-container {
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 230px;
+  padding: 10px 10px 0 10px;
+}
+
+.email-view-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color2-01);
+  font-size: 14px;
+  transition: .2s ease;
+  color: var(--color2-05);
+  outline: none;
+}
+
+.email-view-tools:hover {
+  cursor: pointer;
+ color: var(--color3);
+ text-shadow: 0px 0px 4px var(--color3);
+ transition: .2s
+}

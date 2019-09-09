@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import Search from '../components/Search';
 import Pager from '../components/Pager';
 import DateSorting from '../components/DateSorting';
+import Spinner from '../components/Spinner';
 import '../styles/Page.css';
 
 
@@ -16,6 +18,7 @@ class Email extends Component {
     pagesCount: null,
     searchText: '',
     newestFirst: true,
+    showSpinner: true,
   };
 
   setPagesCount() {
@@ -28,8 +31,12 @@ class Email extends Component {
   }
 
   fetchData(folder, skip, take, searchText, newestFirst) {
-    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}&newestFirst=${newestFirst}`;
 
+    this.setState({
+      showSpinner: true,
+    });
+
+    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}&newestFirst=${newestFirst}`;
     fetch(API)
       .then(response => {
         if (response.ok) {
@@ -38,10 +45,10 @@ class Email extends Component {
       })
       .then(response => response.json())
       .then(data => {
-        this.setState(state => ({
-          data
-        }))
-
+        this.setState({
+          data,
+          showSpinner: false,
+        });
         this.setPagesCount();
       })
       .catch(err => {
@@ -86,41 +93,74 @@ class Email extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+    this.setState({
+      currentPage: 1,
+    });
     const folder = newProps.match.params.folder;
-    const { skip, take, searchText, newestFirst } = this.state;
-    this.fetchData(folder, skip, take, searchText, newestFirst);
+    const { take, searchText, newestFirst } = this.state;
+    this.fetchData(folder, 0, take, searchText, newestFirst);
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     const folder = this.props.match.params.folder;
     const { skip, take, searchText, newestFirst } = this.state;
     this.fetchData(folder, skip, take, searchText, newestFirst);
   }
 
 
+  getDate(date) {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const currentDate = new Date();
+
+    const minutes = date.getMinutes();
+    const hours = date.getHours();
+    const day = date.getDate();
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+
+    let formattedDate = null;
+    if (currentDate.getDate() === day && monthNames[currentDate.getMonth()] === month && currentDate.getFullYear() === year) {
+      formattedDate = `${hours}:${minutes}`
+    } else if (currentDate.getFullYear() === year) {
+      formattedDate = `${day} ${month}`
+    } else if (currentDate.getFullYear() !== year) {
+      formattedDate = `${day}/${month}/${year}`
+    };
+
+    return formattedDate;
+  }
+
+  renderSpinner() {
+    if (this.state.showSpinner)
+      return <Spinner />;
+  }
+
   renderEmailsTable() {
-
     if (this.state.data === null) return;
-
     const { items } = this.state.data;
 
     const emails_table = items.map(item => (
-      <tr key={item.id} className='emails-table-row'>
-        <td className='emails-table-sender'>
-          <div className='emails-table-td'>{item.from.address}</div>
-        </td>
-        <td className='emails-table-title'>
-          <div className='emails-table-td'>{item.title}</div>
-        </td>
-        <td className='emails-table-body'>
-          <div className='emails-table-td'>{item.content}</div>
-        </td>
-        <td className='emails-table-date'>
-          <div className='emails-table-td'>{new Date(item.date).toLocaleString()}</div>
-        </td>
-      </tr>
-    ));
 
+      <NavLink to={`/email/viewemail/${this.props.match.params.folder}/${item.id}`} key={item.id} >
+        <div className='emails-table-row'>
+          <div className='emails-table emails-table-from'>
+            <div className="emails-table-cell">
+              <p>{item.from.address}</p>
+              <p className='emails-table-from-adress'>{item.from.address}</p>
+            </div>
+          </div>
+          <div className='emails-table emails-table-title'>
+            <div className="emails-table-cell">{item.title}</div>
+          </div>
+          <div className='emails-table emails-table-content'>
+            <div className="emails-table-cell">{item.content}</div>
+          </div>
+          <div className='emails-table emails-table-date'>
+            <div className="emails-table-cell">{this.getDate(new Date(item.date))}</div>
+          </div>
+        </div>
+      </NavLink>
+    ));
     return emails_table;
   }
 
@@ -141,19 +181,18 @@ class Email extends Component {
           />}</div>
         </div>
 
-        <table className='emails-table'>
-          <tbody>
-            <tr className='emails-table-header'>
-              <th>From</th>
-              <th>Title</th>
-              <th>Content</th>
-              <th className='emails-table-header-date'>Received {<DateSorting
-                handleDateSorting={this.handleDateSorting}
-              />}</th>
-            </tr>
-            {this.renderEmailsTable()}
-          </tbody>
-        </table>
+        <div className='emails-table-container'>
+          <div className='emails-table-header'>
+            <div className="emails-table-header-item emails-table-header-from">From</div>
+            <div className="emails-table-header-item emails-table-header-title">Title</div>
+            <div className="emails-table-header-item emails-table-header-content">Content</div>
+            <div className='emails-table-header-item emails-table-header-date'>Received {<DateSorting
+              handleDateSorting={this.handleDateSorting}
+            />}</div>
+          </div>
+          {this.renderEmailsTable()}
+          {this.renderSpinner()}
+        </div>
       </>
     );
   }

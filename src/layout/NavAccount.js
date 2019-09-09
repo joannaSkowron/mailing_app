@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Account info', path: '/account/info', exact: true, icon: <i class="fas fa-info"></i> },
-  { name: 'Edit', path: '/account/edit', exact: true, icon: <i class="far fa-edit"></i> },
-  { name: 'Sign out', path: '/account/signout', exact: true, icon: <i class="far fa-arrow-alt-circle-right"></i> },
+  { name: 'Account info', path: '/account/info', exact: true, icon: <i className="fas fa-info"></i> },
+  { name: 'Edit', path: '/account/edit', exact: true, icon: <i className="far fa-edit"></i> },
+  { name: 'Sign out', path: '/account/signout', exact: true, icon: <i className="far fa-arrow-alt-circle-right"></i> },
 ]
 
 const NavAccount = () => {

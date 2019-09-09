@@ -35,9 +35,30 @@ body {
   --color2: black;
   --color2-01: rgba(0, 0, 0, 0.1);
   --color2-02: rgba(0, 0, 0, 0.2);
+  --color2-04: rgba(0, 0, 0, 0.4);
   --color2-05: rgba(0, 0, 0, 0.5);
   --color2-06: rgba(0, 0, 0, 0.6);
 
   --color3: rgb(255, 251, 233);
+}
 
+/* Custom scrollbar: */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color1-02); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color2-02); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color2-06); 
 }

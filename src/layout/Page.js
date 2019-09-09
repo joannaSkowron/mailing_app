@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import '../styles/Page.css';
 import Email from '../pages/Email';
 import EmailCompose from '../pages/EmailCompose';
+import EmailView from '../pages/EmailView';
 import Calendar from '../pages/Calendar';
 import Addressbook from '../pages/Addressbook';
 import AddressbookAdd from '../pages/AddressbookAdd';
@@ -18,8 +19,9 @@ const Page = () => {
     <>
 
       <Switch>
-        <Route path='/email/:folder' component={Email} />
-        <Route path='/email/compose' component={EmailCompose} />
+        <Route path='/email/:folder' exact component={Email} />
+        <Route path='/email/viewemail/:folder/:id' exact component={EmailView} />
+        <Route path='/email/new/compose' exact component={EmailCompose} />
 
         <Route path='/calendar' component={Calendar} />
 

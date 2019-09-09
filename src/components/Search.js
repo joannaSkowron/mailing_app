@@ -31,7 +31,7 @@ class Search extends Component {
 
   clearInput = () => {
     if (this.state.searchText !== '') {
-      return <i class="fas fa-times" title='Clear search' onClick={this.handleClearInput}></i>
+      return <i className="fas fa-times" title='Clear search' onClick={this.handleClearInput}></i>
     }
   }
 
@@ -48,7 +48,7 @@ class Search extends Component {
             onKeyUp={event => this.onKeyUp(event)}
           />
           {this.clearInput()}
-          <i class="fas fa-search" title='Search' onClick={() => this.onClick()}></i>
+          <i className="fas fa-search" title='Search' onClick={() => this.onClick()}></i>
         </div>
       </>
     );

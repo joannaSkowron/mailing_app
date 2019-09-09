@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 import '../styles/Nav.css';
 
 const navItems = [
-  { name: 'Favourites', path: '/addressbook/favourites', icon: <i class="far fa-heart"></i> },
-  { name: 'All', path: '/addressbook/all', icon: <i class="far fa-address-card"></i> },
-  { name: 'Deleted', path: '/addressbook/deleted', icon: <i class='far fa-trash-alt'></i> },
+  { name: 'Favourites', path: '/addressbook/favourites', icon: <i className="far fa-heart"></i> },
+  { name: 'All', path: '/addressbook/all', icon: <i className="far fa-address-card"></i> },
+  { name: 'Deleted', path: '/addressbook/deleted', icon: <i className='far fa-trash-alt'></i> },
 ]
 
 
