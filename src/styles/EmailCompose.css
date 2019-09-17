@@ -1,0 +1,95 @@
+.email-compose-container {
+  height: 100%;
+  /* padding: 20px; */
+  color: var(--color2-05);
+  /* background-color: var(--color1-04); */
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.email-compose-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* padding: 15px; */
+}
+
+.email-compose-form-header {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  padding: 0;
+}
+
+.email-compose-form-header input {
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  background-color: var(--color2-01);
+  color: var(--color2-06);
+  border-radius: 7px;
+}
+
+.email-compose-form-header input:focus {
+  background-color: var(--color1-08);
+  /* border: .5px solid var(--color2-01); */
+}
+
+.email-compose-form-content {
+  flex-grow: 1;
+  margin: 5px 0;
+  width: 100%;
+  /* padding: 8px 12px 8px 8px; */
+  border: none;
+  outline: none;
+  background-color: var(--color1-08);
+  color: var(--color2-06);
+  border-radius: 7px;
+}
+
+.tox-tinymce {
+  /* resize: none; */
+  width: 100%;
+  height: 100% !important;
+  border: none !important;
+  border-radius: 7px !important;
+  background-color: transparent!important;
+}
+
+.tox-editor-container {
+  background-color: transparent!important;
+}
+
+.email-compose-form-editor {
+  width: 100%;
+  height: 100%;
+}
+
+.email-compose-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+  padding: 10px 0 0 0;
+}
+
+.email-compose-btn {
+  width: 120px;
+  padding: 8px;
+  background-color: var(--color1-08);
+  color: var(--color2-05);
+  font-weight: 600;
+  /* border: .5px solid var(--color2-01); */
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.email-compose-btn:hover {
+  background-color: var(--color2-01);
+  color: var(--color3);
+ text-shadow: 0px 0px 4px var(--color3);
+}

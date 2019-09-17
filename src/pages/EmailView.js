@@ -42,7 +42,7 @@ class EmailView extends Component {
     const emailContent = (
       <>
         <div className="email-view-container">
-          <EmailViewTools />
+          <EmailViewTools data={this.state.data} />
 
           <h1 className="email-view-title">{data.title}</h1>
 

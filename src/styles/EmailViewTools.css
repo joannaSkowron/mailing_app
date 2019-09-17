@@ -24,6 +24,10 @@
   outline: none;
 }
 
+.email-view-tools-container a {
+  text-decoration: none;
+}
+
 .email-view-tools:hover {
   cursor: pointer;
  color: var(--color3);

@@ -39,7 +39,7 @@ body {
   --color2-05: rgba(0, 0, 0, 0.5);
   --color2-06: rgba(0, 0, 0, 0.6);
 
-  --color3: rgb(255, 251, 233);
+  --color3: rgba(250, 249, 170, 0.76);
 }
 
 /* Custom scrollbar: */

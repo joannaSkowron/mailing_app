@@ -10,7 +10,7 @@
 }
 
 .emails-table-container {
-  position: relative;
+ position: relative;
  width: 100%;
  height: 90%;
  color: var(--color2-05);
@@ -22,8 +22,8 @@
 }
 
 .emails-table {
-  height: 40px;
-  font-size: 12px;
+  height: 50px;
+  font-size: 13px;
 }
 
 .emails-table-row {
@@ -43,10 +43,10 @@
 .emails-table-header {
   display: flex;
   width: 100%;
- color: var(--color2-05);
- font-size: 14px;
- font-weight: 600;
- text-align: left;
+  color: var(--color2-05);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
 }
 
 .emails-table-cell {
@@ -67,9 +67,8 @@
 }
 
 .emails-table-from-adress {
-  margin-left: 5px;
-  font-size: 10px;
-  color: var(--color2-04);
+  /* margin-left: 5px; */
+  font-size: 11px;
 }
 
 .emails-table-header-title,

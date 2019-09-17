@@ -29,7 +29,7 @@ const NavEmail = () => {
       <nav className='nav-container'>
 
         <ul className='nav'>
-          <div className='nav-item nav-item-btn'>
+          <div className='nav-item-btn'>
             <NavLink to='/email/new/compose' exact>
               <i className='fas fa-plus'></i>Compose
             </NavLink>
