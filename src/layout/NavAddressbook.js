@@ -28,7 +28,7 @@ const NavAddressbook = () => {
         <ul className="nav">
           <li className="nav-item nav-item-btn">
             <NavLink to='/addressbook/add' exact>
-              <i class='fas fa-plus'></i>Add
+              <i className='fas fa-plus'></i>Add
             </NavLink>
           </li>
           {navigation}

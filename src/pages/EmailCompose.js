@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { Link, Prompt, Redirect } from 'react-router-dom';
 import '../styles/EmailCompose.css';
 
 
@@ -10,6 +11,66 @@ class EmailCompose extends Component {
     addressBCC: '',
     subject: '',
     content: '',
+
+    errors: {
+      address: false,
+      addressCC: false,
+      addressBCC: false,
+      subject: false,
+      content: false,
+    },
+
+    redirectToDrafts: false,
+    redirectToInbox: false,
+  }
+
+  errorMessages = {
+    addressIncorrect: 'Please enter a valid e-mail address.',
+    subjectIncorrect: 'Please enter subject.',
+    contentIncorrect: 'Please enter content.',
+  }
+
+  handleValidation = () => {
+
+    let address = false;
+    let addressCC = false;
+    let addressBCC = false;
+    let subject = false;
+    let content = false;
+    let correct = false;
+
+    if (this.state.address.indexOf('@') !== -1) {
+      address = true;
+    }
+
+    if (this.state.addressCC === '' || this.state.addressCC.indexOf('@') !== -1) {
+      addressCC = true;
+    }
+
+    if (this.state.addressBCC === '' || this.state.addressBCC.indexOf('@') !== -1) {
+      addressBCC = true;
+    }
+
+    if (this.state.subject.length > 0) {
+      subject = true;
+    }
+
+    if (this.state.content.length > 0) {
+      content = true;
+    }
+
+    if (address && addressCC && addressBCC && subject && content) {
+      correct = true;
+    }
+
+    return ({
+      address,
+      addressCC,
+      addressBCC,
+      subject,
+      content,
+      correct,
+    })
   }
 
   handleChange = (event) => {
@@ -19,12 +80,124 @@ class EmailCompose extends Component {
     this.setState({
       [name]: value,
     })
+
+    this.setState({
+      errors: {
+        address: false,
+        addressCC: false,
+        addressBCC: false,
+        subject: false,
+        content: false,
+      }
+    })
   }
 
   handleEditorChange = (content) => {
     this.setState({ content });
-    console.log(this.state.content)
   }
+
+  handleSend = (event) => {
+    event.preventDefault();
+
+    const validation = this.handleValidation();
+
+    if (validation.correct) {
+      this.setState({
+        errors: {
+          address: false,
+          addressCC: false,
+          addressBCC: false,
+          subject: false,
+          content: false,
+        }
+      })
+
+      const { address, addressCC, addressBCC, subject, content } = this.state;
+
+      const data = {
+        title: subject,
+        content: content,
+        from: "sender@catmail.test.com.pl",
+        to: address.split(', '),
+        cc: addressCC.split(', '),
+        bcc: addressBCC.split(', ')
+      };
+      const dataJSON = JSON.stringify(data);
+
+      const API = `http://catmail.azurewebsites.net/api/emails/send`;
+
+      fetch(API, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: dataJSON,
+      })
+        .then(response => {
+          if (response.ok) {
+            this.setState({
+              redirectToInbox: true,
+            })
+          } else { throw Error('Error') }
+        })
+        .catch(error => {
+          console.log('Request failed', error);
+          alert("Sorry, your request to send this e-mail failed")
+        });
+    }
+
+    else {
+      this.setState({
+        errors: {
+          address: !validation.address,
+          addressCC: !validation.addressCC,
+          addressBCC: !validation.addressBCC,
+          subject: !validation.subject,
+          content: !validation.content,
+        }
+      })
+    }
+  }
+
+  handleSaveAsDraft = (event) => {
+    event.preventDefault();
+    const { address, addressCC, addressBCC, subject, content } = this.state;
+
+    const data = {
+      title: subject,
+      content: content,
+      from: "sender@catmail.test.com.pl",
+      to: address.split(', '),
+      cc: addressCC.split(', '),
+      bcc: addressBCC.split(', ')
+    };
+    const dataJSON = JSON.stringify(data);
+
+    const API = `http://catmail.azurewebsites.net/api/emails/draft`;
+
+    fetch(API, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: dataJSON,
+    })
+      .then(response => {
+        if (response.ok) {
+          this.setState({
+            redirectToDrafts: true,
+          })
+          alert('Saved as draft')
+        } else { throw Error('Error') }
+      })
+      .catch(error => {
+        console.log('Request failed', error);
+        alert("Sorry, your request to save as draft failed")
+      });
+  }
+
 
   fetchData(id) {
     const API = `http://catmail.azurewebsites.net/api/emails/${id}`;
@@ -55,8 +228,7 @@ class EmailCompose extends Component {
       CC: ${data.cc}<br>
       Received: ${new Date(data.date).toLocaleString()}<br><br>
 
-      ${data.content}
-      `;
+      ${data.content}`;
         const address = data.from.address;
         const addressCC = data.cc.join(' ,');
 
@@ -81,10 +253,17 @@ class EmailCompose extends Component {
         }
       })
     }
-
   }
 
   render() {
+
+    if (this.state.redirectToDrafts) {
+      return <Redirect to='/email/draft' />
+    }
+
+    if (this.state.redirectToInbox) {
+      return <Redirect to='/email/inbox' />
+    }
 
     return (
       <>
@@ -99,6 +278,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.address}
               />
+              {this.state.errors.address &&
+                <span className="email-compose-error-message">{this.errorMessages.addressIncorrect}</span>}
               <input type="text"
                 name="addressCC"
                 placeholder="CC"
@@ -106,6 +287,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.addressCC}
               />
+              {this.state.errors.addressCC &&
+                <span className="email-compose-error-message">{this.errorMessages.addressIncorrect}</span>}
               <input type="text"
                 name="addressBCC"
                 placeholder="BCC"
@@ -113,6 +296,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.addressBCC}
               />
+              {this.state.errors.addressBCC &&
+                <span className="email-compose-error-message">{this.errorMessages.addressIncorrect}</span>}
               <input type="text"
                 name="subject"
                 placeholder="Subject"
@@ -120,6 +305,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.subject}
               />
+              {this.state.errors.subject &&
+                <span className="email-compose-error-message">{this.errorMessages.subjectIncorrect}</span>}
             </div>
             <div className="email-compose-form-content">
               <Editor
@@ -130,6 +317,8 @@ class EmailCompose extends Component {
                 className="email-compose-form-editor"
                 value={this.state.content}
               />
+              {this.state.errors.content &&
+                <span className="email-compose-error-message">{this.errorMessages.contentIncorrect}</span>}
               {/* <textarea name="content"
                 onChange={this.handleChange}
                 value={this.state.content}>
@@ -139,9 +328,16 @@ class EmailCompose extends Component {
               </textarea> */}
             </div>
             <div className="email-compose-form-buttons">
-              <button className="email-compose-btn">Send</button>
-              <button className="email-compose-btn">Save as draft</button>
-              <button className="email-compose-btn">Cancel</button>
+              <button className="email-compose-btn" onClick={this.handleSend}>Send</button>
+              <button className="email-compose-btn" onClick={this.handleSaveAsDraft}>Save as draft</button>
+              <Prompt
+                when={true}
+                message={'Are you sure you want to cancel?'}
+              />
+              <Link to='/email/inbox'>
+                <button className="email-compose-btn">Cancel</button>
+              </Link>
+
             </div>
           </form>
 

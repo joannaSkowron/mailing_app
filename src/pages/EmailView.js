@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EmailViewTools from '../components/EmailViewTools';
+import parse from 'html-react-parser';
 
 import '../styles/EmailView.css';
 
@@ -48,12 +49,12 @@ class EmailView extends Component {
 
           <header className="email-view-header">
             <div className="email-view-header-from">From: {data.from.address} ({data.from.address})</div>
-            <div className="email-view-header-to">To: {data.to.map(item => item.address)}</div>
+            <div className="email-view-header-to">To: {data.to.map(item => `${item.address} `)}</div>
             <div className="email-view-header-date">Date: {new Date(data.date).toLocaleString()}</div>
           </header>
 
           <main className="email-view-main-container">
-            <div className="email-view-main">{data.content}</div>
+            <div className="email-view-main">{parse(data.content)}</div>
           </main>
         </div>
       </>

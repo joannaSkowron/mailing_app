@@ -17,7 +17,7 @@
 
 .date-sorting:hover {
   color: var(--color3);
-  text-shadow: 0px 0px 4px var(--color3);
+  text-shadow: 0px 0px 10px var(--color4);
 }
 
 .fa-sort-up {

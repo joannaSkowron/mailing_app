@@ -5,7 +5,6 @@ import NavEmail from './NavEmail';
 import NavCalendar from './NavCalendar';
 import NavAddressbook from './NavAddressbook';
 import NavAccount from './NavAccount';
-import Error from '../pages/Error';
 
 
 const Navigation = () => {
@@ -33,7 +32,10 @@ const Navigation = () => {
       )} />
       <Route path='/account' component={NavAccount} />
 
-      <Route component={Error} />
+      <Route render={() => (
+        <Redirect to='/email/inbox' />
+      )} />
+
     </Switch>
 
   );

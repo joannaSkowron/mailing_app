@@ -4,6 +4,7 @@ import Search from '../components/Search';
 import Pager from '../components/Pager';
 import DateSorting from '../components/DateSorting';
 import Spinner from '../components/Spinner';
+import parse from 'html-react-parser';
 import '../styles/Page.css';
 
 
@@ -138,22 +139,29 @@ class Email extends Component {
   renderEmailsTable() {
     if (this.state.data === null) return;
     const { items } = this.state.data;
+    const currentFolder = this.props.match.params.folder;
 
     const emails_table = items.map(item => (
 
-      <NavLink to={`/email/viewemail/${this.props.match.params.folder}/${item.id}`} key={item.id} >
+      <NavLink to={`/email/viewemail/${currentFolder}/${item.id}`} key={item.id} >
         <div className='emails-table-row'>
           <div className='emails-table emails-table-from'>
             <div className="emails-table-cell">
-              <p>{item.from.address}</p>
-              <p className='emails-table-from-adress'>{item.from.address}</p>
+              <p>
+                {['outbox', 'draft'].includes(currentFolder) ?
+                  item.to.map(item => `${item.address} `) : item.from.address}
+              </p>
+              <p className='emails-table-from-adress'>
+                {['outbox', 'draft'].includes(currentFolder) ? '' : item.from.address}
+              </p>
             </div>
           </div>
           <div className='emails-table emails-table-title'>
             <div className="emails-table-cell">{item.title}</div>
           </div>
           <div className='emails-table emails-table-content'>
-            <div className="emails-table-cell">{item.content}</div>
+            {/* NIE DZIAŁA INNERTEXT DLA PONIŻSZEGO: */}
+            <div className="emails-table-cell">{parse(item.content)}</div>
           </div>
           <div className='emails-table emails-table-date'>
             <div className="emails-table-cell">{this.getDate(new Date(item.date))}</div>
@@ -167,6 +175,7 @@ class Email extends Component {
   render() {
 
     const { pagesCount, currentPage } = this.state;
+    const currentFolder = this.props.match.params.folder;
 
     return (
       <>
@@ -183,10 +192,12 @@ class Email extends Component {
 
         <div className='emails-table-container'>
           <div className='emails-table-header'>
-            <div className="emails-table-header-item emails-table-header-from">From</div>
+            <div className="emails-table-header-item emails-table-header-from">
+              {['outbox', 'draft'].includes(currentFolder) ? 'To' : 'From'}
+            </div>
             <div className="emails-table-header-item emails-table-header-title">Title</div>
             <div className="emails-table-header-item emails-table-header-content">Content</div>
-            <div className='emails-table-header-item emails-table-header-date'>Received {<DateSorting
+            <div className='emails-table-header-item emails-table-header-date'>Date {<DateSorting
               handleDateSorting={this.handleDateSorting}
             />}</div>
           </div>

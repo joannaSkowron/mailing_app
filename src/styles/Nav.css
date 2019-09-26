@@ -53,7 +53,8 @@
 
 .nav-item .active, .nav-item .active i {
   color: var(--color3);
-  text-shadow: 0px 0px 4px var(--color3);
+  text-shadow: 0px 0px 10px var(--color4);
+  font-weight: 600;
 }
 
 .nav-item .active {
@@ -87,8 +88,8 @@
 .nav-item-btn a.active {
   background-color: var(--color1-06);
   color: var(--color3);
-  text-shadow: 0px 0px 4px var(--color3);
-
+  text-shadow: 0px 0px 10px var(--color4);
+  font-weight: 600;
 }
 
 .nav-item-btn i {
