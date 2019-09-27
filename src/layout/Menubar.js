@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Menubar.css';
+import '../styles/layout/Menubar.css';
 
 const menuItems = [
   { name: 'Email', path: '/email/', icon: <i className="far fa-envelope-open" title="Email"></i> },

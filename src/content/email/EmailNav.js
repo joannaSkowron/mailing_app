@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Nav.css';
+import '../../styles/layout/Nav.css';
 
 const navItems = [
   { name: 'Inbox', path: '/email/inbox', icon: <i className='far fa-envelope-open'></i> },
@@ -30,7 +30,7 @@ const NavEmail = () => {
 
         <ul className='nav'>
           <div className='nav-item-btn'>
-            <NavLink to='/email/new/compose' exact>
+            <NavLink to='/email/compose/new' exact>
               <i className='fas fa-plus'></i>Compose
             </NavLink>
           </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { Link, Prompt, Redirect } from 'react-router-dom';
-import '../styles/EmailCompose.css';
+import '../../styles/email/EmailCompose.css';
 
 
 class EmailCompose extends Component {

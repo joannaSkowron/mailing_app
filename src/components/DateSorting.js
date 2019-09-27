@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/DateSorting.css';
+import '../styles/components/DateSorting.css';
 
 class DateSorting extends Component {
 

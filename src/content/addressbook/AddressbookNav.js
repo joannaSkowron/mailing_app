@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Nav.css';
+import '../../styles/layout/Nav.css';
 
 const navItems = [
   { name: 'Favourites', path: '/addressbook/favourites', icon: <i className="far fa-heart"></i> },
@@ -26,8 +26,8 @@ const NavAddressbook = () => {
       </header>
       <nav className="nav-container">
         <ul className="nav">
-          <li className="nav-item nav-item-btn">
-            <NavLink to='/addressbook/add' exact>
+          <li className="nav-item-btn">
+            <NavLink to='/addressbook/add/new' exact>
               <i className='fas fa-plus'></i>Add
             </NavLink>
           </li>

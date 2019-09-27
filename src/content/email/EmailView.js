@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import EmailViewTools from '../components/EmailViewTools';
+import EmailViewTools from '../../components/EmailViewTools';
 import parse from 'html-react-parser';
 
-import '../styles/EmailView.css';
+import '../../styles/email/EmailView.css';
 
 
 class EmailView extends Component {

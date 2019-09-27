@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Search from '../components/Search';
-import Pager from '../components/Pager';
-import DateSorting from '../components/DateSorting';
-import Spinner from '../components/Spinner';
+import Search from '../../components/Search';
+import Pager from '../../components/Pager';
+import DateSorting from '../../components/DateSorting';
+import Spinner from '../../components/Spinner';
 import parse from 'html-react-parser';
-import '../styles/Page.css';
+import '../../styles/email/EmailList.css';
 
 
 

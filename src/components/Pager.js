@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/Pager.css';
+import '../styles/components/Pager.css';
 
 
 class Pager extends Component {

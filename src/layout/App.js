@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/App.css';
+import '../styles/layout/App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Menubar from './Menubar';
 import Header from './Header';

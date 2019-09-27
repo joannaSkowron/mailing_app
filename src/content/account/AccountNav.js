@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import '../../styles/layout/Nav.css';
 
 const navItems = [
   { name: 'Account info', path: '/account/info', exact: true, icon: <i className="fas fa-info"></i> },

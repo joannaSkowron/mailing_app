@@ -19,14 +19,8 @@ border-bottom-left-radius: 7px;
 .page {
 flex-grow: 1;
 height: 100%;
-/* overflow: auto; */
 padding: 30px 40px;
 background-color: var(--color1-06);
 border-top-right-radius: 7px;
 border-bottom-right-radius: 7px;
-/* background-image: url(../images/balloon.png);
-background-position: right bottom;
-background-size: 40%;
-background-repeat: no-repeat;
-opacity: 0.2; */
 }
