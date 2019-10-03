@@ -1,0 +1,46 @@
+.calendar-tasklist-tools-container {
+  width: 100%;
+  padding: 0 0 10px 0;
+
+}
+
+.calendar-tasklist-buttons{
+  display: flex;
+  justify-content: space-between;
+  width: 130px;
+}
+
+.calendar-tasklist-btn {
+  width: 60px;
+  padding: 5px;
+  background-color: var(--color1-08);
+  color: var(--color2-05);
+  font-weight: 600;
+  font-size: 10px;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.calendar-tasklist-btn:hover {
+  background-color: var(--color2-01);
+  color: var(--color4);
+  text-shadow: 0px 0px 10px var(--color4);
+}
+
+ .calendar-tasklist-btn.active {
+  background-color: var(--color2-01);
+  color: var(--color4);
+  text-shadow: 0px 0px 10px var(--color4);
+}
+
+.calendar-tasklist-container {
+  height: calc(100% - 47px);
+  background-color: var(--color1-05);
+  border-radius: 4px;
+  color: var(--color2-05);
+  padding: 15px;
+ 
+}

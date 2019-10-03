@@ -13,6 +13,8 @@ class NavCalendar extends Component {
     this.setState({
       selectedDate: date,
     })
+
+    this.props.onSelectHandler(date);
   }
 
   render() {

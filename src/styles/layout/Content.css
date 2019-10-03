@@ -23,4 +23,5 @@ padding: 30px 40px;
 background-color: var(--color1-06);
 border-top-right-radius: 7px;
 border-bottom-right-radius: 7px;
+box-shadow: -10px 0 15px -10px rgba(0, 0, 0, 0.2);
 }

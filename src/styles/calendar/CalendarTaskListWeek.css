@@ -1,0 +1,34 @@
+.calendar-tasklist-week-container {
+overflow: auto;
+max-height: 100%;
+display: flex;
+
+
+}
+
+.calendar-tasklist-week-clock {
+  width: 30px;
+  font-size: 10px;
+  
+}
+
+.calendar-tasklist-week-table{
+  flex-grow: 1;
+}
+
+.calendar-tasklist-week-clock-item {
+  padding-right: 5px;
+  height: 60px;
+  transform: translateY(-5px);
+  text-align: end;
+}
+
+.calendar-tasklist-week-table-item {
+  border-top: .5px solid var(--color2-05);
+  height: 60px;
+ 
+}
+
+.calendar-tasklist-item-first {
+  border: none;
+}

@@ -1,0 +1,38 @@
+.calendar-tasklist-day-container {
+overflow: auto;
+max-height: calc(100% - 20px);
+display: flex;
+}
+
+.calendar-tasklist-day-title {
+  font-size: 20px;
+  font-weight: 100;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+}
+
+.calendar-tasklist-day-clock {
+  width: 30px;
+  font-size: 10px;
+}
+
+.calendar-tasklist-day-table{
+  flex-grow: 1;
+}
+
+.calendar-tasklist-day-clock-item {
+  padding-right: 5px;
+  height: 60px;
+  transform: translateY(-5px);
+  text-align: end;
+}
+
+.calendar-tasklist-day-table-item {
+  border-top: .5px solid var(--color2-05);
+  height: 60px;
+}
+
+.calendar-tasklist-item-first {
+  border: none;
+}
