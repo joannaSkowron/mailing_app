@@ -1,19 +1,17 @@
 .calendar-tasklist-week-container {
-overflow: auto;
-max-height: 100%;
-display: flex;
-
-
+  overflow: auto;
+  max-height: calc(100% - 20px);
+  display: flex;
 }
 
 .calendar-tasklist-week-clock {
   width: 30px;
   font-size: 10px;
-  
 }
 
 .calendar-tasklist-week-table{
   flex-grow: 1;
+  position: relative;
 }
 
 .calendar-tasklist-week-clock-item {
@@ -26,9 +24,61 @@ display: flex;
 .calendar-tasklist-week-table-item {
   border-top: .5px solid var(--color2-05);
   height: 60px;
- 
 }
 
 .calendar-tasklist-item-first {
   border: none;
+}
+
+.calendar-tasklist-week-title {
+  display: flex;
+  padding: 0 10px 5px 30px;
+}
+
+.calendar-tasklist-week-title-item {
+  width: calc(100% - 40px);
+  text-align: center;
+}
+
+.calendar-tasklist-week-days-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1440px;
+  display: flex;
+}
+
+.calendar-tasklist-week-days-item {
+  width: calc(100% / 7);
+  height: 100%;
+  border-left: .5px dotted var(--color2-02);
+}
+
+.calendar-tasklist-week-task {
+  position: absolute;
+  width: calc(100% / 7);
+  background-color: var(--color1-08);
+  border-radius: 7px;
+  padding: 3px 10px;
+  overflow: auto;
+  box-shadow: 0px 0px 5px 0px var(--color2-02);
+}
+
+.calendar-tasklist-week-title-container {
+  /* display: flex;
+  justify-content: space-between; */
+}
+
+.calendar-tasklist-week-task-title {
+  font-size: 12px;
+}
+
+.calendar-tasklist-week-task-date {
+  font-size: 10px;
+}
+
+.calendar-tasklist-week-task-description {
+  font-size: 10px;
+  
 }
