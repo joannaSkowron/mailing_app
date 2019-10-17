@@ -76,7 +76,8 @@ class CalendarTaskListWeek extends Component {
 
   generateTitleDivs = (count, cls) => {
     let divs = [];
-    const monday = new Date(this.getFirstDayOfWeek(this.props.selectedDate));
+    const selectedDate = new Date(this.props.selectedDate);
+    const monday = new Date(this.getFirstDayOfWeek(selectedDate));
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     for (let i = 0; i < count; i++) {
@@ -88,11 +89,11 @@ class CalendarTaskListWeek extends Component {
     return divs;
   }
 
-  getLastDayOfWeek = (date) => {
-    let dateWeekDay = date.getDay();
-    date.setDate(date.getDate() + (7 - this.dayOftheWeekMap[dateWeekDay]));
-    return date.toLocaleDateString();
-  }
+  // getLastDayOfWeek = (date) => {
+  //   let dateWeekDay = date.getDay();
+  //   date.setDate(date.getDate() + (7 - this.dayOftheWeekMap[dateWeekDay]));
+  //   return date.toLocaleDateString();
+  // }
 
   getWeekDay = (date) => {
     const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

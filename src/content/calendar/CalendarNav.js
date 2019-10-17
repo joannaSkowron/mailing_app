@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import SimpleReactCalendar from 'simple-react-calendar';
+import CalendarNewTask from './CalendarNewTask';
 import '../../styles/calendar/NavCalendar.css';
 
 
 class NavCalendar extends Component {
   state = {
     selectedDate: new Date(),
+    addTaskActive: false,
   }
 
   onSelectHandler = (date) => {
@@ -15,6 +16,18 @@ class NavCalendar extends Component {
     })
 
     this.props.onSelectHandler(date);
+  }
+
+  handleAddTask = () => {
+    this.setState({
+      addTaskActive: true,
+    })
+  }
+
+  handleCancelBtn = () => {
+    this.setState({
+      addTaskActive: false,
+    })
   }
 
   render() {
@@ -28,13 +41,22 @@ class NavCalendar extends Component {
         <nav className='nav-container'>
 
           <ul className='nav'>
-            <div className='nav-item-btn'>
-              <NavLink to='/calendar/new' exact>
+            <div className='nav-item-btn-calendar'>
+              {/* <NavLink to='/calendar/new' exact> */}
+              <button onClick={this.handleAddTask}>
                 <i className='fas fa-plus'></i>Add task
-            </NavLink>
+                </button>
+              {/* </NavLink> */}
             </div>
           </ul>
         </nav>
+
+        {this.state.addTaskActive ?
+          <CalendarNewTask
+            handleCancelBtn={this.handleCancelBtn}
+            selectedDate={this.state.selectedDate}
+          /> : null}
+
       </>
     );
   }

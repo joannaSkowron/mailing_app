@@ -11,19 +11,19 @@ const EmailViewTools = (props) => {
   return (
     <>
       <div className="email-view-tools-container">
-        <Link to={`/email/new/compose?id=${id}&responsetype=reply`}>
+        <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
           <div className="email-view-tools" title="Reply">
             <i className="fas fa-reply"></i>
           </div>
         </Link>
 
-        <Link to={`/email/new/compose?id=${id}&responsetype=replyall`}>
+        <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
           <div className="email-view-tools" title="Reply to all">
             <i className="fas fa-reply-all"></i>
           </div>
         </Link>
 
-        <Link to={`/email/new/compose?id=${id}&responsetype=forward`}>
+        <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
           <div className="email-view-tools" title="Forward">
             <i className="fas fa-share"></i>
           </div>

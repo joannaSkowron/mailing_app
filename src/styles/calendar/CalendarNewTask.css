@@ -1,0 +1,90 @@
+.calendar-newtask-page-container {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color2-05);
+  transition: 2s;
+}
+
+.calendar-newtask-container {
+  position: absolute;
+  z-index: 21;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  background-color: var(--color1);
+  padding: 30px 50px;
+  border-radius: 7px;
+}
+
+.calendar-newtask-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.calendar-newtask-form-input-container {
+  width: 100%;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-newtask-form-input-container i {
+  margin: 0 5px;
+  color: var(--color2-06);
+}
+
+.calendar-newtask-form-input {
+  width: 120px;
+  flex-grow: 1;
+  border: none;
+  padding: 8px;
+  background-color: var(--color2-01);
+  color: var(--color2-06);
+  border-radius: 7px;
+  outline: none;
+}
+
+.calendar-newtask-form-input-title {
+  width: 100%;
+  font-size: 20px;
+}
+
+.calendar-newtask-form-input-desc {
+  width: 100%;
+  height: 100px;
+  font-family: 'Roboto', sans-serif;
+  overflow: auto;
+  resize: none;
+}
+
+.calendar-newtask-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+}
+
+.calendar-newtask-form-btn {
+  width: 120px;
+  padding: 8px;
+  background-color: var(--color2-01);
+  color: var(--color2-05);
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.calendar-newtask-form-btn:hover {
+  background-color: var(--color2-04);
+  color: var(--color4);
+  text-shadow: 0px 0px 10px var(--color4);
+}

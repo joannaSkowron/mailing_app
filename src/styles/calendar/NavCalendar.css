@@ -113,3 +113,32 @@
   background-color: var(--color1-02);
   color: var(--color2-05);
 }
+
+.nav-item-btn-calendar {
+  width: 100%;
+  padding: 20px;
+  height: 35px;
+}
+
+.nav-item-btn-calendar button {
+  display: block;
+  text-decoration: none;
+  line-height: 35px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: var(--color1-02);
+  color: var(--color1);
+  border-radius: 25px;
+  transition: .2s ease;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.nav-item-btn-calendar button:hover {
+  background-color: var(--color2-01);
+}
+
+.nav-item-btn-calendar button i {
+  padding: 0 10px 0 0;
+}

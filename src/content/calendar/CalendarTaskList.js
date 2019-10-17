@@ -29,7 +29,6 @@ class CalendarTaskList extends Component {
   render() {
     return (
       <>
-        {console.log(this.props.selectedDate.toLocaleString())}
         <div className="calendar-tasklist-tools-container">
           <div className="calendar-tasklist-buttons">
 
