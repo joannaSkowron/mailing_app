@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import TaskHoverButtons from '../../components/TaskHoverButtons';
 import '../../styles/calendar/CalendarTaskListDay.css';
 
 class CalendarTaskListDay extends Component {
-  state = {}
+  state = {
+    data: null,
+  }
 
   testData = [
     {
@@ -49,6 +52,26 @@ class CalendarTaskListDay extends Component {
     },
   ]
 
+  fetchData(from, to) {
+
+    const API = `http://catmail.azurewebsites.net/api/calendar?from=${from}&to=${to}`;
+    fetch(API)
+      .then(response => {
+        if (response.ok) {
+          return response
+        } throw Error('Error')
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          data,
+        });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   generateDivs = (count, cls, ifClock) => {
     let divs = [];
     for (let i = 0; i < count; i++) {
@@ -64,10 +87,15 @@ class CalendarTaskListDay extends Component {
   }
 
   renderTasks = () => {
-    const tasks = this.testData.map(task => {
+    if (this.state.data === null) return;
 
-      const positionFromTopOfContainer = `${(task.dateStart.getHours() * 60) + task.dateStart.getMinutes()}px`;
-      const height = `${(task.dateEnd - task.dateStart) / (60 * 1000)}px`;
+    const tasks = this.state.data.map(task => {
+
+      const start = new Date(task.dateTimeStart);
+      const end = new Date(task.dateTimeEnd)
+
+      const positionFromTopOfContainer = `${(start.getHours() * 60) + start.getMinutes()}px`;
+      const height = `${(end - start) / (60 * 1000)}px`;
       const style = {
         top: positionFromTopOfContainer,
         height: height,
@@ -77,13 +105,30 @@ class CalendarTaskListDay extends Component {
         <div key={task.id} className="calendar-tasklist-day-task" style={style}>
           <div className="calendar-tasklist-day-title-container">
             <h1 className="calendar-tasklist-day-task-title">{task.title}</h1>
-            <p className="calendar-tasklist-day-task-date">{task.dateStart.toLocaleTimeString()} - {task.dateEnd.toLocaleTimeString()}</p>
+            <p className="calendar-tasklist-day-task-date">{start.toLocaleTimeString()} - {end.toLocaleTimeString()}</p>
           </div>
-          <p className="calendar-tasklist-day-task-description">{task.description}</p>
+          <p className="calendar-tasklist-day-task-description">{task.notes}</p>
+
+          <TaskHoverButtons />
+
         </div>
       )
     })
     return tasks;
+  }
+
+  componentDidMount() {
+    const { selectedDate } = this.props;
+
+    let from = new Date(selectedDate);
+    from.setHours(0, 0, 0, 0);
+    from = from.toISOString();
+
+    let to = new Date(selectedDate);
+    to.setHours(23, 59, 59, 999);
+    to = to.toISOString();
+
+    this.fetchData(from, to);
   }
 
   render() {

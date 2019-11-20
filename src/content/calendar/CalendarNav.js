@@ -42,11 +42,9 @@ class NavCalendar extends Component {
 
           <ul className='nav'>
             <div className='nav-item-btn-calendar'>
-              {/* <NavLink to='/calendar/new' exact> */}
               <button onClick={this.handleAddTask}>
                 <i className='fas fa-plus'></i>Add task
                 </button>
-              {/* </NavLink> */}
             </div>
           </ul>
         </nav>

@@ -8,7 +8,6 @@ import parse from 'html-react-parser';
 import '../../styles/email/EmailList.css';
 
 
-
 class Email extends Component {
 
   state = {

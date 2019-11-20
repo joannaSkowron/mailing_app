@@ -49,6 +49,10 @@ display: flex;
   box-shadow: 0px 0px 5px 0px var(--color2-02);
 }
 
+.calendar-tasklist-day-task:hover .taskHoverButtons-container {
+  display: flex;
+}
+
 .calendar-tasklist-day-title-container {
   display: flex;
   justify-content: space-between;

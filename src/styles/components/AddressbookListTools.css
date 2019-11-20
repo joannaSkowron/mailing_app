@@ -1,0 +1,36 @@
+.addressbook-list-tools-container {
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 110px;
+  /* padding: 10px 10px 0 10px; */
+}
+
+.addressbook-list-tools-container a {
+  text-decoration: none;
+}
+
+.addressbook-list-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color2-01);
+  font-size: 14px;
+  transition: .2s ease;
+  color: var(--color2-05);
+  outline: none;
+}
+
+.addressbook-list-tools:hover {
+  cursor: pointer;
+ color: var(--color4);
+ text-shadow: 0px 0px 10px var(--color4);
+ transition: .2s
+}

@@ -1,0 +1,82 @@
+.addressbook-table-container {
+  position: relative;
+  border: 1px solid greenyellow;
+  width: 100%;
+  height: 90%;
+  color: var(--color2-05);
+  overflow: auto;
+}
+
+.addressbook-table-container a {
+  text-decoration: none;
+  display: flex;
+}
+
+.addressbook-table-row {
+  display: flex;
+  cursor: pointer;
+  background-color: var(--color1-05);
+  margin: 4px 4px 0 0;
+  border-radius: 4px;
+  color: var(--color2-05);
+  transition: .2s ease;
+}
+
+.addressbook-table-row a {
+  display: flex;
+  width: 100%;
+  color: var(--color2-05);
+}
+
+.addressbook-table {
+  display: flex;
+  height: 50px;
+  font-size: 13px;
+  padding: 8px;
+  
+}
+
+.addressbook-table-cell {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  overflow: hidden;
+  border: 1px solid greenyellow;
+  /* line-height: 50px; */
+  
+}
+
+.addressbook-table-checkbox {
+  
+  
+}
+
+.addressbook-table-favourite {
+  
+  
+}
+
+.addressbook-table-name {
+  width: 30%;
+}
+
+.addressbook-table-email {
+  width: 30%;
+}
+
+.addressbook-table-phone {
+  width: 15%;
+}
+
+.addressbook-table-notes {
+  width: 10%;
+}
+
+.addressbook-table-tools {
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  
+
+  border: 1px solid yellow;
+}

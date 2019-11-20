@@ -29,6 +29,55 @@ class CalendarNewTask extends Component {
     return options;
   }
 
+  handleSave = (event) => {
+    event.preventDefault();
+
+    const { title, date, start, end, description } = this.state;
+
+    let dateTimeStart = new Date(date);
+    const startArray = start.split(':');
+    dateTimeStart.setHours(startArray[0], startArray[1], 0, 0)
+    dateTimeStart.toISOString();
+
+    let dateTimeEnd = new Date(date);
+    const endArray = end.split(':');
+    dateTimeEnd.setHours(endArray[0], endArray[1], 0, 0)
+    dateTimeEnd.toISOString();
+
+    const data = {
+      dateTimeStart: dateTimeStart,
+      dateTimeEnd: dateTimeEnd,
+      title: title,
+      notes: description
+    };
+
+    const dataJSON = JSON.stringify(data);
+
+    const API = `https://catmail.azurewebsites.net/api/calendar`;
+
+    fetch(API, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: dataJSON,
+    })
+      .then(response => {
+        if (response.ok) {
+          this.setState({
+            redirectToInbox: true,
+          });
+          this.props.handleCancelBtn();
+        } else { throw Error('Error') }
+      })
+      .catch(error => {
+        console.log('Request failed', error);
+        alert("Sorry, your request to save failed")
+      });
+  }
+
+
   componentDidMount = () => {
     this.setState({
       date: this.props.selectedDate,
@@ -91,7 +140,9 @@ class CalendarNewTask extends Component {
             </div>
 
             <div className="calendar-newtask-form-buttons">
-              <button className="calendar-newtask-form-btn">Save</button>
+              <button className="calendar-newtask-form-btn"
+                onClick={this.handleSave}
+              >Save</button>
               <button className="calendar-newtask-form-btn"
                 onClick={this.props.handleCancelBtn}
               >Cancel</button>
