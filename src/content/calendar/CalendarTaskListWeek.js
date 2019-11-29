@@ -151,12 +151,16 @@ class CalendarTaskListWeek extends Component {
           <div className="calendar-tasklist-week-task-content-container">
             <div className="calendar-tasklist-week-title-container">
               <h1 className="calendar-tasklist-week-task-title">{task.title}</h1>
-              <p className="calendar-tasklist-week-task-date">{start.toLocaleTimeString()} - {end.toLocaleTimeString()}</p>
+              <p className="calendar-tasklist-week-task-date">
+                {start.toLocaleTimeString().slice(0, 5)} - {end.toLocaleTimeString().slice(0, 5)}
+              </p>
             </div>
             <p className="calendar-tasklist-week-task-description">{task.notes}</p>
           </div>
 
-          <TaskHoverButtons taskID={task.id} />
+          <TaskHoverButtons
+            task={task}
+          />
         </div>
       )
     })

@@ -106,12 +106,14 @@ class CalendarTaskListDay extends Component {
           <div className="calendar-tasklist-day-task-content-container">
             <div className="calendar-tasklist-day-title-container">
               <h1 className="calendar-tasklist-day-task-title">{task.title}</h1>
-              <p className="calendar-tasklist-day-task-date">{start.toLocaleTimeString()} - {end.toLocaleTimeString()}</p>
+              <p className="calendar-tasklist-day-task-date">
+                {start.toLocaleTimeString().slice(0, 5)} - {end.toLocaleTimeString().slice(0, 5)}
+              </p>
             </div>
             <p className="calendar-tasklist-day-task-description">{task.notes}</p>
           </div>
 
-          <TaskHoverButtons taskID={task.id} />
+          <TaskHoverButtons task={task} />
 
         </div>
       )

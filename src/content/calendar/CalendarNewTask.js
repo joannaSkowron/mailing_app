@@ -92,9 +92,23 @@ class CalendarNewTask extends Component {
 
 
   componentDidMount = () => {
-    this.setState({
-      date: this.props.selectedDate,
-    })
+    if (this.props.task !== undefined) {
+
+      const start = new Date(this.props.task.dateTimeStart).toLocaleTimeString().slice(0, 5);
+      const end = new Date(this.props.task.dateTimeEnd).toLocaleTimeString().slice(0, 5);
+
+      this.setState({
+        title: this.props.task.title,
+        date: new Date(this.props.task.dateTimeStart),
+        start: start,
+        end: end,
+        description: this.props.task.notes,
+      })
+    } else {
+      this.setState({
+        date: new Date(this.props.selectedDate),
+      })
+    }
   }
 
   render() {
