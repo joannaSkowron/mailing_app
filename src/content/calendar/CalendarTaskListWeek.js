@@ -66,7 +66,7 @@ class CalendarTaskListWeek extends Component {
 
   fetchData(from, to) {
 
-    const API = `http://catmail.azurewebsites.net/api/calendar?from=${from}&to=${to}`;
+    const API = `https://catmail.azurewebsites.net/api/calendar?from=${from}&to=${to}`;
     fetch(API)
       .then(response => {
         if (response.ok) {
@@ -156,7 +156,7 @@ class CalendarTaskListWeek extends Component {
             <p className="calendar-tasklist-week-task-description">{task.notes}</p>
           </div>
 
-          <TaskHoverButtons />
+          <TaskHoverButtons taskID={task.id} />
         </div>
       )
     })
