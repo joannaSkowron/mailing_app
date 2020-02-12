@@ -86,6 +86,21 @@ class CalendarTaskListDay extends Component {
     return weekdays[day];
   }
 
+
+  handleUpdateData = () => {
+    const { selectedDate } = this.props;
+
+    let from = new Date(selectedDate);
+    from.setHours(0, 0, 0, 0);
+    from = from.toISOString();
+
+    let to = new Date(selectedDate);
+    to.setHours(23, 59, 59, 999);
+    to = to.toISOString();
+
+    this.fetchData(from, to);
+  }
+
   renderTasks = () => {
     if (this.state.data === null) return;
 
@@ -113,13 +128,15 @@ class CalendarTaskListDay extends Component {
             <p className="calendar-tasklist-day-task-description">{task.notes}</p>
           </div>
 
-          <TaskHoverButtons task={task} />
+          <TaskHoverButtons task={task} handleUpdateData={this.handleUpdateData} />
 
         </div>
       )
     })
+
     return tasks;
   }
+
 
   componentDidMount() {
     const { selectedDate } = this.props;

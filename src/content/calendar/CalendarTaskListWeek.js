@@ -126,6 +126,22 @@ class CalendarTaskListWeek extends Component {
     return weekdays[day];
   }
 
+  handleUpdateData = () => {
+    const { selectedDate } = this.props;
+
+    let from = new Date(selectedDate);
+    from = this.getFirstDayOfWeek(from);
+    from.setHours(0, 0, 0, 0);
+    from = from.toISOString();
+
+    let to = new Date(selectedDate);
+    to = this.getLastDayOfWeek(to);
+    to.setHours(23, 59, 59, 999);
+    to = to.toISOString();
+
+    this.fetchData(from, to);
+  }
+
   renderTasks = () => {
     if (this.state.data === null) return;
 
@@ -160,6 +176,7 @@ class CalendarTaskListWeek extends Component {
 
           <TaskHoverButtons
             task={task}
+            handleUpdateData={this.handleUpdateData}
           />
         </div>
       )
@@ -217,3 +234,30 @@ class CalendarTaskListWeek extends Component {
 }
 
 export default CalendarTaskListWeek;
+
+class DateHelper {
+  getDateRange(date) {
+
+    let from = new Date(date);
+    from = this.getFirstDayOfWeek(from);
+    from.setHours(0, 0, 0, 0);
+    from = from.toISOString();
+
+    let to = new Date(date);
+    to = this.getLastDayOfWeek(to);
+    to.setHours(23, 59, 59, 999);
+    to = to.toISOString();
+
+    return new DateRange(from, to)
+  }
+}
+
+class DateRange {
+  from;
+  to;
+
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
+  }
+}

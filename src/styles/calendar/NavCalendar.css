@@ -44,13 +44,19 @@
   background-color: var(--color1-02);
   color: var(--color1);
   font-size: 14px;
-  box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);
-  transition: .2s ease;
+  /* box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.3);
+  transition: .2s ease; */
+
+  box-shadow: 0px 8px 15px var(--color2-02);
+  transition: all 0.3s ease 0s;
 }
 
 .calendar-header_button:hover {
-  color: var(--color3);
-  text-shadow: 0px 0px 4px var(--color3);
+  /* text-shadow: 0px 0px 4px var(--color2-02); */
+  background-color: var(--color1-05);
+  color: var(--color2-06);
+  box-shadow: 0px 15px 20px var(--color1-02);
+  transform: translateY(-3px);
 }
 
 
@@ -128,15 +134,23 @@
   padding: 0 10px;
   background-color: var(--color1-02);
   color: var(--color1);
-  border-radius: 25px;
-  transition: .2s ease;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 100;
+  border-radius: 35px;
   border: none;
   outline: none;
   cursor: pointer;
+  box-shadow: 0px 8px 15px var(--color2-02);
+  transition: all 0.3s ease 0s;
 }
 
 .nav-item-btn-calendar button:hover {
-  background-color: var(--color2-01);
+  /* text-shadow: 0px 0px 4px var(--color2-02); */
+  background-color: var(--color1-05);
+  color: var(--color2-06);
+  box-shadow: 0px 15px 20px var(--color1-02);
+  transform: translateY(-3px);
 }
 
 .nav-item-btn-calendar button i {

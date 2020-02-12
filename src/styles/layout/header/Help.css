@@ -1,0 +1,40 @@
+@keyframes opacity {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+
+.help-container {
+  z-index: 1;
+  position: absolute;
+  bottom: -400px;
+  right: 0;
+  width: 300px;
+  height: 400px;
+  padding: 10px 5px;
+  background-color: var(--color1);
+  box-shadow: 0px 8px 15px var(--color2-02);
+  border-radius: 7px;
+  color: var(--color2-05);
+  animation-name: opacity;
+  animation-duration: 500ms;
+}
+
+.help-container:hover {
+  text-shadow: none;
+}
+
+.help-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 30px;
+  font-weight: 600;
+  color: var(--color2-06);
+  padding: 5px 5px 10px 5px;
+  border-bottom: 0.5px solid var(--color2-02);
+}
+
+.help-content {
+  height: calc(100% - 30px);
+  overflow: auto;
+}

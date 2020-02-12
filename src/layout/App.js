@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/layout/App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Menubar from './Menubar';
-import Header from './Header';
+import Header from './header/Header';
 import Content from './Content';
 
 function App() {

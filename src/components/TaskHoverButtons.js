@@ -20,7 +20,7 @@ class TaskHoverButtons extends Component {
     })
       .then(response => {
         if (response.ok) {
-          return response
+          this.props.handleUpdateData();
         } throw Error('Error')
       })
       .catch(err => {
@@ -29,15 +29,13 @@ class TaskHoverButtons extends Component {
   }
 
   handleEditButton = () => {
-    console.log("EDIT this shit" + this.props.task.id);
     this.setState({
       editTaskActive: true,
     })
   }
 
   handleDeleteButton = () => {
-    console.log("DELETE" + this.props.task.id)
-    this.fetchData(this.props.task.id)
+    this.fetchData(this.props.task.id);
   }
 
   handleCancelBtn = () => {
@@ -68,6 +66,7 @@ class TaskHoverButtons extends Component {
         {this.state.editTaskActive ?
           <CalendarNewTask
             handleCancelBtn={this.handleCancelBtn}
+            handleUpdateData={this.props.handleUpdateData}
             task={this.props.task}
           /> : null
         }

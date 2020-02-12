@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import '../../styles/calendar/CalendarNewTask.css';
+import { Validator, ValidationResult, validateRequired, useValidateMaxLenght, ValidationConfig } from "../../tools/Validator"
 
 class CalendarNewTask extends Component {
 
   state = {
+    id: null,
     title: '',
     date: '',
     start: '12:00',
     end: '12:30',
     description: '',
+    validationResult: null
   }
 
   handleChange = (event) => {
@@ -47,6 +50,21 @@ class CalendarNewTask extends Component {
 
     const { title, date, start, end, description } = this.state;
 
+    const validationConfigs = [
+      new ValidationConfig("title", [validateRequired, useValidateMaxLenght(15)]),
+    ];
+
+    const validationResult = new Validator(validationConfigs).validate(this.state);
+    this.setState({
+      validationResult
+    });
+
+    if (validationResult.isValid) {
+      // wywołujemy API
+    }
+
+    console.log(validationResult);
+
     let dateTimeStart = new Date(date);
     const startArray = start.split(':');
     dateTimeStart.setHours(startArray[0], startArray[1], 0, 0)
@@ -65,31 +83,40 @@ class CalendarNewTask extends Component {
     };
 
     const dataJSON = JSON.stringify(data);
+    let API = `https://catmail.azurewebsites.net/api/calendar`;
+    let method = 'post';
+    if (this.state.id !== null) {
+      method = 'put';
+      API = `https://catmail.azurewebsites.net/api/calendar/${this.state.id}`;
+    };
 
-    const API = `https://catmail.azurewebsites.net/api/calendar`;
-
-    fetch(API, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: dataJSON,
-    })
-      .then(response => {
-        if (response.ok) {
-          this.setState({
-            redirectToInbox: true,
-          });
-          this.props.handleCancelBtn();
-        } else { throw Error('Error') }
-      })
-      .catch(error => {
-        console.log('Request failed', error);
-        alert("Sorry, your request to save failed")
-      });
+    // fetch(API, {
+    //   method: method,
+    //   headers: {
+    //     'Accept': 'application/json, text/plain, */*',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: dataJSON,
+    // })
+    //   .then(response => {
+    //     if (response.ok) {
+    //       this.props.handleCancelBtn();
+    //       if (this.props.task !== undefined) {
+    //         this.props.handleUpdateData();
+    //       }
+    //     } else { throw Error('Error') }
+    //   })
+    //   .catch(error => {
+    //     console.log('Request failed', error);
+    //     alert("Sorry, your request to save failed")
+    //   });
   }
 
+  getValidationError(fieldName) {
+    if (this.state.validationResult) {
+      return this.state.validationResult.getErrorMessage(fieldName);
+    }
+  }
 
   componentDidMount = () => {
     if (this.props.task !== undefined) {
@@ -98,6 +125,7 @@ class CalendarNewTask extends Component {
       const end = new Date(this.props.task.dateTimeEnd).toLocaleTimeString().slice(0, 5);
 
       this.setState({
+        id: this.props.task.id,
         title: this.props.task.title,
         date: new Date(this.props.task.dateTimeStart),
         start: start,
@@ -127,6 +155,7 @@ class CalendarNewTask extends Component {
                 value={this.state.title}
                 onChange={this.handleChange}
               />
+              {this.getValidationError('title')}
             </div>
 
             <div className="calendar-newtask-form-input-container">

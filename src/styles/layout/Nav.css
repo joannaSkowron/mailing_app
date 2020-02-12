@@ -1,10 +1,10 @@
 .nav-header {
   display: block;
-  padding: 15px 0px 20px 30px;
-  color: var(--color2-02);
-  font-size: 40px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  padding: 45px 0px 15px 45px;
+  color: var(--color2-04);
+  font-family: 'Comfortaa', cursive;
+  font-size: 30px;
+  font-weight: 400;
 }
 
 .nav {
@@ -14,7 +14,8 @@
   height: 100%;
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 100;
   list-style-type: none;
 }
 
@@ -26,16 +27,17 @@
   display: block;
   margin-left: 15px;
   width: calc(100% - 15px);
-  height: 40px;
-  line-height: 40px;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  height: 35px;
+  line-height: 35px;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
   transition: .2s;
 }
 
 .nav-item i {
   padding: 0 10px 0 30px;
   color: var(--color1);
+  font-size: 13px;
   transition: .2s;
 }
 
@@ -52,46 +54,49 @@
 }
 
 .nav-item .active, .nav-item .active i {
-  color: var(--color3);
-  text-shadow: 0px 0px 10px var(--color4);
-  font-weight: 600;
+  color: var(--color2-06);
 }
 
 .nav-item .active {
   background-color: var(--color1-05);
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
 }
 
 .nav-item-btn {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .nav-item-btn a {
   display: block;
   text-decoration: none;
-  width: 140px;
-  height: 40px;
-  line-height: 40px;
+  width: calc(100% - 30px);
+  height: 35px;
+  line-height: 35px;
   margin: 15px;
   padding: 0 10px;
-  background-color: var(--color1-02);
+  background-color: var(--color2-01);
   color: var(--color1);
-  border-radius: 25px;
-  transition: .2s ease;
+  border-radius: 35px;
+  box-shadow: 0px 8px 15px var(--color2-02);
+  transition: all 0.3s ease 0s;
 }
 
 .nav-item-btn a:hover {
-  background-color: var(--color2-01);
+  /* text-shadow: 0px 0px 4px var(--color2-02); */
+  background-color: var(--color1-05);
+  color: var(--color2-06);
+  box-shadow: 0px 15px 20px var(--color1-02);
+  transform: translateY(-3px);
 }
 
 .nav-item-btn a.active {
   background-color: var(--color1-06);
-  color: var(--color3);
-  text-shadow: 0px 0px 10px var(--color4);
-  font-weight: 600;
+  color: var(--color2-06);
 }
 
 .nav-item-btn i {
   padding: 0 10px 0 20px;
+  font-size: 13px;
 }
