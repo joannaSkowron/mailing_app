@@ -206,6 +206,7 @@ class CalendarNewTask extends Component {
 
           </div>
         </div>
+
       </>
     );
   }

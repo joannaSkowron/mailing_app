@@ -1,0 +1,123 @@
+   @keyframes opacity {
+     0% {opacity: 0}
+     100% {opacity: 1}
+   }
+   
+   .picture-editor-page-container {
+     z-index: 1;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: var(--color2-05);
+     cursor: pointer;
+     animation: opacity 500ms;
+   }
+
+   .picture-editor-container {
+     z-index: 2;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     height: 350px;
+     width: 400px;
+     padding: 30px 50px;
+     background-color: var(--color1);
+     border-radius: 7px;
+     box-shadow: 0px 8px 15px var(--color2-02);
+     animation: opacity 500ms;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: center;
+   }
+
+   .picture-editor-title {
+     line-height: 30px;
+     width: 100%;
+     font-size: 16px;
+     font-weight: 100;
+   }
+
+   .picture-editor-selector {
+      width: 100%;
+      height: 175px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+   }
+
+   .picture-editor-selector-item {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: var(--color2-02);
+      background-size: cover;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+   }
+
+   .picture-editor-selector-item:hover {
+    transform: scale(1.1);
+  }
+
+   .picture-editor-selector-item.active {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 0px 7px var(--color2-02), 0px 10px 12px 0px var(--color2-04);
+    transition: all 0.3s ease 0s;
+   }
+
+   .picture-editor-selector-item:nth-of-type(1) {
+    background-image: url('../../../images/avatar1.png');
+   }
+
+   .picture-editor-selector-item:nth-of-type(2) {
+    background-image: url('../../../images/avatar2.png');
+   }
+
+   .picture-editor-selector-item:nth-of-type(3) {
+    background-image: url('../../../images/avatar3.png');
+   }
+
+   .picture-editor-selector-item:nth-of-type(4) {
+    background-image: url('../../../images/avatar4.png');
+   }
+
+   .picture-editor-selector-item:nth-of-type(5) {
+    background-image: url('../../../images/avatar5.png');
+   }
+
+   .picture-editor-selector-item:nth-of-type(6) {
+    background-image: url('../../../images/avatar6.png');
+   }
+
+   .picture-editor-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .picture-editor-button {
+    width: 120px;
+    padding: 8px;
+    background-color: var(--color2-01);
+    color: var(--color2-05);
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    cursor: pointer;
+    transition: .2s;
+  }
+  
+  .picture-editor-button:hover {
+    background-color: var(--color2-04);
+    color: var(--color4);
+    text-shadow: 0px 0px 10px var(--color4);
+  }

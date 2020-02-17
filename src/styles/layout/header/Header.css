@@ -22,7 +22,7 @@
   justify-content: flex-end;
 }
 
-.header-headshot {
+.header-picture {
   margin-left: 20px;
   width: 50px;
   height: 50px;
@@ -30,11 +30,11 @@
   background-color: var(--color1-06);
   color: var(--color2-05);
   transition: all 0.3s ease 0s;
-  background-image: url('../../../images/avatar02.png');
+  background-image: url('../../../images/avatar1.png');
   background-size: cover;
 }
 
-.header-headshot:hover{
+.header-picture:hover{
   cursor: pointer;
   box-shadow: 0px 8px 15px var(--color2-02);
   transform: scale(1.7) translate(-25%, 25%);
