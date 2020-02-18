@@ -14,7 +14,7 @@ width: 40%;
 }
 
 .input-search {
-  flex-grow: 1;
+  width: 85%;
   margin: 0 5px;
   border: none;
   background-color: transparent;

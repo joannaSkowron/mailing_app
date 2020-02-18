@@ -39,29 +39,30 @@ body {
   --color2-05: rgba(0, 0, 0, 0.5);
   --color2-06: rgba(0, 0, 0, 0.6);
 
-  --color3: rgba(0, 10, 87, 0.514);
+  --color3: rgb(185, 174, 171);
   --color4: rgb(253, 238, 188);
 }
 
 /* Custom scrollbar: */
-/* width */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: var(--color1-02); 
   border-radius: 6px;
 }
  
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--color2-02); 
   border-radius: 6px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color2-06); 
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color1-02); 
 }

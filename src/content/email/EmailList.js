@@ -189,17 +189,20 @@ class Email extends Component {
           />}</div>
         </div>
 
-        <div className='emails-table-container'>
-          <div className='emails-table-header'>
-            <div className="emails-table-header-item emails-table-header-from">
-              {['outbox', 'draft'].includes(currentFolder) ? 'To' : 'From'}
-            </div>
-            <div className="emails-table-header-item emails-table-header-title">Title</div>
-            <div className="emails-table-header-item emails-table-header-content">Content</div>
-            <div className='emails-table-header-item emails-table-header-date'>Date {<DateSorting
-              handleDateSorting={this.handleDateSorting}
-            />}</div>
+
+        <div className='emails-table-header'>
+          <div className="emails-table-header-item emails-table-header-from">
+            {['outbox', 'draft'].includes(currentFolder) ? 'To' : 'From'}
           </div>
+
+          <div className="emails-table-header-item emails-table-header-title">Title</div>
+          <div className="emails-table-header-item emails-table-header-content">Content</div>
+          <div className='emails-table-header-item emails-table-header-date'>Date {<DateSorting
+            handleDateSorting={this.handleDateSorting}
+          />}</div>
+        </div>
+
+        <div className='emails-table-container'>
           {this.renderEmailsTable()}
           {this.renderSpinner()}
         </div>

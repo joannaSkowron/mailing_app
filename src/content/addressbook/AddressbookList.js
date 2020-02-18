@@ -10,14 +10,15 @@ import '../../styles/addressbook/AddressbookList.css';
 class AddressbookList extends Component {
 
   state = {
+
     data: [
       {
         id: 1,
         isFavourite: true,
-        name: 'Fake Contact Name',
-        email: 'fake@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact object.'
+        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
       },
       {
         id: 2,
@@ -42,13 +43,23 @@ class AddressbookList extends Component {
     console.log("love" + id)
   }
 
-  renderTable() {
-    if (this.state.data === null) return;
+  // showToolbar = () => {
+  //   console.log('bar show')
+  // }
 
+  // hideToolbar = () => {
+  //   console.log('hide bar')
+  // }
+
+  renderTable() {
     const { data } = this.state;
+    if (data === null) return;
 
     const addressbookTable = data.map(item => (
-      <div className='addressbook-table-row' key={item.id}>
+      <div className='addressbook-table-row' key={item.id}
+      // onMouseEnter={this.showToolbar}
+      // onMouseLeave={this.hideToolbar}
+      >
         <div className="addressbook-table addressbook-table-checkbox">
           <div className="addressbook-table-cell">
             <input type="checkbox" name="" id="" />
@@ -69,9 +80,6 @@ class AddressbookList extends Component {
           </div>
           <div className='addressbook-table addressbook-table-phone'>
             <div className="addressbook-table-cell">{item.phone}</div>
-          </div>
-          <div className='addressbook-table addressbook-table-notes'>
-            <div className="addressbook-table-cell">{item.notes}</div>
           </div>
         </NavLink >
 
@@ -104,11 +112,9 @@ class AddressbookList extends Component {
 
         <div className='addressbook-table-container'>
           <div className='addressbook-table-header'>
-            <div className="addressbook-table-header-item addressbook-table-header-checkbox">X</div>
             <div className="addressbook-table-header-item addressbook-table-header-name">Name</div>
             <div className="addressbook-table-header-item addressbook-table-header-email">E-mail</div>
             <div className="addressbook-table-header-item addressbook-table-header-phone">Phone</div>
-            <div className='addressbook-table-header-item addressbook-table-header-notes'>Notes</div>
           </div>
           {this.renderTable()}
           {/* {this.renderSpinner()} */}
