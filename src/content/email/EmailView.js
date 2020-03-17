@@ -37,13 +37,13 @@ class EmailView extends Component {
   }
 
   renderEmailContent() {
-    if (this.state.data === null) return;
     const { data } = this.state;
+    if (data === null) return;
 
     const emailContent = (
       <>
         <div className="email-view-container">
-          <EmailViewTools data={this.state.data} />
+          <EmailViewTools data={data} />
 
           <h1 className="email-view-title">{data.title}</h1>
 

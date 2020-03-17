@@ -36,11 +36,108 @@ class AddressbookList extends Component {
         phone: '123456789',
         notes: 'This is fake contact third object.'
       },
+      {
+        id: 4,
+        isFavourite: false,
+        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+      },
+      {
+        id: 5,
+        isFavourite: false,
+        name: 'Fake Contact Name 2',
+        email: 'fake2@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact second object.'
+      },
+      {
+        id: 6,
+        isFavourite: false,
+        name: 'Fake Contact Name !!!',
+        email: 'fake55@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact third object.'
+      },
+      {
+        id: 7,
+        isFavourite: false,
+        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+      },
+      {
+        id: 8,
+        isFavourite: false,
+        name: 'Fake Contact Name 2',
+        email: 'fake2@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact second object.'
+      },
+      {
+        id: 9,
+        isFavourite: true,
+        name: 'Fake Contact Name !!!',
+        email: 'fake55@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact third object.'
+      },
+      {
+        id: 10,
+        isFavourite: false,
+        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+      },
+      {
+        id: 11,
+        isFavourite: false,
+        name: 'Fake Contact Name 2',
+        email: 'fake2@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact second object.'
+      },
+      {
+        id: 12,
+        isFavourite: false,
+        name: 'Fake Contact Name !!!',
+        email: 'fake55@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact third object.'
+      },
+      {
+        id: 13,
+        isFavourite: false,
+        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+      },
+      {
+        id: 14,
+        isFavourite: false,
+        name: 'Fake Contact Name 2',
+        email: 'fake2@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact second object.'
+      },
+      {
+        id: 15,
+        isFavourite: false,
+        name: 'Fake Contact Name !!!',
+        email: 'fake55@contact.com',
+        phone: '123456789',
+        notes: 'This is fake contact third object.'
+      },
     ]
   }
 
-  handleFavourites = (id) => {
-    console.log("love" + id)
+  handleFavourites = (event, id) => {
+    console.log("love" + id);
+    console.log(event.target)
   }
 
   // showToolbar = () => {
@@ -60,30 +157,33 @@ class AddressbookList extends Component {
       // onMouseEnter={this.showToolbar}
       // onMouseLeave={this.hideToolbar}
       >
-        <div className="addressbook-table addressbook-table-checkbox">
+        <div className="addressbook-table-item addressbook-table-checkbox">
           <div className="addressbook-table-cell">
             <input type="checkbox" name="" id="" />
           </div>
         </div>
-        <div className="addressbook-table addressbook-table-favourite">
+        <div className="addressbook-table-item addressbook-table-favourite">
           <div className="addressbook-table-cell">
-            <i className="far fa-heart" title="Add to favourites" onClick={() => { this.handleFavourites(item.id) }}></i>
+            <i title={item.isFavourite ? "Remove from favourites" : "Add to favourites"}
+              className={item.isFavourite ? "far fa-heart favourite" : "far fa-heart"}
+              onClick={(event) => { this.handleFavourites(event, item.id) }}
+            ></i>
           </div>
         </div>
 
-        <NavLink to="/" >
-          <div className='addressbook-table addressbook-table-name'>
+        <NavLink to={`/addressbook/contactview/${item.id}`} >
+          <div className='addressbook-table-item addressbook-table-name'>
             <div className="addressbook-table-cell">{item.name}</div>
           </div>
-          <div className='addressbook-table addressbook-table-email'>
+          <div className='addressbook-table-item addressbook-table-email'>
             <div className="addressbook-table-cell">{item.email}</div>
           </div>
-          <div className='addressbook-table addressbook-table-phone'>
+          <div className='addressbook-table-item addressbook-table-phone'>
             <div className="addressbook-table-cell">{item.phone}</div>
           </div>
         </NavLink >
 
-        <div className="addressbook-table addressbook-table-tools">
+        <div className="addressbook-table-item addressbook-table-tools">
           <div className="addressbook-table-cell">
             <AddressbookListTools id={item.id} />
           </div>
@@ -116,8 +216,11 @@ class AddressbookList extends Component {
             <div className="addressbook-table-header-item addressbook-table-header-email">E-mail</div>
             <div className="addressbook-table-header-item addressbook-table-header-phone">Phone</div>
           </div>
-          {this.renderTable()}
-          {/* {this.renderSpinner()} */}
+          <div className="addressbook-table-inner-container">
+            {this.renderTable()}
+            {/* {this.renderSpinner()} */}
+          </div>
+
         </div>
 
       </>

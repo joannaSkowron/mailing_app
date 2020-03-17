@@ -1,14 +1,19 @@
 .addressbook-table-container {
-  /* position: relative; */
   width: 100%;
-  height: 90%;
+  height: calc(100% - 35px);
   color: var(--color2-05);
+}
+
+.addressbook-table-inner-container {
   overflow: auto;
+  width: 100%;
+  height: calc(100% - 40px);
+  padding-right: 4px;
 }
 
 .addressbook-table-header {
   display: flex;
-  padding-left: 62px;
+  padding-left: 80px;
   height: 40px;
 }
 
@@ -17,37 +22,43 @@
   padding: 10px 4px;
 }
 
-.addressbook-table-header-name, .addressbook-table-name {
+.addressbook-table-item {
+  display: flex;
+  height: 50px;
+  font-size: 13px;
+  padding: 8px 3px;
+}
+
+.addressbook-table-header-name, 
+.addressbook-table-name {
   width: 30%;
 }
 
-.addressbook-table-header-email, .addressbook-table-email{
+.addressbook-table-header-email, 
+.addressbook-table-email{
   width: 30%;
 }
 
-.addressbook-table-header-phone, .addressbook-table-phone {
+.addressbook-table-header-phone, 
+.addressbook-table-phone {
   width: 15%;
 }
 
-.addressbook-table-checkbox {
-  width: 31px;
-  
-}
-
+.addressbook-table-checkbox,
 .addressbook-table-favourite {
-  width: 31px;
-  
+  width: 40px;
+  padding: 10px 5px;
 }
 
 .addressbook-table-container a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 .addressbook-table-row {
   position: relative;
   display: flex;
   width: 100%;
-  cursor: pointer;
   background-color: var(--color1-05);
   margin: 4px 4px 0 0;
   border-radius: 4px;
@@ -62,23 +73,41 @@
 .addressbook-table-row a {
   display: flex;
   flex-grow: 0;
-  width: calc(100% - 62px);
+  width: calc(100% - 80px);
   color: var(--color2-05);
-}
-
-.addressbook-table {
-  display: flex;
-  height: 50px;
-  font-size: 13px;
-  padding: 8px 4px;
-  
 }
 
 .addressbook-table-cell {
   text-overflow: ellipsis;
   white-space: nowrap; 
   overflow: hidden;
+  width: 100%;
   line-height: 34px;
+}
+
+.addressbook-table-checkbox .addressbook-table-cell,
+.addressbook-table-favourite .addressbook-table-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color2-01);
+  border-radius: 50%;
+  transition: all 0.3s ease 0s;
+}
+
+.addressbook-table-cell .favourite {
+  color: var(--color5);
+  font-weight: 600;
+}
+
+.addressbook-table-cell .fa-heart {
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.addressbook-table-cell .fa-heart:hover {
+  text-shadow: 0px 0px 5px var(--color5);
+  color: var(--color5);
 }
 
 .addressbook-table-tools {

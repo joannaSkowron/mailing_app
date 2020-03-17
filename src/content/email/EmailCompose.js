@@ -124,7 +124,7 @@ class EmailCompose extends Component {
       };
       const dataJSON = JSON.stringify(data);
 
-      const API = `http://catmail.azurewebsites.net/api/emails/send`;
+      const API = `https://catmail.azurewebsites.net/api/emails/send`;
 
       fetch(API, {
         method: 'post',
@@ -174,7 +174,7 @@ class EmailCompose extends Component {
     };
     const dataJSON = JSON.stringify(data);
 
-    const API = `http://catmail.azurewebsites.net/api/emails/draft`;
+    const API = `https://catmail.azurewebsites.net/api/emails/draft`;
 
     fetch(API, {
       method: 'post',
@@ -200,7 +200,7 @@ class EmailCompose extends Component {
 
 
   fetchData(id) {
-    const API = `http://catmail.azurewebsites.net/api/emails/${id}`;
+    const API = `https://catmail.azurewebsites.net/api/emails/${id}`;
     const data = fetch(API)
       .then(response => {
         if (response.ok) {

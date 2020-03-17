@@ -40,7 +40,9 @@ body {
   --color2-06: rgba(0, 0, 0, 0.6);
 
   --color3: rgb(185, 174, 171);
-  --color4: rgb(253, 238, 188);
+  --color4: rgb(253, 238, 188); /*highlighted element */
+  --color5: rgba(255, 23, 112, 0.7); /*alert element */
+  --color6: #8EC5CC; /*success button */
 }
 
 /* Custom scrollbar: */
@@ -52,11 +54,13 @@ body {
 ::-webkit-scrollbar-track {
   background: var(--color1-02); 
   border-radius: 6px;
+  margin: 0 0 5px 0;
 }
  
 ::-webkit-scrollbar-thumb {
   background: var(--color2-02); 
   border-radius: 6px;
+  margin: 0 0 5px 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {

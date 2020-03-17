@@ -1,0 +1,154 @@
+.addressbook-add-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  height: 100%;
+  padding: 20px;
+  overflow: auto;
+  color: var(--color2-05);
+  background-color: var(--color1-04);
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.addressbook-add-container-forms {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.addressbook-add-header {
+  width: 100%;
+  font-size: 17px;
+  padding: 5px 5px 15px 0px;
+  font-weight: 100;
+}
+
+.addressbook-add-contact-data, 
+.addressbook-add-address-data,
+.addressbook-add-upload-picture {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  width: 50%;
+  min-width: 320px;
+  padding: 0 10px 10px 10px;
+  border: 2px dotted palevioletred;
+}
+
+.addressbook-add-upload-picture {
+  width: 100%;
+  border: 2px dotted rgb(240, 13, 89);
+}
+
+.addressbook-add-fieldnames {
+  width: 105px;
+  padding-right: 10px;
+}
+
+.addressbook-add-fieldnames p {
+  margin-bottom: 10px;
+  height: 32px;
+  font-size: 13px;
+  text-align: end;
+}
+
+.addressbook-add-fieldnames p span {
+  color: var(--color5);
+}
+
+.addressbook-add-form {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  width: calc(100% - 105px);
+}
+
+.addressbook-add-form input, .addressbook-add-form textarea {
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  background-color: var(--color2-01);
+  color: var(--color2-06);
+  border-radius: 7px;
+  transition: all 0.3s ease 0s;
+}
+
+.addressbook-add-form textarea {
+  height: 100px;
+  resize: none;
+}
+
+.addressbook-add-form input:focus, .addressbook-add-form textarea:focus {
+  background-color: var(--color1-08);
+}
+
+.addressbook-add-form-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  border: 2px dotted palevioletred;
+}
+
+.addressbook-add-form-buttons button, .addressbook-add-form .open-map {
+  width: 120px;
+  height: 32px;
+  padding: 8px;
+  background-color: var(--color1-08);
+  color: var(--color2-05);
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: .1s;
+  transition: all 0.3s ease 0s;
+}
+
+.addressbook-add-form-buttons .save {
+  margin-right: 25px;
+  background-color: var(--color6);
+  color: var(--color2-05);
+}
+
+.addressbook-add-form-buttons .save:hover {
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 5px var(--color6), 0px 5px 6px 0px var(--color2-04);
+}
+
+
+.addressbook-add-form-buttons .cancel {
+  background-color: var(--color2-01);
+}
+
+.addressbook-add-form-buttons .cancel:hover {
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 5px var(--color2-01), 0px 5px 6px 0px var(--color2-02);
+}
+
+
+.addressbook-add-form .open-map {
+  width: 100%;
+  font-size: 10px;
+}
+
+.addressbook-add-form .open-map:hover {
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 5px var(--color1-08), 0px 5px 6px 0px var(--color2-04);
+}
+
+.addressbook-add-form .open-map i {
+  margin-right: 5px;
+}
+
+
+.addressbook-add-form-buttons button:hover {
+  /* background-color: var(--color2-01); */
+  /* color: var(--color4); */
+  /* text-shadow: 0px 0px 10px var(--color4); */
+}
+
