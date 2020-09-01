@@ -52,9 +52,22 @@
   width: 120px;
   flex-grow: 1;
   border: none;
-  padding: 8px;
+  padding: 9px;
   background-color: var(--color2-01);
   color: var(--color2-06);
+  font-family: 'Montserrat','Roboto', sans-serif;
+  font-size: 13px;
+  border-radius: 7px;
+  outline: none;
+}
+
+.react-date-picker .react-date-picker__wrapper {
+  border: none;
+  padding: 4.5px;
+  background-color: var(--color2-01);
+  color: var(--color2-06);
+  font-family: 'Montserrat','Roboto', sans-serif;
+  font-size: 13px;
   border-radius: 7px;
   outline: none;
 }

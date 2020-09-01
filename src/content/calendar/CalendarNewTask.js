@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import '../../styles/calendar/CalendarNewTask.css';
-import { Validator, ValidationResult, validateRequired, useValidateMaxLenght, ValidationConfig } from "../../tools/Validator"
+import { Validator, ValidationResult, validateRequired, useValidateMaxLenght, ValidationConfig } from "../../tools/Validator";
+import DatePicker from 'react-date-picker';
 
 class CalendarNewTask extends Component {
 
   state = {
     id: null,
     title: '',
-    date: '',
+    date: new Date(),
     start: '12:00',
     end: '12:30',
     description: '',
@@ -20,6 +21,11 @@ class CalendarNewTask extends Component {
     this.setState({
       [name]: value,
     })
+  }
+
+  handleDatePickerChange = (date) => {
+    console.log(date);
+    this.setState({ date });
   }
 
   generateTimeOptions = () => {
@@ -160,13 +166,21 @@ class CalendarNewTask extends Component {
 
             <div className="calendar-newtask-form-input-container">
               <i className="far fa-calendar-alt"></i>
-              <input type="text"
+
+              <DatePicker
+                onChange={this.handleDatePickerChange}
+                value={this.state.date}
+              // className="calendar-newtask-form-input"
+              />
+
+
+              {/* <input type="text"
                 className="calendar-newtask-form-input"
                 name="date"
                 placeholder="Date"
                 value={new Date(this.state.date).toLocaleDateString()}
                 onChange={this.handleChange}
-              />
+              /> */}
               <i className="far fa-clock"></i>
               <select
                 className="calendar-newtask-form-input"

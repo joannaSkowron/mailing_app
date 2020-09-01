@@ -16,7 +16,8 @@ const NavEmail = () => {
 
     <li key={navItem.name} className='nav-item' >
       <NavLink to={navItem.path} exact className='nav-item-container' >
-        {navItem.icon}{navItem.name}
+        {navItem.icon}
+        <p>{navItem.name}</p>
       </NavLink>
     </li>
   ))
@@ -31,7 +32,8 @@ const NavEmail = () => {
         <ul className='nav'>
           <div className='nav-item-btn'>
             <NavLink to='/email/compose/new' exact>
-              <i className='fas fa-plus'></i>Compose
+              <i className="fas fa-pencil-alt"></i>
+              <p>Compose</p>
             </NavLink>
           </div>
 
