@@ -9,7 +9,7 @@ export class Validator {
   }
 
   // Metoda do której przekazujemy obiekt który następnie będzie zwalidowany za pomocą funkcji
-  // zdefiniowanych w konfiguracji. Zwraca obiekt typu ValidationConfig
+  // zdefiniowanych w konfiguracji. Zwraca obiekt typu ValidationResult
   validate(data) {
 
     let isValid = true;
@@ -61,7 +61,7 @@ export class ValidationConfig {
 // Klasa ValidationResult zawiera informacje o wyniku walidacji obiektu
 // - isValid - pole to określa czy obiekt jest poprawny czy nie
 // - errorMessages - obiekt który zawiera listę komunikatów błędów
-export class ValidationResult {
+class ValidationResult {
 
   constructor(isValid, errorMessages) {
     this.isValid = isValid;
@@ -72,24 +72,37 @@ export class ValidationResult {
     return this.errorMessages[fieldName];
   }
 }
-
+//-------------------FUNKCJE WALIDUJĄCE------------------------------//
 // Funkcja o parametrach (obj, fieldName) służąca do sprawdzenia czy pole 'fieldName' w obiekcie 'obj' jest wypełnione.
 // Jeśli nie jest to zwraca komunikat błędu walidacji.
 export function validateRequired(obj, fieldName) {
   if (obj[fieldName] === undefined || obj[fieldName] === null || obj[fieldName] === "") {
-    return "Pole jest wymagane"
+    return `${fieldName} is required`
   }
 }
 
 // Funkcja o parametrach (obj, fieldName) służąca do sprawdzenia czy pole 'fieldName' w obiekcie 'obj' zawiera
 // maksymalną ilość znaków (10).
 // Jeśli nie to zwraca komunikat błędu walidacji.
-export function validateMaxLenght(obj, fieldName, maxLenght) {
+//Funkcja wymaga więcej parametrów, żeby je przekazać poprawnie musimy stworzyć funkcję opakowującą, która zwraca funkcję z odpowiednią liczbą parametrów.
+function validateMaxLenght(obj, fieldName, maxLenght) {
   if (obj[fieldName].length > maxLenght) {
-    return `Tekst powinien maximum ${maxLenght} znaków`
+    return `maximum length: ${maxLenght} characters`
   }
 }
 
 export function useValidateMaxLenght(maxLenght) {
   return (obj, fieldName) => validateMaxLenght(obj, fieldName, maxLenght);
+}
+
+//Funkcja sprawdzająca, czy godzina 'do' jest większa od godziny 'od'
+
+function validateTimeValues(obj, fieldname, taskStartTimeValue) {
+  if (obj[fieldname] < taskStartTimeValue) {
+    return `invalid time range`
+  }
+}
+
+export function useValidateTimeValues(taskStartTimeValue) {
+  return (obj, fieldname) => validateTimeValues(obj, fieldname, taskStartTimeValue)
 }

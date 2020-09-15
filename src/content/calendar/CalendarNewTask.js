@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import '../../styles/calendar/CalendarNewTask.css';
-import { Validator, ValidationResult, validateRequired, useValidateMaxLenght, ValidationConfig } from "../../tools/Validator";
+import {
+  Validator,
+  validateRequired,
+  useValidateMaxLenght,
+  useValidateTimeValues,
+  ValidationConfig,
+} from "../../tools/Validator";
+
 import DatePicker from 'react-date-picker';
 
 class CalendarNewTask extends Component {
@@ -24,7 +31,6 @@ class CalendarNewTask extends Component {
   }
 
   handleDatePickerChange = (date) => {
-    console.log(date);
     this.setState({ date });
   }
 
@@ -56,21 +62,6 @@ class CalendarNewTask extends Component {
 
     const { title, date, start, end, description } = this.state;
 
-    const validationConfigs = [
-      new ValidationConfig("title", [validateRequired, useValidateMaxLenght(15)]),
-    ];
-
-    const validationResult = new Validator(validationConfigs).validate(this.state);
-    this.setState({
-      validationResult
-    });
-
-    if (validationResult.isValid) {
-      // wywołujemy API
-    }
-
-    console.log(validationResult);
-
     let dateTimeStart = new Date(date);
     const startArray = start.split(':');
     dateTimeStart.setHours(startArray[0], startArray[1], 0, 0)
@@ -88,34 +79,49 @@ class CalendarNewTask extends Component {
       notes: description
     };
 
-    const dataJSON = JSON.stringify(data);
-    let API = `https://catmail.azurewebsites.net/api/calendar`;
-    let method = 'post';
-    if (this.state.id !== null) {
-      method = 'put';
-      API = `https://catmail.azurewebsites.net/api/calendar/${this.state.id}`;
-    };
+    const validationConfigs = [
+      new ValidationConfig('title', [validateRequired, useValidateMaxLenght(20)]),
+      new ValidationConfig('date', [validateRequired]),
+      new ValidationConfig('start', [validateRequired]),
+      new ValidationConfig('end', [validateRequired, useValidateTimeValues(start)]),
+    ];
 
-    // fetch(API, {
-    //   method: method,
-    //   headers: {
-    //     'Accept': 'application/json, text/plain, */*',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: dataJSON,
-    // })
-    //   .then(response => {
-    //     if (response.ok) {
-    //       this.props.handleCancelBtn();
-    //       if (this.props.task !== undefined) {
-    //         this.props.handleUpdateData();
-    //       }
-    //     } else { throw Error('Error') }
-    //   })
-    //   .catch(error => {
-    //     console.log('Request failed', error);
-    //     alert("Sorry, your request to save failed")
-    //   });
+    const validationResult = new Validator(validationConfigs).validate(this.state);
+    this.setState({
+      validationResult
+    });
+
+    if (validationResult.isValid) {
+      const dataJSON = JSON.stringify(data);
+      let API = `https://catmail.azurewebsites.net/api/calendar`;
+      let method = 'post';
+      if (this.state.id !== null) {
+        method = 'put';
+        API = `https://catmail.azurewebsites.net/api/calendar/${this.state.id}`;
+      };
+
+      fetch(API, {
+        method: method,
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: dataJSON,
+      })
+        .then(response => {
+          if (response.ok) {
+            this.props.handleCancelBtn();
+            if (this.props.task !== undefined) {
+              this.props.handleUpdateData();
+            }
+          } else { throw Error('Error') }
+        })
+        .catch(error => {
+          console.log('Request failed', error);
+          alert("Sorry, your request to save failed")
+        });
+
+    }
   }
 
   getValidationError(fieldName) {
@@ -153,6 +159,7 @@ class CalendarNewTask extends Component {
         <div className="calendar-newtask-container">
           <div className="calendar-newtask-form">
 
+            <span className='calendar-newtask-error-message'>{this.getValidationError('title')}</span>
             <div className="calendar-newtask-form-input-container">
               <input type="text"
                 className="calendar-newtask-form-input calendar-newtask-form-input-title"
@@ -161,8 +168,14 @@ class CalendarNewTask extends Component {
                 value={this.state.title}
                 onChange={this.handleChange}
               />
-              {this.getValidationError('title')}
+
             </div>
+
+            <p className='calendar-newtask-error-messages-container'>
+              <span className='calendar-newtask-error-message'>{this.getValidationError('date')}</span>
+              <span className='calendar-newtask-error-message'>{this.getValidationError('start')}</span>
+              <span className='calendar-newtask-error-message'>{this.getValidationError('end')}</span>
+            </p>
 
             <div className="calendar-newtask-form-input-container">
               <i className="far fa-calendar-alt"></i>
@@ -170,17 +183,8 @@ class CalendarNewTask extends Component {
               <DatePicker
                 onChange={this.handleDatePickerChange}
                 value={this.state.date}
-              // className="calendar-newtask-form-input"
               />
 
-
-              {/* <input type="text"
-                className="calendar-newtask-form-input"
-                name="date"
-                placeholder="Date"
-                value={new Date(this.state.date).toLocaleDateString()}
-                onChange={this.handleChange}
-              /> */}
               <i className="far fa-clock"></i>
               <select
                 className="calendar-newtask-form-input"

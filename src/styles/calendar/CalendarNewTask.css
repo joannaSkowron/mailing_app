@@ -109,3 +109,15 @@
   color: var(--color4);
   text-shadow: 0px 0px 10px var(--color4);
 }
+
+.calendar-newtask-error-messages-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-newtask-error-message {
+  color: rgb(250, 3, 127);
+  font-weight: 200;
+  font-size: 12px;
+  font-style: italic;
+}
