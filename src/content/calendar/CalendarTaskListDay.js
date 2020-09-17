@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskHoverButtons from '../../components/TaskHoverButtons';
+import { handleCalendarScrollTop } from '../../tools/CalendarScroll';
 import '../../styles/calendar/CalendarTaskListDay.css';
 
 class CalendarTaskListDay extends Component {
@@ -137,7 +138,6 @@ class CalendarTaskListDay extends Component {
     return tasks;
   }
 
-
   componentDidMount() {
     const { selectedDate } = this.props;
 
@@ -150,6 +150,8 @@ class CalendarTaskListDay extends Component {
     to = to.toISOString();
 
     this.fetchData(from, to);
+
+    handleCalendarScrollTop('.calendar-tasklist-day-container');
   }
 
   render() {

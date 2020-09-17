@@ -21,7 +21,7 @@ class TaskHoverButtons extends Component {
       .then(response => {
         if (response.ok) {
           this.props.handleUpdateData();
-        } throw Error('Error')
+        }
       })
       .catch(err => {
         console.log(err)

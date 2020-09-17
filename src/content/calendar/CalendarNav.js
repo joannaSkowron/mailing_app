@@ -44,7 +44,7 @@ class NavCalendar extends Component {
             <div className='nav-item-btn-calendar'>
               <button onClick={this.handleAddTask}>
                 <i className='fas fa-plus'></i>Add task
-                </button>
+              </button>
             </div>
           </ul>
         </nav>
@@ -53,6 +53,7 @@ class NavCalendar extends Component {
           <CalendarNewTask
             handleCancelBtn={this.handleCancelBtn}
             selectedDate={this.state.selectedDate}
+            performCalendarTaskListUpdateHandler={this.props.performCalendarTaskListUpdateHandler}
           /> : null}
 
       </>

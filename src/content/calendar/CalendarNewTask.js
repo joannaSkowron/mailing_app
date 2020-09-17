@@ -114,6 +114,9 @@ class CalendarNewTask extends Component {
             if (this.props.task !== undefined) {
               this.props.handleUpdateData();
             }
+            if (this.props.performCalendarTaskListUpdateHandler !== undefined) {
+              this.props.performCalendarTaskListUpdateHandler();
+            }
           } else { throw Error('Error') }
         })
         .catch(error => {

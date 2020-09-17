@@ -8,6 +8,7 @@ class Calendar extends Component {
 
   state = {
     selectedDate: new Date(),
+    performCalendarTaskListUpdate: false,
   }
 
   onSelectHandler = (date) => {
@@ -16,12 +17,25 @@ class Calendar extends Component {
     })
   }
 
+  performCalendarTaskListUpdateHandler = () => {
+    this.setState(prevState => ({
+      performCalendarTaskListUpdate: !prevState.performCalendarTaskListUpdate,
+    }));
+  }
+
   render() {
     return (
       <>
 
-        <div className="navigation"> {<CalendarNav onSelectHandler={this.onSelectHandler} />} </div>
-        <div className="page"> {<CalendarPage selectedDate={this.state.selectedDate} />}</div>
+        <div className="navigation">
+          {<CalendarNav
+            onSelectHandler={this.onSelectHandler}
+            performCalendarTaskListUpdateHandler={this.performCalendarTaskListUpdateHandler}
+          />} </div>
+        <div className="page">
+          {<CalendarPage
+            selectedDate={this.state.selectedDate}
+          />}</div>
 
       </>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskHoverButtons from '../../components/TaskHoverButtons';
+import { handleCalendarScrollTop } from '../../tools/CalendarScroll';
 import '../../styles/calendar/CalendarTaskListWeek.css';
 
 
@@ -198,6 +199,8 @@ class CalendarTaskListWeek extends Component {
     to = to.toISOString();
 
     this.fetchData(from, to);
+
+    handleCalendarScrollTop('.calendar-tasklist-week-container');
   }
 
   render() {
