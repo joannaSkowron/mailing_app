@@ -23,7 +23,7 @@ class DateSorting extends Component {
           title={this.state.newestFirst ? 'Newest first' : 'Oldest first'}
           onClick={this.handleDateSorting}>
           <i
-            className={this.state.newestFirst ? "fas fa-sort-up date-sorting" : "fas fa-sort-down date-sorting"}></i>
+            className={this.state.newestFirst ? "fas fa-sort-up date-sorting-up" : "fas fa-sort-up date-sorting-down"}></i>
         </div>
       </>
 

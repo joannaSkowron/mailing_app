@@ -41,7 +41,7 @@ class Email extends Component {
       .then(response => {
         if (response.ok) {
           return response
-        } throw Error('Error')
+        } throw Error('Error') //użycie throw spowoduje, że nowa obietnica uzyska stan rejected, wywoła się metoda catch
       })
       .then(response => response.json())
       .then(data => {
@@ -120,7 +120,7 @@ class Email extends Component {
 
     let formattedDate = null;
     if (currentDate.getDate() === day && monthNames[currentDate.getMonth()] === month && currentDate.getFullYear() === year) {
-      formattedDate = `${hours}:${minutes}`
+      formattedDate = `${hours}:${minutes.toString().padStart(2, '0')}`
     } else if (currentDate.getFullYear() === year) {
       formattedDate = `${day} ${month}`
     } else if (currentDate.getFullYear() !== year) {
@@ -137,8 +137,11 @@ class Email extends Component {
 
   renderEmailsTable() {
     if (this.state.data === null) return;
+
     const { items } = this.state.data;
     const currentFolder = this.props.match.params.folder;
+
+    if (items.length === 0) return `Nothing to see here, move along, sir.`;
 
     const emails_table = items.map(item => (
 
@@ -150,9 +153,9 @@ class Email extends Component {
                 {['outbox', 'draft'].includes(currentFolder) ?
                   item.to.map(item => `${item.address} `) : item.from.address}
               </p>
-              <p className='emails-table-from-adress'>
+              {/* <p className='emails-table-from-adress'>
                 {['outbox', 'draft'].includes(currentFolder) ? '' : item.from.address}
-              </p>
+              </p> */}
             </div>
           </div>
           <div className='emails-table emails-table-title'>

@@ -4,5 +4,4 @@ export const handleCalendarScrollTop = (selector) => {
   const pixelsToScroll = currentHour * 60 - 70;
 
   element.scrollTop = pixelsToScroll;
-  console.log(`scrollowanie ${pixelsToScroll} pixeli`)
 }

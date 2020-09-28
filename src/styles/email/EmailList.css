@@ -23,6 +23,7 @@
 .emails-table {
   height: 50px;
   font-size: 13px;
+  overflow: hidden;
 }
 
 .emails-table-row {
@@ -49,8 +50,7 @@
 }
 
 .emails-table-cell, 
-.emails-table-cell *
-{
+.emails-table-cell * {
   min-width: 0;
   white-space: nowrap; 
   overflow: hidden;
@@ -68,21 +68,21 @@
 
 }
 
-.emails-table-from-adress {
-  font-size: 11px;
-}
-
 .emails-table-header-title,
 .emails-table-title {
   width: 25%;
-  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 10px;
 }
 
 .emails-table-header-content,
 .emails-table-content {
   width: 35%;
-  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 10px;
 }
 

@@ -11,6 +11,7 @@ const EmailViewTools = (props) => {
   return (
     <>
       <div className="email-view-tools-container">
+
         <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
           <div className="email-view-tools" title="Reply">
             <i className="fas fa-reply"></i>
@@ -29,11 +30,9 @@ const EmailViewTools = (props) => {
           </div>
         </Link>
 
-
         <div className="email-view-tools" title="Move to spam">
           <i className='fas fa-ban'></i>
         </div>
-
 
         <div className="email-view-tools" title="Move to bin">
           <i className='far fa-trash-alt'></i>

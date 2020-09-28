@@ -43,7 +43,8 @@ class NavCalendar extends Component {
           <ul className='nav'>
             <div className='nav-item-btn-calendar'>
               <button onClick={this.handleAddTask}>
-                <i className='fas fa-plus'></i>Add task
+                <i className='fas fa-plus'></i>
+                Add task
               </button>
             </div>
           </ul>
