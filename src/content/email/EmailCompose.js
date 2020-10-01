@@ -217,38 +217,51 @@ class EmailCompose extends Component {
   componentDidMount() {
 
     const query = new URLSearchParams(this.props.location.search);
+
     if (query.get('id')) {
       this.fetchData(query.get("id")).then(data => {
 
-        const subject = `RE: ${data.title}`;
+        const subject = data.title;
+        const subjectRE = `RE: ${data.title}`;
         const subjectFWD = `FWD: ${data.title}`;
+        const address = data.from.address;
+        const addressTO = data.to.map(obj => obj.address).join(', ');
+        const addressCC = data.cc.map(obj => obj.address).join(', ');
+        const addressBCC = data.bcc.map(obj => obj.address).join(', ');
         const content = `<br><br>
       <hr>
-      From: ${data.from.address}<br>
-      CC: ${data.cc}<br>
+      From: ${address}<br>
+      CC: ${addressCC}<br>
       Received: ${new Date(data.date).toLocaleString()}<br><br>
 
       ${data.content}`;
-        const address = data.from.address;
-        const addressCC = data.cc.join(' ,');
+
 
         if (query.get("responsetype") === 'reply') {
           this.setState({
             address,
-            subject,
+            subject: subjectRE,
             content,
           })
         } else if (query.get("responsetype") === 'replyall') {
           this.setState({
             address,
             addressCC,
-            subject,
+            subject: subjectRE,
             content,
           })
         } else if (query.get("responsetype") === 'forward') {
           this.setState({
             subject: subjectFWD,
             content,
+          })
+        } else if (query.get("responsetype") === 'edit') {
+          this.setState({
+            address: addressTO,
+            addressCC,
+            addressBCC,
+            subject,
+            content: data.content,
           })
         }
       })

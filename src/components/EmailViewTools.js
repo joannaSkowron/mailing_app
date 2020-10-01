@@ -7,36 +7,47 @@ import '../styles/components/EmailViewTools.css';
 const EmailViewTools = (props) => {
 
   const id = props.data.id;
+  const { reply, replyAll, forward, edit, moveToInbox, moveToSpam, moveToBin } = props;
 
   return (
     <>
       <div className="email-view-tools-container">
 
-        <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
+        {reply && <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
           <div className="email-view-tools" title="Reply">
             <i className="fas fa-reply"></i>
           </div>
-        </Link>
+        </Link>}
 
-        <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
+        {replyAll && <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
           <div className="email-view-tools" title="Reply to all">
             <i className="fas fa-reply-all"></i>
           </div>
-        </Link>
+        </Link>}
 
-        <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
+        {forward && <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
           <div className="email-view-tools" title="Forward">
             <i className="fas fa-share"></i>
           </div>
-        </Link>
+        </Link>}
 
-        <div className="email-view-tools" title="Move to spam">
+        {edit && <Link to={`/email/compose/new?id=${id}&responsetype=edit`}>
+          <div className="email-view-tools" title="Edit">
+            <i className="far fa-edit"></i>
+          </div>
+        </Link>}
+
+        {moveToInbox && <div className="email-view-tools" title="Move to inbox">
+          <i className='far fa-envelope-open'></i>
+        </div>}
+
+        {moveToSpam && <div className="email-view-tools" title="Move to spam">
           <i className='fas fa-ban'></i>
-        </div>
+        </div>}
 
-        <div className="email-view-tools" title="Move to bin">
+        {moveToBin && <div className="email-view-tools" title="Move to bin">
           <i className='far fa-trash-alt'></i>
-        </div>
+        </div>}
 
       </div>
     </>

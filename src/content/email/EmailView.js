@@ -43,13 +43,23 @@ class EmailView extends Component {
     const emailContent = (
       <>
         <div className="email-view-container">
-          <EmailViewTools data={data} />
+          <EmailViewTools
+            data={data}
+            reply={true}
+            replyAll={true}
+            forward={true}
+            edit={false}
+            moveToInbox={false}
+            moveToSpam={true}
+            moveToBin={true}
+          />
 
           <h1 className="email-view-title">{data.title}</h1>
 
           <header className="email-view-header">
-            <div className="email-view-header-from">From: {data.from.address} ({data.from.address})</div>
-            <div className="email-view-header-to">To: {data.to.map(item => `${item.address} `)}</div>
+            <div className="email-view-header-from">From: {data.from.address}</div>
+            <div className="email-view-header-to">To: {data.to.map(item => item.address)}</div>
+            <div className="email-view-header-toCC">CC: {data.cc.map(obj => obj.address).join(', ')}</div>
             <div className="email-view-header-date">Date: {new Date(data.date).toLocaleString()}</div>
           </header>
 

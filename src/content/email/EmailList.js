@@ -5,6 +5,7 @@ import Pager from '../../components/Pager';
 import DateSorting from '../../components/DateSorting';
 import Spinner from '../../components/Spinner';
 import parse from 'html-react-parser';
+import EmailViewTools from '../../components/EmailViewTools';
 import '../../styles/email/EmailList.css';
 
 
@@ -145,8 +146,10 @@ class Email extends Component {
 
     const emails_table = items.map(item => (
 
-      <NavLink to={`/email/viewemail/${currentFolder}/${item.id}`} key={item.id} >
-        <div className='emails-table-row'>
+      <div className='emails-table-row' key={item.id}>
+
+        <NavLink to={`/email/viewemail/${currentFolder}/${item.id}`} >
+
           <div className='emails-table emails-table-from'>
             <div className="emails-table-cell">
               <p>
@@ -168,9 +171,30 @@ class Email extends Component {
           <div className='emails-table emails-table-date'>
             <div className="emails-table-cell">{this.getDate(new Date(item.date))}</div>
           </div>
+
+        </NavLink>
+
+        <div className="emails-table-item emails-table-tools">
+          <div className="emails-table-cell">
+
+            <EmailViewTools
+              data={item}
+              reply={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+              replyAll={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+              forward={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+              edit={['draft'].includes(currentFolder) ? true : false}
+              moveToInbox={['bin'].includes(currentFolder) ? true : false}
+              moveToSpam={['inbox'].includes(currentFolder) ? true : false}
+              moveToBin={true}
+            />
+
+          </div>
         </div>
-      </NavLink>
+
+      </div>
+
     ));
+
     return emails_table;
   }
 
