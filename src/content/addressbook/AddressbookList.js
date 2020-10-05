@@ -10,7 +10,7 @@ import '../../styles/addressbook/AddressbookList.css';
 class AddressbookList extends Component {
 
   state = {
-
+    showSpinner: false,
     data: [
       {
         id: 1,
@@ -135,18 +135,16 @@ class AddressbookList extends Component {
     ]
   }
 
+  renderSpinner = () => {
+    if (this.state.showSpinner) {
+      return <Spinner />
+    }
+  }
+
   handleFavourites = (event, id) => {
     console.log("love" + id);
     console.log(event.target)
   }
-
-  // showToolbar = () => {
-  //   console.log('bar show')
-  // }
-
-  // hideToolbar = () => {
-  //   console.log('hide bar')
-  // }
 
   renderTable() {
     const { data } = this.state;
@@ -154,8 +152,7 @@ class AddressbookList extends Component {
 
     const addressbookTable = data.map(item => (
       <div className='addressbook-table-row' key={item.id}
-      // onMouseEnter={this.showToolbar}
-      // onMouseLeave={this.hideToolbar}
+
       >
         <div className="addressbook-table-item addressbook-table-checkbox">
           <div className="addressbook-table-cell">
@@ -211,6 +208,7 @@ class AddressbookList extends Component {
         </div>
 
         <div className='addressbook-table-container'>
+
           <div className='addressbook-table-header'>
             <div className="addressbook-table-header-item addressbook-table-header-name">Name</div>
             <div className="addressbook-table-header-item addressbook-table-header-email">E-mail</div>
@@ -218,7 +216,7 @@ class AddressbookList extends Component {
           </div>
           <div className="addressbook-table-inner-container">
             {this.renderTable()}
-            {/* {this.renderSpinner()} */}
+            {this.renderSpinner()}
           </div>
 
         </div>

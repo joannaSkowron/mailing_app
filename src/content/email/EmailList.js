@@ -6,21 +6,29 @@ import DateSorting from '../../components/DateSorting';
 import Spinner from '../../components/Spinner';
 import parse from 'html-react-parser';
 import EmailViewTools from '../../components/EmailViewTools';
+import { FetchService } from '../../services/FetchService';
 import '../../styles/email/EmailList.css';
 
 
 class Email extends Component {
 
-  state = {
-    data: null,
-    skip: 0,
-    take: 20,
-    currentPage: 1,
-    pagesCount: null,
-    searchText: '',
-    newestFirst: true,
-    showSpinner: true,
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      data: null,
+      skip: 0,
+      take: 20,
+      currentPage: 1,
+      pagesCount: null,
+      searchText: '',
+      newestFirst: true,
+      showSpinner: true,
+    };
+
+    this.fetchService = new FetchService();
+  }
+
 
   setPagesCount() {
     if (this.state.data !== null) {
@@ -31,30 +39,48 @@ class Email extends Component {
     }
   }
 
+
+
   fetchData(folder, skip, take, searchText, newestFirst) {
 
     this.setState({
       showSpinner: true,
     });
 
-    const API = `http://catmail.azurewebsites.net/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}&newestFirst=${newestFirst}`;
-    fetch(API)
-      .then(response => {
-        if (response.ok) {
-          return response
-        } throw Error('Error') //użycie throw spowoduje, że nowa obietnica uzyska stan rejected, wywoła się metoda catch
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          data,
-          showSpinner: false,
-        });
-        this.setPagesCount();
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    const API = `/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}&newestFirst=${newestFirst}`;
+    const options = { method: 'get' };
+
+    const successCallback = (data) => {
+      this.setState({
+        data,
+        showSpinner: false,
+      });
+      this.setPagesCount();
+    };
+
+    const failureCallback = (err) => {
+      console.log('failure callback in component');
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+
+    // fetch(API)
+    //   .then(response => {
+    //     if (response.ok) {
+    //       return response
+    //     } throw Error('Error') //użycie throw spowoduje, że nowa obietnica uzyska stan rejected, wywoła się metoda catch
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     this.setState({
+    //       data,
+    //       showSpinner: false,
+    //     });
+    //     this.setPagesCount();
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   }
 
   handlePageChange = (value) => {
@@ -108,6 +134,10 @@ class Email extends Component {
     this.fetchData(folder, skip, take, searchText, newestFirst);
   }
 
+  componentWillUnmount() {
+    this.fetchService.abortFetch();
+  }
+
 
   getDate(date) {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -144,7 +174,7 @@ class Email extends Component {
 
     if (items.length === 0) return `Nothing to see here, move along, sir.`;
 
-    const emails_table = items.map(item => (
+    const emailsTable = items.map(item => (
 
       <div className='emails-table-row' key={item.id}>
 
@@ -195,7 +225,7 @@ class Email extends Component {
 
     ));
 
-    return emails_table;
+    return emailsTable;
   }
 
   render() {
@@ -224,9 +254,11 @@ class Email extends Component {
 
           <div className="emails-table-header-item emails-table-header-title">Title</div>
           <div className="emails-table-header-item emails-table-header-content">Content</div>
-          <div className='emails-table-header-item emails-table-header-date'>Date {<DateSorting
-            handleDateSorting={this.handleDateSorting}
-          />}</div>
+          <div className='emails-table-header-item emails-table-header-date'>Date
+          {<DateSorting
+              handleDateSorting={this.handleDateSorting}
+            />}
+          </div>
         </div>
 
         <div className='emails-table-container'>
