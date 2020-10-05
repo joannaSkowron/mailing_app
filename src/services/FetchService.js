@@ -48,8 +48,7 @@ export class FetchService {
       })
 
       .catch(err => {
-        console.log(err, err.name);
-        failureCallback()
+        failureCallback(err);
       })
   }
 

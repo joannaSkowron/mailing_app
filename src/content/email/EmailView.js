@@ -37,20 +37,23 @@ class EmailView extends Component {
   }
 
   renderEmailContent() {
+
     const { data } = this.state;
+    const currentFolder = this.props.match.params.folder;
     if (data === null) return;
 
     const emailContent = (
       <>
         <div className="email-view-container">
+
           <EmailViewTools
             data={data}
-            reply={true}
-            replyAll={true}
-            forward={true}
-            edit={false}
-            moveToInbox={false}
-            moveToSpam={true}
+            reply={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+            replyAll={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+            forward={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+            edit={['draft'].includes(currentFolder) ? true : false}
+            moveToInbox={['bin'].includes(currentFolder) ? true : false}
+            moveToSpam={['inbox'].includes(currentFolder) ? true : false}
             moveToBin={true}
           />
 

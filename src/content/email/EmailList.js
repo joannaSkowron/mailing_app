@@ -59,7 +59,8 @@ class Email extends Component {
     };
 
     const failureCallback = (err) => {
-      console.log('failure callback in component');
+      console.log('Fetch failure callback in component EmailList');
+      console.log(err, err.name);
     };
 
     this.fetchService.useFetch(API, options, successCallback, failureCallback);

@@ -5,29 +5,33 @@ import '../../styles/email/EmailCompose.css';
 
 
 class EmailCompose extends Component {
-  state = {
-    address: '',
-    addressCC: '',
-    addressBCC: '',
-    subject: '',
-    content: '',
 
-    errors: {
-      address: false,
-      addressCC: false,
-      addressBCC: false,
-      subject: false,
-      content: false,
-    },
+  constructor() {
+    super();
+    this.state = {
+      address: '',
+      addressCC: '',
+      addressBCC: '',
+      subject: '',
+      content: '',
 
-    redirectToDrafts: false,
-    redirectToInbox: false,
-  }
+      errors: {
+        address: false,
+        addressCC: false,
+        addressBCC: false,
+        subject: false,
+        content: false,
+      },
 
-  errorMessages = {
-    addressIncorrect: 'Please enter a valid e-mail address.',
-    subjectIncorrect: 'Please enter subject.',
-    contentIncorrect: 'Please enter content.',
+      redirectToDrafts: false,
+      redirectToInbox: false,
+    }
+
+    this.validationErrorMessages = {
+      addressIncorrect: 'Please enter a valid e-mail address.',
+      subjectIncorrect: 'Please enter subject.',
+      contentIncorrect: 'Please enter content.',
+    }
   }
 
   handleValidation = () => {
@@ -228,7 +232,7 @@ class EmailCompose extends Component {
         const addressTO = data.to.map(obj => obj.address).join(', ');
         const addressCC = data.cc.map(obj => obj.address).join(', ');
         const addressBCC = data.bcc.map(obj => obj.address).join(', ');
-        const content = `<br><br>
+        const contentQuotation = `<br><br>
       <hr>
       From: ${address}<br>
       CC: ${addressCC}<br>
@@ -241,19 +245,19 @@ class EmailCompose extends Component {
           this.setState({
             address,
             subject: subjectRE,
-            content,
+            content: contentQuotation,
           })
         } else if (query.get("responsetype") === 'replyall') {
           this.setState({
             address,
-            addressCC,
+            addressCC: addressTO + addressCC,
             subject: subjectRE,
-            content,
+            content: contentQuotation,
           })
         } else if (query.get("responsetype") === 'forward') {
           this.setState({
             subject: subjectFWD,
-            content,
+            content: contentQuotation,
           })
         } else if (query.get("responsetype") === 'edit') {
           this.setState({
@@ -292,7 +296,7 @@ class EmailCompose extends Component {
                 value={this.state.address}
               />
               {this.state.errors.address &&
-                <span className="email-compose-error-message">{this.errorMessages.addressIncorrect}</span>}
+                <span className="email-compose-error-message">{this.validationErrorMessages.addressIncorrect}</span>}
               <input type="text"
                 name="addressCC"
                 placeholder="CC"
@@ -301,7 +305,7 @@ class EmailCompose extends Component {
                 value={this.state.addressCC}
               />
               {this.state.errors.addressCC &&
-                <span className="email-compose-error-message">{this.errorMessages.addressIncorrect}</span>}
+                <span className="email-compose-error-message">{this.validationErrorMessages.addressIncorrect}</span>}
               <input type="text"
                 name="addressBCC"
                 placeholder="BCC"
@@ -310,7 +314,7 @@ class EmailCompose extends Component {
                 value={this.state.addressBCC}
               />
               {this.state.errors.addressBCC &&
-                <span className="email-compose-error-message">{this.errorMessages.addressIncorrect}</span>}
+                <span className="email-compose-error-message">{this.validationErrorMessages.addressIncorrect}</span>}
               <input type="text"
                 name="subject"
                 placeholder="Subject"
@@ -319,7 +323,7 @@ class EmailCompose extends Component {
                 value={this.state.subject}
               />
               {this.state.errors.subject &&
-                <span className="email-compose-error-message">{this.errorMessages.subjectIncorrect}</span>}
+                <span className="email-compose-error-message">{this.validationErrorMessages.subjectIncorrect}</span>}
             </div>
             <div className="email-compose-form-content">
               <Editor
@@ -331,7 +335,7 @@ class EmailCompose extends Component {
                 value={this.state.content}
               />
               {this.state.errors.content &&
-                <span className="email-compose-error-message">{this.errorMessages.contentIncorrect}</span>}
+                <span className="email-compose-error-message">{this.validationErrorMessages.contentIncorrect}</span>}
               {/* <textarea name="content"
                 onChange={this.handleChange}
                 value={this.state.content}>
