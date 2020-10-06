@@ -11,7 +11,7 @@ export class FetchService {
     options.signal = this.controller.signal;
     API = BASE_URL + API;
 
-    fetch(API, { options })
+    fetch(API, options)
 
       .then(response => {
 
@@ -39,9 +39,8 @@ export class FetchService {
           throw Error('Error');
         }
       })
-      //co jeżeli pojawi się inny kod błędu? czy zrobić ostateczny else?
-      //czy potrzebny jest kolejny then do przekształcenia response, nie można tego umieścić w poprzednim?
-      .then(response => response.json())
+
+      .then(response => response.headers.get("Content-Length") > 0 ? response.json() : null)
 
       .then(data => {
         successCallback(data)

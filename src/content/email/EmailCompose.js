@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { Link, Prompt, Redirect } from 'react-router-dom';
+import { FetchService } from '../../services/FetchService';
+import { emailResponseQuotationHelper, stateUpdateBasedOnResponseType } from '../../tools/EmailResponseHelper';
 import '../../styles/email/EmailCompose.css';
 
 
@@ -32,6 +34,8 @@ class EmailCompose extends Component {
       subjectIncorrect: 'Please enter subject.',
       contentIncorrect: 'Please enter content.',
     }
+
+    this.fetchService = new FetchService();
   }
 
   handleValidation = () => {
@@ -100,6 +104,21 @@ class EmailCompose extends Component {
     this.setState({ content });
   }
 
+  createJSON = () => {
+    const { address, addressCC, addressBCC, subject, content } = this.state;
+
+    const data = {
+      title: subject,
+      content: content,
+      from: "sender@catmail.test.com.pl",
+      to: address.split(', '),
+      cc: addressCC.split(', '),
+      bcc: addressBCC.split(', ')
+    };
+
+    return JSON.stringify(data);
+  }
+
   handleSend = (event) => {
     event.preventDefault();
 
@@ -116,39 +135,26 @@ class EmailCompose extends Component {
         }
       })
 
-      const { address, addressCC, addressBCC, subject, content } = this.state;
-
-      const data = {
-        title: subject,
-        content: content,
-        from: "sender@catmail.test.com.pl",
-        to: address.split(', '),
-        cc: addressCC.split(', '),
-        bcc: addressBCC.split(', ')
-      };
-      const dataJSON = JSON.stringify(data);
-
-      const API = `https://catmail.azurewebsites.net/api/emails/send`;
-
-      fetch(API, {
+      const API = `/api/emails/send`;
+      const options = {
         method: 'post',
         headers: {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
         },
-        body: dataJSON,
-      })
-        .then(response => {
-          if (response.ok) {
-            this.setState({
-              redirectToInbox: true,
-            })
-          } else { throw Error('Error') }
+        body: this.createJSON(),
+      };
+      const successCallback = () => {
+        this.setState({
+          redirectToInbox: true,
         })
-        .catch(error => {
-          console.log('Request failed', error);
-          alert("Sorry, your request to send this e-mail failed")
-        });
+      }
+      const failureCallback = (error) => {
+        console.log('Request failed', error);
+        alert("Sorry, your request to send this e-mail failed");
+      }
+
+      this.fetchService.useFetch(API, options, successCallback, failureCallback);
     }
 
     else {
@@ -166,110 +172,56 @@ class EmailCompose extends Component {
 
   handleSaveAsDraft = (event) => {
     event.preventDefault();
-    const { address, addressCC, addressBCC, subject, content } = this.state;
 
-    const data = {
-      title: subject,
-      content: content,
-      from: "sender@catmail.test.com.pl",
-      to: address.split(', '),
-      cc: addressCC.split(', '),
-      bcc: addressBCC.split(', ')
-    };
-    const dataJSON = JSON.stringify(data);
-
-    const API = `https://catmail.azurewebsites.net/api/emails/draft`;
-
-    fetch(API, {
+    const API = `/api/emails/draft`;
+    const options = {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: dataJSON,
-    })
-      .then(response => {
-        if (response.ok) {
-          this.setState({
-            redirectToDrafts: true,
-          })
-          alert('Saved as draft')
-        } else { throw Error('Error') }
+      body: this.createJSON(),
+    };
+    const successCallback = () => {
+      this.setState({
+        redirectToDrafts: true,
       })
-      .catch(error => {
-        console.log('Request failed', error);
-        alert("Sorry, your request to save as draft failed")
-      });
+      alert('Saved as draft');
+    };
+    const failureCallback = (err) => {
+      console.log('Request failed', err);
+      alert("Sorry, your request to save as draft failed")
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
-
-  fetchData(id) {
-    const API = `https://catmail.azurewebsites.net/api/emails/${id}`;
-    const data = fetch(API)
-      .then(response => {
-        if (response.ok) {
-          return response
-        } throw Error('Error')
-      })
-      .then(response => response.json())
-      .catch(err => {
-        console.log(err)
-      });
-    return data;
-  }
 
   componentDidMount() {
+    const id = new URLSearchParams(this.props.location.search).get('id');
+    const responsetype = new URLSearchParams(this.props.location.search).get('responsetype');
+    const API = `/api/emails/${id}`;
+    const options = { method: 'get' };
+    let emailResponseQuotation;
 
-    const query = new URLSearchParams(this.props.location.search);
+    const successCallback = (data) => {
+      console.log(data)
+      emailResponseQuotation = emailResponseQuotationHelper(data);
+      this.setState(stateUpdateBasedOnResponseType(responsetype, emailResponseQuotation));
+    };
 
-    if (query.get('id')) {
-      this.fetchData(query.get("id")).then(data => {
+    const failureCallback = (err) => {
+      console.log(err)
+    };
 
-        const subject = data.title;
-        const subjectRE = `RE: ${data.title}`;
-        const subjectFWD = `FWD: ${data.title}`;
-        const address = data.from.address;
-        const addressTO = data.to.map(obj => obj.address).join(', ');
-        const addressCC = data.cc.map(obj => obj.address).join(', ');
-        const addressBCC = data.bcc.map(obj => obj.address).join(', ');
-        const contentQuotation = `<br><br>
-      <hr>
-      From: ${address}<br>
-      CC: ${addressCC}<br>
-      Received: ${new Date(data.date).toLocaleString()}<br><br>
-
-      ${data.content}`;
-
-
-        if (query.get("responsetype") === 'reply') {
-          this.setState({
-            address,
-            subject: subjectRE,
-            content: contentQuotation,
-          })
-        } else if (query.get("responsetype") === 'replyall') {
-          this.setState({
-            address,
-            addressCC: addressTO + addressCC,
-            subject: subjectRE,
-            content: contentQuotation,
-          })
-        } else if (query.get("responsetype") === 'forward') {
-          this.setState({
-            subject: subjectFWD,
-            content: contentQuotation,
-          })
-        } else if (query.get("responsetype") === 'edit') {
-          this.setState({
-            address: addressTO,
-            addressCC,
-            addressBCC,
-            subject,
-            content: data.content,
-          })
-        }
-      })
+    if (id) {
+      this.fetchService.useFetch(API, options, successCallback, failureCallback);
     }
+  }
+
+
+  componentWillUnmount() {
+    this.fetchService.abortFetch();
   }
 
   render() {
@@ -291,7 +243,7 @@ class EmailCompose extends Component {
               <input type="text"
                 name="address"
                 placeholder="To"
-                autoComplete="false1"
+                autoComplete='false'
                 onChange={this.handleChange}
                 value={this.state.address}
               />
@@ -336,13 +288,6 @@ class EmailCompose extends Component {
               />
               {this.state.errors.content &&
                 <span className="email-compose-error-message">{this.validationErrorMessages.contentIncorrect}</span>}
-              {/* <textarea name="content"
-                onChange={this.handleChange}
-                value={this.state.content}>
-                <Editor
-                  apiKey="bjuvt5iln6j3ymf2uwsfx02kslovxyhomp0nnkbgm47yvtbl"
-                  init={{ plugins: 'link table' }} />
-              </textarea> */}
             </div>
             <div className="email-compose-form-buttons">
               <button className="email-compose-btn" onClick={this.handleSend}>Send</button>
