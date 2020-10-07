@@ -64,24 +64,6 @@ class Email extends Component {
     };
 
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
-
-    // fetch(API)
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response
-    //     } throw Error('Error') //użycie throw spowoduje, że nowa obietnica uzyska stan rejected, wywoła się metoda catch
-    //   })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState({
-    //       data,
-    //       showSpinner: false,
-    //     });
-    //     this.setPagesCount();
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
   }
 
   handlePageChange = (value) => {
@@ -187,9 +169,6 @@ class Email extends Component {
                 {['outbox', 'draft'].includes(currentFolder) ?
                   item.to.map(item => `${item.address} `) : item.from.address}
               </p>
-              {/* <p className='emails-table-from-adress'>
-                {['outbox', 'draft'].includes(currentFolder) ? '' : item.from.address}
-              </p> */}
             </div>
           </div>
           <div className='emails-table emails-table-title'>

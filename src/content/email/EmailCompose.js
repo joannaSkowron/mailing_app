@@ -205,7 +205,6 @@ class EmailCompose extends Component {
     let emailResponseQuotation;
 
     const successCallback = (data) => {
-      console.log(data)
       emailResponseQuotation = emailResponseQuotationHelper(data);
       this.setState(stateUpdateBasedOnResponseType(responsetype, emailResponseQuotation));
     };
@@ -218,7 +217,6 @@ class EmailCompose extends Component {
       this.fetchService.useFetch(API, options, successCallback, failureCallback);
     }
   }
-
 
   componentWillUnmount() {
     this.fetchService.abortFetch();

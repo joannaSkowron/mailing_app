@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EmailViewTools from '../../components/EmailViewTools';
+import { FetchService } from '../../services/FetchService';
 import parse from 'html-react-parser';
 
 import '../../styles/email/EmailView.css';
@@ -7,40 +8,39 @@ import '../../styles/email/EmailView.css';
 
 class EmailView extends Component {
 
-  state = {
-    data: null,
-  }
+  constructor() {
+    super();
 
-  fetchData() {
-    const id = this.props.match.params.id;
-    const API = `http://catmail.azurewebsites.net/api/emails/${id}`;
+    this.state = {
+      data: null,
+    }
 
-    fetch(API)
-      .then(response => {
-        if (response.ok) {
-          return response
-        } throw Error('Error')
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState(state => ({
-          data
-        }));
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.fetchService = new FetchService();
   }
 
   componentDidMount() {
-    this.fetchData();
+    const id = this.props.match.params.id;
+    const API = `/api/emails/${id}`;
+    const options = { method: 'get' };
+    const successCallback = (data) => {
+      this.setState({ data });
+    }
+    const failureCallback = (err) => {
+      console.log(err)
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+  }
+
+  componentWillUnmount() {
+    this.fetchService.abortFetch();
   }
 
   renderEmailContent() {
-
     const { data } = this.state;
-    const currentFolder = this.props.match.params.folder;
     if (data === null) return;
+
+    const currentFolder = this.props.match.params.folder;
 
     const emailContent = (
       <>
@@ -81,9 +81,7 @@ class EmailView extends Component {
 
     return (
       <>
-
         {this.renderEmailContent()}
-
       </>
     );
   }
