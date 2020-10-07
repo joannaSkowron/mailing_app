@@ -7,20 +7,28 @@ import {
   useValidateTimeValues,
   ValidationConfig,
 } from "../../tools/Validator";
-
 import DatePicker from 'react-date-picker';
+import { FetchService } from '../../services/FetchService';
 
 class CalendarNewTask extends Component {
 
-  state = {
-    id: null,
-    title: '',
-    date: new Date(),
-    start: '12:00',
-    end: '12:30',
-    description: '',
-    validationResult: null
+  constructor() {
+    super();
+
+    this.state = {
+      id: null,
+      title: '',
+      date: new Date(),
+      start: '12:00',
+      end: '12:30',
+      description: '',
+      validationResult: null
+    };
+
+    this.fetchService = new FetchService();
   }
+
+
 
   handleChange = (event) => {
     const value = event.target.value;
@@ -60,7 +68,7 @@ class CalendarNewTask extends Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    const { title, date, start, end, description } = this.state;
+    const { id, title, date, start, end, description } = this.state;
 
     let dateTimeStart = new Date(date);
     const startArray = start.split(':');
@@ -72,12 +80,12 @@ class CalendarNewTask extends Component {
     dateTimeEnd.setHours(endArray[0], endArray[1], 0, 0)
     dateTimeEnd.toISOString();
 
-    const data = {
+    const dataJSON = JSON.stringify({
       dateTimeStart: dateTimeStart,
       dateTimeEnd: dateTimeEnd,
       title: title,
       notes: description
-    };
+    });
 
     const validationConfigs = [
       new ValidationConfig('title', [validateRequired, useValidateMaxLenght(20)]),
@@ -92,38 +100,32 @@ class CalendarNewTask extends Component {
     });
 
     if (validationResult.isValid) {
-      const dataJSON = JSON.stringify(data);
-      let API = `https://catmail.azurewebsites.net/api/calendar`;
-      let method = 'post';
-      if (this.state.id !== null) {
-        method = 'put';
-        API = `https://catmail.azurewebsites.net/api/calendar/${this.state.id}`;
-      };
-
-      fetch(API, {
-        method: method,
+      const API = id ? `/api/calendar/${id}` : `/api/calendar`;
+      const options = {
+        method: id ? 'put' : 'post',
         headers: {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json'
         },
         body: dataJSON,
-      })
-        .then(response => {
-          if (response.ok) {
-            this.props.handleCancelBtn();
-            if (this.props.task !== undefined) {
-              this.props.handleUpdateData();
-            }
-            if (this.props.performCalendarTaskListUpdateHandler !== undefined) {
-              this.props.performCalendarTaskListUpdateHandler();
-            }
-          } else { throw Error('Error') }
-        })
-        .catch(error => {
-          console.log('Request failed', error);
-          alert("Sorry, your request to save failed")
-        });
+      };
 
+      const successCallback = () => {
+        this.props.handleCancelBtn();
+        if (this.props.task !== undefined) {
+          this.props.handleUpdateData();
+        }
+        if (this.props.performCalendarTaskListUpdateHandler !== undefined) {
+          this.props.performCalendarTaskListUpdateHandler();
+        }
+      };
+
+      const failureCallback = (err) => {
+        console.log('Request failed', err);
+        alert("Sorry, your request to save failed")
+      };
+
+      this.fetchService.useFetch(API, options, successCallback, failureCallback);
     }
   }
 

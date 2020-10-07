@@ -33,9 +33,7 @@ class NavCalendar extends Component {
   render() {
     return (
       <>
-        {/* <header>
-          <h1 className='nav-header'>Calendar</h1>
-        </header> */}
+
         <SimpleReactCalendar selected={this.state.selectedDate} onSelect={this.onSelectHandler} mode="single" />
 
         <nav className='nav-container'>

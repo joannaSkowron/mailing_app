@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import CalendarTaskListDay from './CalendarTaskListDay';
 import CalendarTaskListWeek from './CalendarTaskListWeek';
-
 import '../../styles/calendar/CalendarTaskList.css';
 
 
 
 class CalendarTaskList extends Component {
 
-  state = {
-    selectedView: 'day',
+  constructor() {
+    super();
+    this.state = {
+      selectedView: 'day',
+    }
   }
 
   selectedViewHandler = (selectedView) => {
