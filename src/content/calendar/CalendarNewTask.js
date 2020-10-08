@@ -9,6 +9,10 @@ import {
 } from "../../tools/Validator";
 import DatePicker from 'react-date-picker';
 import { FetchService } from '../../services/FetchService';
+import {
+  generateTimeOptions,
+  getISODateFromSelectedDateAndTime
+} from '../../tools/CalendarHelper';
 
 class CalendarNewTask extends Component {
 
@@ -28,8 +32,6 @@ class CalendarNewTask extends Component {
     this.fetchService = new FetchService();
   }
 
-
-
   handleChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
@@ -42,43 +44,12 @@ class CalendarNewTask extends Component {
     this.setState({ date });
   }
 
-  generateTimeOptions = () => {
-    const time = [];
-    for (let i = 0; i < 24; i++) {
-      let fullTime = null;
-      let halfTime = null;
-      if (i < 10) {
-        fullTime = `0${i}:00`;
-        halfTime = `0${i}:30`;
-      } else {
-        fullTime = `${i}:00`;
-        halfTime = `${i}:30`;
-      }
-      time.push(fullTime, halfTime)
-    }
-    time.push(`23:59`);
-
-    const options = time.map(option => (
-      <option key={option} value={option}>{option}</option>
-    ));
-
-    return options;
-  }
-
   handleSave = (event) => {
     event.preventDefault();
-
     const { id, title, date, start, end, description } = this.state;
 
-    let dateTimeStart = new Date(date);
-    const startArray = start.split(':');
-    dateTimeStart.setHours(startArray[0], startArray[1], 0, 0)
-    dateTimeStart.toISOString();
-
-    let dateTimeEnd = new Date(date);
-    const endArray = end.split(':');
-    dateTimeEnd.setHours(endArray[0], endArray[1], 0, 0)
-    dateTimeEnd.toISOString();
+    const dateTimeStart = getISODateFromSelectedDateAndTime(date, start);
+    const dateTimeEnd = getISODateFromSelectedDateAndTime(date, end);
 
     const dataJSON = JSON.stringify({
       dateTimeStart: dateTimeStart,
@@ -196,7 +167,7 @@ class CalendarNewTask extends Component {
                 name="start"
                 value={this.state.start}
                 onChange={this.handleChange}>
-                {this.generateTimeOptions()}
+                {generateTimeOptions()}
               </select>
               <i className="fas fa-minus"></i>
               <select
@@ -204,7 +175,7 @@ class CalendarNewTask extends Component {
                 name="end"
                 value={this.state.end}
                 onChange={this.handleChange}>
-                {this.generateTimeOptions()}
+                {generateTimeOptions()}
               </select>
             </div>
 

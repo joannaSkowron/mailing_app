@@ -87,11 +87,9 @@ class CalendarTaskListWeek extends Component {
     handleCalendarScrollTop('.calendar-tasklist-week-container');
   }
 
-
   componentWillUnmount() {
     this.fetchService.abortFetch();
   }
-
 
   render() {
     return (
@@ -125,30 +123,3 @@ class CalendarTaskListWeek extends Component {
 }
 
 export default CalendarTaskListWeek;
-
-// class DateHelper {
-//   getDateRange(date) {
-
-//     let from = new Date(date);
-//     from = this.getFirstDayOfWeek(from);
-//     from.setHours(0, 0, 0, 0);
-//     from = from.toISOString();
-
-//     let to = new Date(date);
-//     to = this.getLastDayOfWeek(to);
-//     to.setHours(23, 59, 59, 999);
-//     to = to.toISOString();
-
-//     return new DateRange(from, to)
-//   }
-// }
-
-// class DateRange {
-//   from;
-//   to;
-
-//   constructor(from, to) {
-//     this.from = from;
-//     this.to = to;
-//   }
-// }

@@ -8,7 +8,6 @@ export const handleCalendarScrollTop = (selector) => {
   element.scrollTop = pixelsToScroll;
 }
 
-
 export const dayOftheWeekMap = {
   0: 7,
   1: 1,
@@ -19,7 +18,6 @@ export const dayOftheWeekMap = {
   6: 6
 }
 
-
 export const generateDivs = (divscCount, divsClass, ifClock) => {
   let divs = [];
   for (let i = 0; i < divscCount; i++) {
@@ -28,20 +26,19 @@ export const generateDivs = (divscCount, divsClass, ifClock) => {
   return divs;
 }
 
-
 export const getFirstDayOfWeek = (date) => {
-  let dateWeekDay = date.getDay();
-  date.setDate(date.getDate() - dayOftheWeekMap[dateWeekDay] + 1);
-  return date;
+  const dateWeekDay = date.getDay();
+  let newDate = new Date(date);
+  newDate.setDate(date.getDate() - dayOftheWeekMap[dateWeekDay] + 1);
+  return newDate;
 }
-
 
 export const getLastDayOfWeek = (date) => {
-  let dateWeekDay = date.getDay();
-  date.setDate(date.getDate() + (7 - dayOftheWeekMap[dateWeekDay]));
-  return date;
+  const dateWeekDay = date.getDay();
+  let newDate = new Date(date);
+  newDate.setDate(date.getDate() + (7 - dayOftheWeekMap[dateWeekDay]));
+  return newDate;
 }
-
 
 export const generateTitleDivs = (divsCount, divsClass, selectedDate) => {
   let divs = [];
@@ -57,13 +54,11 @@ export const generateTitleDivs = (divsCount, divsClass, selectedDate) => {
   return divs;
 }
 
-
 export const getWeekDayName = (date) => {
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const day = date.getDay();
   return weekdays[day];
 }
-
 
 export const getWeekDateRange = (date) => {
   let from = new Date(date);
@@ -87,4 +82,36 @@ export const getDayDateRange = (date) => {
   to.setHours(23, 59, 59, 999);
   to = to.toISOString();
   return [from, to];
+}
+
+export const generateTimeOptions = () => {
+  const time = [];
+  for (let i = 0; i < 24; i++) {
+    let fullTime = null;
+    let halfTime = null;
+    if (i < 10) {
+      fullTime = `0${i}:00`;
+      halfTime = `0${i}:30`;
+    } else {
+      fullTime = `${i}:00`;
+      halfTime = `${i}:30`;
+    }
+    time.push(fullTime, halfTime)
+  }
+  time.push(`23:59`);
+
+  const options = time.map(option => (
+    <option key={option} value={option}>{option}</option>
+  ));
+
+  return options;
+}
+
+export const getISODateFromSelectedDateAndTime = (date, timeOption) => {
+  let dateObj = new Date(date);
+  const timeOptionArr = timeOption.split(':');
+  dateObj.setHours(timeOptionArr[0], timeOptionArr[1], 0, 0);
+  dateObj.toISOString();
+
+  return dateObj;
 }
