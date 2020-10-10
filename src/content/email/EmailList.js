@@ -7,13 +7,14 @@ import Spinner from '../../components/Spinner';
 import parse from 'html-react-parser';
 import EmailViewTools from '../../components/EmailViewTools';
 import { FetchService } from '../../services/FetchService';
+import { dateFormatter } from '../../tools/DateFormatter';
 import '../../styles/email/EmailList.css';
 
 
 class Email extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       data: null,
@@ -29,7 +30,6 @@ class Email extends Component {
     this.fetchService = new FetchService();
   }
 
-
   setPagesCount() {
     if (this.state.data !== null) {
       const pagesCount = Math.ceil(this.state.data.itemsCount / this.state.take);
@@ -38,8 +38,6 @@ class Email extends Component {
       })
     }
   }
-
-
 
   fetchData(folder, skip, take, searchText, newestFirst) {
 
@@ -102,14 +100,14 @@ class Email extends Component {
     this.fetchData(folder, skip, take, searchText, value);
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      currentPage: 1,
-    });
-    const folder = newProps.match.params.folder;
-    const { take, searchText, newestFirst } = this.state;
-    this.fetchData(folder, 0, take, searchText, newestFirst);
-  }
+  // componentWillReceiveProps(newProps) {
+  //   this.setState({
+  //     currentPage: 1,
+  //   });
+  //   const folder = newProps.match.params.folder;
+  //   const { take, searchText, newestFirst } = this.state;
+  //   this.fetchData(folder, 0, take, searchText, newestFirst);
+  // }
 
   componentDidMount() {
     const folder = this.props.match.params.folder;
@@ -121,36 +119,16 @@ class Email extends Component {
     this.fetchService.abortFetch();
   }
 
-
-  getDate(date) {
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const currentDate = new Date();
-
-    const minutes = date.getMinutes();
-    const hours = date.getHours();
-    const day = date.getDate();
-    const month = monthNames[date.getMonth()];
-    const year = date.getFullYear();
-
-    let formattedDate = null;
-    if (currentDate.getDate() === day && monthNames[currentDate.getMonth()] === month && currentDate.getFullYear() === year) {
-      formattedDate = `${hours}:${minutes.toString().padStart(2, '0')}`
-    } else if (currentDate.getFullYear() === year) {
-      formattedDate = `${day} ${month}`
-    } else if (currentDate.getFullYear() !== year) {
-      formattedDate = `${day}/${month}/${year}`
-    };
-
-    return formattedDate;
-  }
-
   renderSpinner() {
     if (this.state.showSpinner)
       return <Spinner />;
   }
 
   renderEmailsTable() {
-    if (this.state.data === null) return;
+    if (this.state.data === null) {
+      console.log("State is null... cannot render table...")
+      return;
+    }
 
     const { items } = this.state.data;
     const currentFolder = this.props.match.params.folder;
@@ -179,7 +157,7 @@ class Email extends Component {
             <div className="emails-table-cell">{parse(item.content)}</div>
           </div>
           <div className='emails-table emails-table-date'>
-            <div className="emails-table-cell">{this.getDate(new Date(item.date))}</div>
+            <div className="emails-table-cell">{dateFormatter(new Date(item.date))}</div>
           </div>
 
         </NavLink>
@@ -200,9 +178,7 @@ class Email extends Component {
 
           </div>
         </div>
-
       </div>
-
     ));
 
     return emailsTable;
@@ -210,22 +186,26 @@ class Email extends Component {
 
   render() {
 
+    console.log("Render...");
+
     const { pagesCount, currentPage } = this.state;
     const currentFolder = this.props.match.params.folder;
 
     return (
       <>
         <div className="tools-container">
-          <div className="search">{<Search
-            handleSearch={this.handleSearch}
-          />}</div>
-          <div className="pager">{<Pager
-            pagesCount={pagesCount}
-            currentPage={currentPage}
-            handlePageChange={this.handlePageChange}
-          />}</div>
+          <div className="search">
+            {<Search
+              handleSearch={this.handleSearch}
+            />}
+          </div>
+          <div className="pager">
+            {<Pager
+              pagesCount={pagesCount}
+              currentPage={currentPage}
+              handlePageChange={this.handlePageChange}
+            />}</div>
         </div>
-
 
         <div className='emails-table-header'>
           <div className="emails-table-header-item emails-table-header-from">

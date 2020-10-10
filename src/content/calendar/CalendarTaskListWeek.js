@@ -13,8 +13,8 @@ import '../../styles/calendar/CalendarTaskListWeek.css';
 
 class CalendarTaskListWeek extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: null,
     };

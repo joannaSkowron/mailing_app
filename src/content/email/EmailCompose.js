@@ -8,8 +8,8 @@ import '../../styles/email/EmailCompose.css';
 
 class EmailCompose extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       address: '',
       addressCC: '',

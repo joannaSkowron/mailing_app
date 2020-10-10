@@ -6,10 +6,15 @@ import '../../styles/layout/Content.css';
 
 class Calendar extends Component {
 
-  state = {
-    selectedDate: new Date(),
-    performCalendarTaskListUpdate: false,
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedDate: new Date(),
+      performCalendarTaskListUpdate: false,
+    }
   }
+
 
   onSelectHandler = (date) => {
     this.setState({

@@ -9,131 +9,136 @@ import '../../styles/addressbook/AddressbookList.css';
 
 class AddressbookList extends Component {
 
-  state = {
-    showSpinner: false,
-    data: [
-      {
-        id: 1,
-        isFavourite: true,
-        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-      },
-      {
-        id: 2,
-        isFavourite: false,
-        name: 'Fake Contact Name 2',
-        email: 'fake2@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact second object.'
-      },
-      {
-        id: 3,
-        isFavourite: true,
-        name: 'Fake Contact Name !!!',
-        email: 'fake55@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact third object.'
-      },
-      {
-        id: 4,
-        isFavourite: false,
-        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-      },
-      {
-        id: 5,
-        isFavourite: false,
-        name: 'Fake Contact Name 2',
-        email: 'fake2@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact second object.'
-      },
-      {
-        id: 6,
-        isFavourite: false,
-        name: 'Fake Contact Name !!!',
-        email: 'fake55@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact third object.'
-      },
-      {
-        id: 7,
-        isFavourite: false,
-        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-      },
-      {
-        id: 8,
-        isFavourite: false,
-        name: 'Fake Contact Name 2',
-        email: 'fake2@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact second object.'
-      },
-      {
-        id: 9,
-        isFavourite: true,
-        name: 'Fake Contact Name !!!',
-        email: 'fake55@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact third object.'
-      },
-      {
-        id: 10,
-        isFavourite: false,
-        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-      },
-      {
-        id: 11,
-        isFavourite: false,
-        name: 'Fake Contact Name 2',
-        email: 'fake2@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact second object.'
-      },
-      {
-        id: 12,
-        isFavourite: false,
-        name: 'Fake Contact Name !!!',
-        email: 'fake55@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact third object.'
-      },
-      {
-        id: 13,
-        isFavourite: false,
-        name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-        email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-        phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-        notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-      },
-      {
-        id: 14,
-        isFavourite: false,
-        name: 'Fake Contact Name 2',
-        email: 'fake2@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact second object.'
-      },
-      {
-        id: 15,
-        isFavourite: false,
-        name: 'Fake Contact Name !!!',
-        email: 'fake55@contact.com',
-        phone: '123456789',
-        notes: 'This is fake contact third object.'
-      },
-    ]
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showSpinner: false,
+      data: [
+        {
+          id: 1,
+          isFavourite: true,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 2,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 3,
+          isFavourite: true,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 4,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 5,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 6,
+          isFavourite: false,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 7,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 8,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 9,
+          isFavourite: true,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 10,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 11,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 12,
+          isFavourite: false,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 13,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 14,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 15,
+          isFavourite: false,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+      ]
+    }
   }
+
 
   renderSpinner = () => {
     if (this.state.showSpinner) {

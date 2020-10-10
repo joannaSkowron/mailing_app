@@ -5,9 +5,14 @@ import '../../styles/calendar/NavCalendar.css';
 
 
 class NavCalendar extends Component {
-  state = {
-    selectedDate: new Date(),
-    addTaskActive: false,
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedDate: new Date(),
+      addTaskActive: false,
+    }
   }
 
   onSelectHandler = (date) => {

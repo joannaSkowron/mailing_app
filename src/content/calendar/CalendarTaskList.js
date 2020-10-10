@@ -7,8 +7,8 @@ import '../../styles/calendar/CalendarTaskList.css';
 
 class CalendarTaskList extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedView: 'day',
     }
@@ -22,10 +22,8 @@ class CalendarTaskList extends Component {
 
   renderView = () => {
     if (this.state.selectedView === 'day') {
-      console.log(this.props.selectedDate)
       return <CalendarTaskListDay selectedDate={this.props.selectedDate} />
     } else {
-      console.log(this.props.selectedDate)
       return <CalendarTaskListWeek selectedDate={this.props.selectedDate} />
     }
   }

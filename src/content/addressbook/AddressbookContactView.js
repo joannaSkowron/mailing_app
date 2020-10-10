@@ -4,22 +4,27 @@ import '../../styles/addressbook/AddressbookContactView.css';
 
 class AddressbookContactView extends Component {
 
-  state = {
-    data: {
-      id: 1,
-      isFavourite: true,
-      name: 'Fake Contact Name',
-      email: 'fake@contact.com',
-      phone: '123456789fake',
-      note: 'This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet.',
-      // picture: null,
-      picture: 'https://cdn.pixabay.com/photo/2016/03/26/19/15/iceland-1281141_1280.jpg',
-      address: 'Branickiego 18',
-      city: 'Warszawa',
-      postalCode: '02-972',
-      country: 'Poland',
-    },
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: {
+        id: 1,
+        isFavourite: true,
+        name: 'Fake Contact Name',
+        email: 'fake@contact.com',
+        phone: '123456789fake',
+        note: 'This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet.',
+        // picture: null,
+        picture: 'https://cdn.pixabay.com/photo/2016/03/26/19/15/iceland-1281141_1280.jpg',
+        address: 'Branickiego 18',
+        city: 'Warszawa',
+        postalCode: '02-972',
+        country: 'Poland',
+      },
+    }
   }
+
 
   renderContactContent = () => {
     const { data } = this.state;

@@ -4,18 +4,21 @@ import '../../styles/addressbook/AddressbookAdd.css';
 
 
 class AddressbookAdd extends Component {
-  state = {
-    name: '',
-    email: '',
-    phone: '',
-    note: '',
-    address: '',
-    city: '',
-    postalCode: '',
-    country: 'Poland',
 
-    mapActive: false,
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      name: '',
+      email: '',
+      phone: '',
+      note: '',
+      address: '',
+      city: '',
+      postalCode: '',
+      country: 'Poland',
+      mapActive: false,
+    }
   }
 
   onChange = (event) => {

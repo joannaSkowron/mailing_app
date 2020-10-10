@@ -11,8 +11,8 @@ import '../../styles/calendar/CalendarTaskListDay.css';
 
 class CalendarTaskListDay extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       data: null,

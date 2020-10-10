@@ -8,8 +8,8 @@ import '../../styles/email/EmailView.css';
 
 class EmailView extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       data: null,
