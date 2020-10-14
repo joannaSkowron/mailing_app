@@ -100,14 +100,10 @@ class Email extends Component {
     this.fetchData(folder, skip, take, searchText, value);
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   this.setState({
-  //     currentPage: 1,
-  //   });
-  //   const folder = newProps.match.params.folder;
-  //   const { take, searchText, newestFirst } = this.state;
-  //   this.fetchData(folder, 0, take, searchText, newestFirst);
-  // }
+  renderSpinner() {
+    if (this.state.showSpinner)
+      return <Spinner />;
+  }
 
   componentDidMount() {
     const folder = this.props.match.params.folder;
@@ -115,13 +111,19 @@ class Email extends Component {
     this.fetchData(folder, skip, take, searchText, newestFirst);
   }
 
-  componentWillUnmount() {
-    this.fetchService.abortFetch();
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.folder !== prevProps.match.params.folder) {
+      this.setState({
+        currentPage: 1,
+      });
+      const folder = this.props.match.params.folder;
+      const { take, searchText, newestFirst } = this.state;
+      this.fetchData(folder, 0, take, searchText, newestFirst);
+    }
   }
 
-  renderSpinner() {
-    if (this.state.showSpinner)
-      return <Spinner />;
+  componentWillUnmount() {
+    this.fetchService.abortFetch();
   }
 
   renderEmailsTable() {
