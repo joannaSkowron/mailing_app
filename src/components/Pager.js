@@ -1,22 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/components/Pager.css';
 
 
-class Pager extends Component {
+const Pager = (props) => {
 
-  state = {}
+  const pageNumber = props.pagesCount !== 0 ? props.currentPage : 0;
 
-  render() {
-    return (
-      <>
-        <div className="pager-container">
-          <p className="pager-location">page {this.props.currentPage} of {this.props.pagesCount}</p>
-          <button className="pager-btn" title='Previous' onClick={() => this.props.handlePageChange(-1)}><i className="fas fa-chevron-left" ></i></button>
-          <button className="pager-btn" title='Next' onClick={() => this.props.handlePageChange(1)}><i className="fas fa-chevron-right" ></i></button>
-        </div>
-      </>
-    );
-  }
+  return (
+    <>
+      <div className="pager-container">
+
+        <p className="pager-location">page {pageNumber} of {props.pagesCount}</p>
+        <button
+          className="pager-btn"
+          title='Previous'
+          onClick={() => props.handlePageChange(-1)}>
+          <i className="fas fa-chevron-left" ></i>
+        </button>
+        <button
+          className="pager-btn"
+          title='Next'
+          onClick={() => props.handlePageChange(1)}>
+          <i className="fas fa-chevron-right" ></i>
+        </button>
+
+      </div>
+    </>
+  );
 }
 
 export default Pager;

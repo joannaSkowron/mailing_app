@@ -40,7 +40,6 @@ class Email extends Component {
   }
 
   fetchData(folder, skip, take, searchText, newestFirst) {
-
     this.setState({
       showSpinner: true,
     });
