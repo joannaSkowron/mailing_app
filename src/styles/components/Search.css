@@ -23,14 +23,16 @@ width: 40%;
   color: var(--color2-06);
 }
 
-.input-search-container .fa-search:hover,
-.input-search-container .fa-times:hover {
+.input-search-container .fas:hover {
  cursor: pointer;
  color: var(--color4);
  text-shadow: 0px 0px 10px var(--color4);
  transition: .2s
 }
 
-.input-search-container .fa-times {
+.input-search-container .fas {
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -6,19 +6,19 @@ class Search extends Component {
     searchText: ''
   }
 
-  onInput = (event) => {
+  handleChange = (event) => {
     this.setState({
       searchText: event.target.value
     })
   }
 
-  onKeyUp = (event) => {
+  handleKeyUp = (event) => {
     if (event.keyCode === 13) {
       this.props.handleSearch(event.target.value);
     }
   }
 
-  onClick = () => {
+  handleClick = () => {
     this.props.handleSearch(this.state.searchText);
   }
 
@@ -44,11 +44,11 @@ class Search extends Component {
             type="text"
             placeholder="search..."
             value={this.state.searchText}
-            onChange={event => this.onInput(event)}
-            onKeyUp={event => this.onKeyUp(event)}
+            onChange={event => this.handleChange(event)}
+            onKeyUp={event => this.handleKeyUp(event)}
           />
           {this.clearInput()}
-          <i className="fas fa-search" title='Search' onClick={() => this.onClick()}></i>
+          <i className="fas fa-search" title='Search' onClick={() => this.handleClick()}></i>
         </div>
       </>
     );

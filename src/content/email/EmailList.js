@@ -30,15 +30,6 @@ class Email extends Component {
     this.fetchService = new FetchService();
   }
 
-  setPagesCount() {
-    if (this.state.data !== null) {
-      const pagesCount = Math.ceil(this.state.data.itemsCount / this.state.take);
-      this.setState({
-        pagesCount,
-      })
-    }
-  }
-
   fetchData(folder, skip, take, searchText, newestFirst) {
     this.setState({
       showSpinner: true,
@@ -48,11 +39,12 @@ class Email extends Component {
     const options = { method: 'get' };
 
     const successCallback = (data) => {
+      const pagesCount = Math.ceil(data.itemsCount / take);
       this.setState({
         data,
+        pagesCount,
         showSpinner: false,
       });
-      this.setPagesCount();
     };
 
     const failureCallback = (err) => {
@@ -99,9 +91,24 @@ class Email extends Component {
     this.fetchData(folder, skip, take, searchText, value);
   }
 
-  renderSpinner() {
-    if (this.state.showSpinner)
-      return <Spinner />;
+  renderSpinner = () => {
+    this.setState({
+      showSpinner: true,
+    })
+  }
+
+  handleUpdateListAfterDeletingEmail = () => {
+    console.log('EmailList: odświeżenie listy po usunięciu maila');
+    if (this.state.data.items.length === 1 && this.state.pagesCount > 1) {
+      this.setState(prevState => ({
+        currentPage: prevState.currentPage - 1,
+      }))
+    };
+
+    const folder = this.props.match.params.folder;
+    const { currentPage, take, searchText, newestFirst } = this.state;
+    const newSkip = (currentPage - 1) * take;
+    this.fetchData(folder, newSkip, take, searchText, newestFirst);
   }
 
   componentDidMount() {
@@ -134,7 +141,7 @@ class Email extends Component {
     const { items } = this.state.data;
     const currentFolder = this.props.match.params.folder;
 
-    if (items.length === 0) return `Nothing to see here, move along, sir.`;
+    if (items.length === 0) return `This list is empty`;
 
     const emailsTable = items.map(item => (
 
@@ -168,13 +175,16 @@ class Email extends Component {
 
             <EmailViewTools
               data={item}
-              reply={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
-              replyAll={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
-              forward={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+              handleUpdateListAfterDeletingEmail={this.handleUpdateListAfterDeletingEmail}
+              renderSpinner={this.renderSpinner}
+              reply={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
+              replyAll={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
+              forward={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
               edit={['draft'].includes(currentFolder) ? true : false}
-              moveToInbox={['bin'].includes(currentFolder) ? true : false}
+              moveToInbox={['spam', 'trash'].includes(currentFolder) ? true : false}
               moveToSpam={['inbox'].includes(currentFolder) ? true : false}
-              moveToBin={true}
+              moveToTrash={['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false}
+              deleteEmail={['trash', 'outbox'].includes(currentFolder) ? true : false}
             />
 
           </div>
@@ -224,7 +234,7 @@ class Email extends Component {
 
         <div className='emails-table-container'>
           {this.renderEmailsTable()}
-          {this.renderSpinner()}
+          {this.state.renderSpinner && <Spinner />}
         </div>
       </>
     );

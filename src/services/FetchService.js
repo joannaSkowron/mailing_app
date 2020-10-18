@@ -40,7 +40,9 @@ export class FetchService {
         }
       })
 
-      .then(response => response.headers.get("Content-Length") > 0 ? response.json() : null)
+      .then(response => response.text())
+
+      .then(text => text.length > 0 ? JSON.parse(text) : null)
 
       .then(data => {
         successCallback(data)

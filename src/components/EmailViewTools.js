@@ -1,57 +1,105 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/components/EmailViewTools.css';
+import { FetchService } from '../services/FetchService';
 
 
+class EmailViewTools extends Component {
 
-const EmailViewTools = (props) => {
+  constructor(props) {
+    super(props);
 
-  const id = props.data.id;
-  const { reply, replyAll, forward, edit, moveToInbox, moveToSpam, moveToBin } = props;
+    this.state = {};
 
-  return (
-    <>
-      <div className="email-view-tools-container">
+    this.fetchService = new FetchService();
+  }
 
-        {reply && <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
-          <div className="email-view-tools" title="Reply">
-            <i className="fas fa-reply"></i>
+  handleMoveToFolder = (folderName) => {
+    console.log(`Move to folder: ${folderName}`);
+  }
+
+  handleDeleteEmail = () => {
+    this.props.renderSpinner();
+    console.log('delete email');
+    const API = `/api/Emails/${this.props.data.id}`;
+    const options = { method: 'delete' }
+    const successCallback = () => {
+      this.props.handleUpdateListAfterDeletingEmail();
+    };
+    const failureCallback = (err) => {
+      console.log('Failed to delete email. ', err);
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+  }
+
+  render() {
+    const id = this.props.data.id;
+    const { reply, replyAll, forward, edit, moveToInbox, moveToSpam, moveToTrash, deleteEmail } = this.props;
+
+    return (
+      <>
+        <div className="email-view-tools-container">
+
+          {reply && <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
+            <div className="email-view-tools" title="Reply">
+              <i className="fas fa-reply"></i>
+            </div>
+          </Link>}
+
+          {replyAll && <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
+            <div className="email-view-tools" title="Reply to all">
+              <i className="fas fa-reply-all"></i>
+            </div>
+          </Link>}
+
+          {forward && <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
+            <div className="email-view-tools" title="Forward">
+              <i className="fas fa-share"></i>
+            </div>
+          </Link>}
+
+          {edit && <Link to={`/email/compose/new?id=${id}&responsetype=edit`}>
+            <div className="email-view-tools" title="Edit">
+              <i className="far fa-edit"></i>
+            </div>
+          </Link>}
+
+          {moveToInbox && <div
+            className="email-view-tools"
+            title="Move to inbox"
+            name="inbox"
+            onClick={() => this.handleMoveToFolder('inbox')}>
+            <i className='far fa-envelope-open'></i>
+          </div>}
+
+          {moveToSpam && <div
+            className="email-view-tools"
+            title="Move to spam"
+            onClick={() => this.handleMoveToFolder('spam')}>
+            <i className='fas fa-ban'></i>
+          </div>}
+
+          {moveToTrash && <div
+            className="email-view-tools"
+            title="Move to trash"
+            onClick={() => this.handleMoveToFolder('trash')}>
+            <i className='far fa-trash-alt'></i>
+          </div>}
+
+          {deleteEmail && <div
+            className="email-view-tools"
+            title="Delete"
+            onClick={this.handleDeleteEmail}>
+            <i className="far fa-times-circle"></i>
           </div>
-        </Link>}
+          }
 
-        {replyAll && <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
-          <div className="email-view-tools" title="Reply to all">
-            <i className="fas fa-reply-all"></i>
-          </div>
-        </Link>}
-
-        {forward && <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
-          <div className="email-view-tools" title="Forward">
-            <i className="fas fa-share"></i>
-          </div>
-        </Link>}
-
-        {edit && <Link to={`/email/compose/new?id=${id}&responsetype=edit`}>
-          <div className="email-view-tools" title="Edit">
-            <i className="far fa-edit"></i>
-          </div>
-        </Link>}
-
-        {moveToInbox && <div className="email-view-tools" title="Move to inbox">
-          <i className='far fa-envelope-open'></i>
-        </div>}
-
-        {moveToSpam && <div className="email-view-tools" title="Move to spam">
-          <i className='fas fa-ban'></i>
-        </div>}
-
-        {moveToBin && <div className="email-view-tools" title="Move to bin">
-          <i className='far fa-trash-alt'></i>
-        </div>}
-
-      </div>
-    </>
-  );
+        </div>
+      </>
+    );
+  }
 }
+
 
 export default EmailViewTools;

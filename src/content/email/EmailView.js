@@ -48,13 +48,14 @@ class EmailView extends Component {
 
           <EmailViewTools
             data={data}
-            reply={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
-            replyAll={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
-            forward={['inbox', 'outbox', 'bin', 'spam'].includes(currentFolder) ? true : false}
+            reply={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
+            replyAll={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
+            forward={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
             edit={['draft'].includes(currentFolder) ? true : false}
-            moveToInbox={['bin'].includes(currentFolder) ? true : false}
+            moveToInbox={['spam', 'trash'].includes(currentFolder) ? true : false}
             moveToSpam={['inbox'].includes(currentFolder) ? true : false}
-            moveToBin={true}
+            moveToTrash={['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false}
+            deleteEmail={['draft', 'trash'].includes(currentFolder) ? true : false}
           />
 
           <h1 className="email-view-title">{data.title}</h1>
