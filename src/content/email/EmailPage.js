@@ -13,7 +13,7 @@ const EmailPage = () => {
 
       <Switch>
         <Route path='/email/:folder' exact component={EmailList} />
-        <Route path='/email/viewemail/:folder/:id' exact component={EmailView} />
+        <Route path='/email/:folder/viewemail/:id' exact component={EmailView} />
         <Route path='/email/compose/new' component={EmailCompose} />
 
         <Route component={Error} />

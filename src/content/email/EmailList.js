@@ -31,9 +31,7 @@ class Email extends Component {
   }
 
   fetchData(folder, skip, take, searchText, newestFirst) {
-    this.setState({
-      showSpinner: true,
-    });
+    this.renderSpinner();
 
     const API = `/api/folders/${folder}/emails?skip=${skip}&take=${take}&searchText=${searchText}&newestFirst=${newestFirst}`;
     const options = { method: 'get' };
@@ -97,7 +95,7 @@ class Email extends Component {
     })
   }
 
-  handleDeletingEmail = () => {
+  handleDeletingOrMovingEmail = () => {
     if (this.state.data.items.length === 1 && this.state.pagesCount > 1) {
       this.setState(prevState => ({
         currentPage: prevState.currentPage - 1,
@@ -146,7 +144,7 @@ class Email extends Component {
 
       <div className='emails-table-row' key={item.id}>
 
-        <NavLink to={`/email/viewemail/${currentFolder}/${item.id}`} >
+        <NavLink to={`/email/${currentFolder}/viewemail/${item.id}`} >
 
           <div className='emails-table emails-table-from'>
             <div className="emails-table-cell">
@@ -174,7 +172,7 @@ class Email extends Component {
 
             <EmailViewTools
               data={item}
-              handleDeletingEmail={this.handleDeletingEmail}
+              handleDeletingOrMovingEmail={this.handleDeletingOrMovingEmail}
               currentFolder={currentFolder}
             />
 
@@ -225,7 +223,7 @@ class Email extends Component {
 
         <div className='emails-table-container'>
           {this.renderEmailsTable()}
-          {this.state.renderSpinner && <Spinner />}
+          {this.state.showSpinner && <Spinner />}
         </div>
       </>
     );

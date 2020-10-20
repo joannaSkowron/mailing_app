@@ -20,7 +20,7 @@ class EmailView extends Component {
     this.fetchService = new FetchService();
   }
 
-  handleDeletingEmail = () => {
+  handleDeletingOrMovingEmail = () => {
     const folder = this.props.match.params.folder;
     this.setState({
       redirectToFolder: folder,
@@ -57,7 +57,7 @@ class EmailView extends Component {
 
           <EmailViewTools
             data={data}
-            handleDeletingEmail={this.handleDeletingEmail}
+            handleDeletingOrMovingEmail={this.handleDeletingOrMovingEmail}
             currentFolder={currentFolder}
           />
 

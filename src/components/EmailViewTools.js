@@ -17,6 +17,16 @@ class EmailViewTools extends Component {
   handleMoveToFolder = (folderName) => {
     console.log(`Move to folder: ${folderName}`);
 
+    const API = `/api/Emails/${this.props.data.id}/move/${folderName}`;
+    const options = { method: 'put' };
+    const successCallback = () => {
+      this.props.handleDeletingOrMovingEmail();
+    };
+    const failureCallback = (err) => {
+      console.log('Failed to move email. ', err)
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
   restoreEmail = () => {
@@ -27,7 +37,7 @@ class EmailViewTools extends Component {
     const API = `/api/Emails/${this.props.data.id}`;
     const options = { method: 'delete' }
     const successCallback = () => {
-      this.props.handleDeletingEmail();
+      this.props.handleDeletingOrMovingEmail();
     };
     const failureCallback = (err) => {
       console.log('Failed to delete email. ', err);
