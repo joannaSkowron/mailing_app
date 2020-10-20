@@ -196,7 +196,6 @@ class EmailCompose extends Component {
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
-
   componentDidMount() {
     const id = new URLSearchParams(this.props.location.search).get('id');
     const responsetype = new URLSearchParams(this.props.location.search).get('responsetype');

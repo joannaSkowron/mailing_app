@@ -16,15 +16,14 @@ class EmailViewTools extends Component {
 
   handleMoveToFolder = (folderName) => {
     console.log(`Move to folder: ${folderName}`);
+
   }
 
-  handleDeleteEmail = () => {
-    this.props.renderSpinner();
-    console.log('delete email');
+  deleteEmail = () => {
     const API = `/api/Emails/${this.props.data.id}`;
     const options = { method: 'delete' }
     const successCallback = () => {
-      this.props.handleUpdateListAfterDeletingEmail();
+      this.props.handleDeletingEmail();
     };
     const failureCallback = (err) => {
       console.log('Failed to delete email. ', err);
@@ -33,9 +32,13 @@ class EmailViewTools extends Component {
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
+  restoreEmail = () => {
+    console.log(`Restore to original folder`);
+  }
+
   render() {
     const id = this.props.data.id;
-    const { reply, replyAll, forward, edit, moveToInbox, moveToSpam, moveToTrash, deleteEmail } = this.props;
+    const { reply, replyAll, forward, edit, moveToInbox, moveToSpam, moveToTrash, deleteEmail, restoreEmail } = this.props;
 
     return (
       <>
@@ -87,13 +90,19 @@ class EmailViewTools extends Component {
             <i className='far fa-trash-alt'></i>
           </div>}
 
+          {restoreEmail && <div
+            className="email-view-tools"
+            title="Restore to original folder"
+            onClick={this.deleteEmail}>
+            <i className="fas fa-trash-restore"></i>
+          </div>}
+
           {deleteEmail && <div
             className="email-view-tools"
             title="Delete"
-            onClick={this.handleDeleteEmail}>
+            onClick={this.deleteEmail}>
             <i className="far fa-times-circle"></i>
-          </div>
-          }
+          </div>}
 
         </div>
       </>

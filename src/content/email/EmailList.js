@@ -97,8 +97,7 @@ class Email extends Component {
     })
   }
 
-  handleUpdateListAfterDeletingEmail = () => {
-    console.log('EmailList: odświeżenie listy po usunięciu maila');
+  handleDeletingEmail = () => {
     if (this.state.data.items.length === 1 && this.state.pagesCount > 1) {
       this.setState(prevState => ({
         currentPage: prevState.currentPage - 1,
@@ -175,16 +174,16 @@ class Email extends Component {
 
             <EmailViewTools
               data={item}
-              handleUpdateListAfterDeletingEmail={this.handleUpdateListAfterDeletingEmail}
-              renderSpinner={this.renderSpinner}
+              handleDeletingEmail={this.handleDeletingEmail}
               reply={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
               replyAll={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
               forward={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
               edit={['draft'].includes(currentFolder) ? true : false}
-              moveToInbox={['spam', 'trash'].includes(currentFolder) ? true : false}
+              moveToInbox={['spam'].includes(currentFolder) ? true : false}
               moveToSpam={['inbox'].includes(currentFolder) ? true : false}
               moveToTrash={['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false}
-              deleteEmail={['trash', 'outbox'].includes(currentFolder) ? true : false}
+              deleteEmail={['draft', 'trash', 'spam'].includes(currentFolder) ? true : false}
+              restoreEmail={['trash'].includes(currentFolder) ? true : false}
             />
 
           </div>

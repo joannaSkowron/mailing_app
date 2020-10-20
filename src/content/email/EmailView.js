@@ -4,6 +4,7 @@ import { FetchService } from '../../services/FetchService';
 import parse from 'html-react-parser';
 
 import '../../styles/email/EmailView.css';
+import { Redirect } from 'react-router-dom';
 
 
 class EmailView extends Component {
@@ -13,9 +14,17 @@ class EmailView extends Component {
 
     this.state = {
       data: null,
+      redirectToFolder: false,
     }
 
     this.fetchService = new FetchService();
+  }
+
+  handleDeletingEmail = () => {
+    const folder = this.props.match.params.folder;
+    this.setState({
+      redirectToFolder: folder,
+    })
   }
 
   componentDidMount() {
@@ -48,14 +57,16 @@ class EmailView extends Component {
 
           <EmailViewTools
             data={data}
+            handleDeletingEmail={this.handleDeletingEmail}
             reply={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
             replyAll={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
             forward={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
             edit={['draft'].includes(currentFolder) ? true : false}
-            moveToInbox={['spam', 'trash'].includes(currentFolder) ? true : false}
+            moveToInbox={['spam'].includes(currentFolder) ? true : false}
             moveToSpam={['inbox'].includes(currentFolder) ? true : false}
             moveToTrash={['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false}
             deleteEmail={['draft', 'trash'].includes(currentFolder) ? true : false}
+            restoreEmail={['trash'].includes(currentFolder) ? true : false}
           />
 
           <h1 className="email-view-title">{data.title}</h1>
@@ -79,6 +90,10 @@ class EmailView extends Component {
 
 
   render() {
+
+    if (this.state.redirectToFolder) {
+      return <Redirect to={`/email/${this.state.redirectToFolder}`} />;
+    }
 
     return (
       <>
