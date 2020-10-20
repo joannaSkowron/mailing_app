@@ -19,6 +19,10 @@ class EmailViewTools extends Component {
 
   }
 
+  restoreEmail = () => {
+    console.log(`Restore to original folder`);
+  }
+
   deleteEmail = () => {
     const API = `/api/Emails/${this.props.data.id}`;
     const options = { method: 'delete' }
@@ -32,43 +36,51 @@ class EmailViewTools extends Component {
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
-  restoreEmail = () => {
-    console.log(`Restore to original folder`);
-  }
-
   render() {
     const id = this.props.data.id;
-    const { reply, replyAll, forward, edit, moveToInbox, moveToSpam, moveToTrash, deleteEmail, restoreEmail } = this.props;
+    const currentFolder = this.props.currentFolder;
+
+    const selectButtons = {
+      reply: ['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false,
+      replyAll: ['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false,
+      forward: ['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false,
+      edit: ['draft'].includes(currentFolder) ? true : false,
+      moveToInbox: ['spam'].includes(currentFolder) ? true : false,
+      moveToSpam: ['inbox'].includes(currentFolder) ? true : false,
+      moveToTrash: ['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false,
+      deleteEmail: ['draft', 'trash'].includes(currentFolder) ? true : false,
+      restoreEmail: ['trash'].includes(currentFolder) ? true : false,
+    }
 
     return (
       <>
         <div className="email-view-tools-container">
 
-          {reply && <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
+          {selectButtons.reply && <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
             <div className="email-view-tools" title="Reply">
               <i className="fas fa-reply"></i>
             </div>
           </Link>}
 
-          {replyAll && <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
+          {selectButtons.replyAll && <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
             <div className="email-view-tools" title="Reply to all">
               <i className="fas fa-reply-all"></i>
             </div>
           </Link>}
 
-          {forward && <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
+          {selectButtons.forward && <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
             <div className="email-view-tools" title="Forward">
               <i className="fas fa-share"></i>
             </div>
           </Link>}
 
-          {edit && <Link to={`/email/compose/new?id=${id}&responsetype=edit`}>
+          {selectButtons.edit && <Link to={`/email/compose/new?id=${id}&responsetype=edit`}>
             <div className="email-view-tools" title="Edit">
               <i className="far fa-edit"></i>
             </div>
           </Link>}
 
-          {moveToInbox && <div
+          {selectButtons.moveToInbox && <div
             className="email-view-tools"
             title="Move to inbox"
             name="inbox"
@@ -76,28 +88,28 @@ class EmailViewTools extends Component {
             <i className='far fa-envelope-open'></i>
           </div>}
 
-          {moveToSpam && <div
+          {selectButtons.moveToSpam && <div
             className="email-view-tools"
             title="Move to spam"
             onClick={() => this.handleMoveToFolder('spam')}>
             <i className='fas fa-ban'></i>
           </div>}
 
-          {moveToTrash && <div
+          {selectButtons.moveToTrash && <div
             className="email-view-tools"
             title="Move to trash"
             onClick={() => this.handleMoveToFolder('trash')}>
             <i className='far fa-trash-alt'></i>
           </div>}
 
-          {restoreEmail && <div
+          {selectButtons.restoreEmail && <div
             className="email-view-tools"
             title="Restore to original folder"
             onClick={this.deleteEmail}>
             <i className="fas fa-trash-restore"></i>
           </div>}
 
-          {deleteEmail && <div
+          {selectButtons.deleteEmail && <div
             className="email-view-tools"
             title="Delete"
             onClick={this.deleteEmail}>

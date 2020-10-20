@@ -175,15 +175,7 @@ class Email extends Component {
             <EmailViewTools
               data={item}
               handleDeletingEmail={this.handleDeletingEmail}
-              reply={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
-              replyAll={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
-              forward={['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false}
-              edit={['draft'].includes(currentFolder) ? true : false}
-              moveToInbox={['spam'].includes(currentFolder) ? true : false}
-              moveToSpam={['inbox'].includes(currentFolder) ? true : false}
-              moveToTrash={['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false}
-              deleteEmail={['draft', 'trash', 'spam'].includes(currentFolder) ? true : false}
-              restoreEmail={['trash'].includes(currentFolder) ? true : false}
+              currentFolder={currentFolder}
             />
 
           </div>
