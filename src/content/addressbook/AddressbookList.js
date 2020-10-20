@@ -156,9 +156,7 @@ class AddressbookList extends Component {
     if (data === null) return;
 
     const addressbookTable = data.map(item => (
-      <div className='addressbook-table-row' key={item.id}
-
-      >
+      <div className='addressbook-table-row' key={item.id}>
         <div className="addressbook-table-item addressbook-table-checkbox">
           <div className="addressbook-table-cell">
             <input type="checkbox" name="" id="" />
@@ -168,7 +166,7 @@ class AddressbookList extends Component {
           <div className="addressbook-table-cell">
             <i title={item.isFavourite ? "Remove from favourites" : "Add to favourites"}
               className={item.isFavourite ? "far fa-heart favourite" : "far fa-heart"}
-              onClick={(event) => { this.handleFavourites(event, item.id) }}
+              onClick={(event) => this.handleFavourites(event, item.id)}
             ></i>
           </div>
         </div>

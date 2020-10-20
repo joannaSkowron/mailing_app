@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@tinymce/tinymce-react": "^3.3.2",
-    "html-react-parser": "^0.9.1",
-    "query-string": "^6.8.3",
-    "react": "^16.8.6",
-    "react-date-picker": "^8.0.1",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
+    "@tinymce/tinymce-react": "^3.8.0",
+    "html-react-parser": "^0.9.2",
+    "query-string": "^6.13.6",
+    "react": "^16.14.0",
+    "react-date-picker": "^8.0.3",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "sass": "^1.26.10",
-    "simple-react-calendar": "^1.8.0"
+    "sass": "^1.27.0",
+    "simple-react-calendar": "^2.2.8"
   },
   "scripts": {
     "start": "react-scripts start",
