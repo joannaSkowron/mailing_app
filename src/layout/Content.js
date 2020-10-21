@@ -24,7 +24,7 @@ const Content = () => {
           <Route path='/calendar' component={Calendar} />
 
           <Route path='/addressbook' exact render={() => (
-            <Redirect to='/addressbook/favourites' />
+            <Redirect to='/addressbook/all' />
           )} />
           <Route path='/addressbook' component={Addressbook} />
 

@@ -3,32 +3,32 @@ import { NavLink } from 'react-router-dom';
 import '../../styles/layout/Nav.css';
 
 const navItems = [
-  { name: 'Favourites', path: '/addressbook/favourites', icon: <i className="far fa-heart"></i> },
-  { name: 'All', path: '/addressbook/all', icon: <i className="far fa-address-card"></i> },
-  { name: 'Deleted', path: '/addressbook/deleted', icon: <i className='far fa-trash-alt'></i> },
+  { name: 'All contacts', path: '/addressbook/all', icon: 'far fa-address-book' },
+  { name: 'Favourite', path: '/addressbook/favourite', icon: 'far fa-heart' },
+  { name: 'Personal', path: '/addressbook/personal', icon: 'fas fa-users' },
+  { name: 'Work', path: '/addressbook/work', icon: 'fas fa-briefcase' },
+  { name: 'School', path: '/addressbook/school', icon: 'fas fa-user-graduate' },
+  { name: 'Deleted', path: '/addressbook/deleted', icon: 'far fa-trash-alt' },
 ]
 
-
 const NavAddressbook = () => {
-
   const navigation = navItems.map(navItem => (
-    <li className="nav-item" key={navItem.name}>
+    <li className="nav-item" key={navItem.name} title={navItem.name}>
       <NavLink to={navItem.path} exact={navItem.exact ? navItem.exact : false}>
-        {navItem.icon}{navItem.name}
+        <i className={navItem.icon} ></i>
+        {navItem.name}
       </NavLink>
     </li>
   ))
 
   return (
     <>
-      <header>
-        <h1 className='nav-header'>Contacts</h1>
-      </header>
       <nav className="nav-container">
         <ul className="nav">
           <li className="nav-item-btn">
             <NavLink to='/addressbook/add/new' exact>
-              <i className='fas fa-plus'></i>Add
+              <i className='fas fa-plus'></i>
+              Add
             </NavLink>
           </li>
           {navigation}

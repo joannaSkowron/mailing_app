@@ -152,6 +152,7 @@ class AddressbookList extends Component {
   }
 
   renderTable() {
+    const currentFolder = this.props.match.params.folder;
     const { data } = this.state;
     if (data === null) return;
 
@@ -171,7 +172,7 @@ class AddressbookList extends Component {
           </div>
         </div>
 
-        <NavLink to={`/addressbook/contactview/${item.id}`} >
+        <NavLink to={`/addressbook/${currentFolder}/contactview/${item.id}`} >
           <div className='addressbook-table-item addressbook-table-name'>
             <div className="addressbook-table-cell">{item.name}</div>
           </div>

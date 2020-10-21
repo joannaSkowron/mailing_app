@@ -3,19 +3,19 @@ import { NavLink } from 'react-router-dom';
 import '../styles/layout/Menubar.css';
 
 const menuItems = [
-  { name: 'Email', path: '/email/', icon: <i className="far fa-envelope-open" title="Email"></i> },
-  { name: 'Calendar', path: '/calendar/', icon: <i className="far fa-calendar-alt" title="Calendar"></i> },
-  { name: 'Addressbook', path: '/addressbook/', icon: <i className="far fa-address-book" title="Addressbook"></i> },
-  { name: 'Account', path: '/account/', icon: <i className="far fa-user" title="Account info"></i> },
+  { name: 'Email', path: '/email/', icon: "far fa-envelope-open" },
+  { name: 'Calendar', path: '/calendar/', icon: "far fa-calendar-alt" },
+  { name: 'Addressbook', path: '/addressbook/', icon: "far fa-address-book" },
+  { name: 'Account', path: '/account/', icon: "far fa-user" },
 ]
 
 const Menubar = () => {
   const menu = menuItems.map(menuItem => (
-    <div key={menuItem.name} className="menu-item-container">
+    <div key={menuItem.name} className="menu-item-container" >
 
       <NavLink to={menuItem.path} exact={menuItem.exact ? menuItem.exact : false}>
-        <li className='menu-item'>
-          {menuItem.icon}
+        <li className='menu-item' title={menuItem.name}>
+          <i className={menuItem.icon} ></i>
         </li>
       </NavLink>
 

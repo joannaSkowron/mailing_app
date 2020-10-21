@@ -42,7 +42,6 @@ class NavCalendar extends Component {
         <SimpleReactCalendar selected={this.state.selectedDate} onSelect={this.onSelectHandler} mode="single" />
 
         <nav className='nav-container'>
-
           <ul className='nav'>
             <div className='nav-item-btn-calendar'>
               <button onClick={this.handleAddTask}>

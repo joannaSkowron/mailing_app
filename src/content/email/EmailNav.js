@@ -14,7 +14,7 @@ const NavEmail = () => {
 
   const navigation = navItems.map(navItem => (
 
-    <li key={navItem.name} className='nav-item' >
+    <li key={navItem.name} className='nav-item' title={navItem.name}>
       <NavLink to={navItem.path} className='nav-item-container' >
         <i className={navItem.icon}></i>
         <p>{navItem.name}</p>
@@ -24,11 +24,7 @@ const NavEmail = () => {
 
   return (
     <>
-      <header>
-        <h1 className='nav-header'>Email</h1>
-      </header>
       <nav className='nav-container'>
-
         <ul className='nav'>
           <div className='nav-item-btn'>
             <NavLink to='/email/compose/new' exact>
@@ -36,7 +32,6 @@ const NavEmail = () => {
               <p>Compose</p>
             </NavLink>
           </div>
-
           {navigation}
         </ul>
       </nav>

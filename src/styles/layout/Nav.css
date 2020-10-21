@@ -1,12 +1,3 @@
-.nav-header {
-  display: none;
-  padding: 45px 0px 15px 45px;
-  color: var(--color2-04);
-  font-family: 'Comfortaa', cursive;
-  font-size: 30px;
-  font-weight: 400;
-}
-
 .nav {
   display: flex;
   flex-direction: column;
