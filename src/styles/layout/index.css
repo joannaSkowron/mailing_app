@@ -18,6 +18,11 @@ body {
   font-size: 14px;
 }
 
+body a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 :root {
   /* --bgc-trans: rgba(256, 256, 256, 0.2);
   --font-main: white;

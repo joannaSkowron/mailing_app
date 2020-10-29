@@ -11,22 +11,17 @@ const AddressbookListTools = (props) => {
   return (
     <>
       <div className="addressbook-list-tools-container">
-        <Link to={`/email/compose/new?id=${id}&responsetype=reply`}>
-          <div className="addressbook-list-tools" title="Compose e-mail">
-            <i className="far fa-envelope"></i>
-          </div>
+
+        <Link to={`/email/compose/new?id=${id}&responsetype=reply`} className="addressbook-list-tools" title="Compose e-mail">
+          <i className="far fa-envelope"></i>
         </Link>
 
-        <Link to={`/email/compose/new?id=${id}&responsetype=replyall`}>
-          <div className="addressbook-list-tools" title="Edit">
-            <i className="far fa-edit"></i>
-          </div>
+        <Link to={`/email/compose/new?id=${id}&responsetype=replyall`} className="addressbook-list-tools" title="Edit">
+          <i className="far fa-edit"></i>
         </Link>
 
-        <Link to={`/email/compose/new?id=${id}&responsetype=forward`}>
-          <div className="addressbook-list-tools" title="Delete">
-            <i className="far fa-trash-alt"></i>
-          </div>
+        <Link to={`/email/compose/new?id=${id}&responsetype=forward`} className="addressbook-list-tools" title="Delete">
+          <i className="far fa-trash-alt"></i>
         </Link>
 
       </div>

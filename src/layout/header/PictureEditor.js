@@ -34,12 +34,31 @@ class PictureEditor extends Component {
           <p className="picture-editor-title">Select profile picture:</p>
 
           <div className="picture-editor-selector">
-            <div className="picture-editor-selector-item" onClick={event => this.handleSelector(event, avatar1)}></div>
-            <div className="picture-editor-selector-item" onClick={event => this.handleSelector(event, avatar2)}></div>
-            <div className="picture-editor-selector-item" onClick={event => this.handleSelector(event, avatar3)}></div>
-            <div className="picture-editor-selector-item" onClick={event => this.handleSelector(event, avatar4)}></div>
-            <div className="picture-editor-selector-item" onClick={event => this.handleSelector(event, avatar5)}></div>
-            <div className="picture-editor-selector-item" onClick={event => this.handleSelector(event, avatar6)}></div>
+
+            <img src={avatar1} alt="Avatar"
+              className="picture-editor-selector-img"
+              onClick={event => this.handleSelector(event, avatar1)} />
+
+            <img src={avatar2} alt="Avatar"
+              className="picture-editor-selector-img"
+              onClick={event => this.handleSelector(event, avatar2)} />
+
+            <img src={avatar3} alt="Avatar"
+              className="picture-editor-selector-img"
+              onClick={event => this.handleSelector(event, avatar3)} />
+
+            <img src={avatar4} alt="Avatar"
+              className="picture-editor-selector-img"
+              onClick={event => this.handleSelector(event, avatar4)} />
+
+            <img src={avatar5} alt="Avatar"
+              className="picture-editor-selector-img"
+              onClick={event => this.handleSelector(event, avatar5)} />
+
+            <img src={avatar6} alt="Avatar"
+              className="picture-editor-selector-img"
+              onClick={event => this.handleSelector(event, avatar6)} />
+
           </div>
 
           <div className="picture-editor-buttons">

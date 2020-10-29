@@ -5,6 +5,12 @@ import Pager from '../../components/Pager';
 import Spinner from '../../components/Spinner';
 import AddressbookListTools from '../../components/AddressbookListTools';
 import '../../styles/addressbook/AddressbookList.css';
+import avatar1 from '../../images/avatar1.png';
+import avatar2 from '../../images/avatar2.png';
+import avatar3 from '../../images/avatar3.png';
+import avatar4 from '../../images/avatar4.png';
+import avatar5 from '../../images/avatar5.png';
+import avatar6 from '../../images/avatar6.png';
 
 
 class AddressbookList extends Component {
@@ -17,6 +23,7 @@ class AddressbookList extends Component {
       data: [
         {
           id: 1,
+          avatar: avatar1,
           isFavourite: true,
           name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
           email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
@@ -25,6 +32,7 @@ class AddressbookList extends Component {
         },
         {
           id: 2,
+          avatar: avatar2,
           isFavourite: false,
           name: 'Fake Contact Name 2',
           email: 'fake2@contact.com',
@@ -33,6 +41,7 @@ class AddressbookList extends Component {
         },
         {
           id: 3,
+          avatar: avatar3,
           isFavourite: true,
           name: 'Fake Contact Name !!!',
           email: 'fake55@contact.com',
@@ -41,6 +50,7 @@ class AddressbookList extends Component {
         },
         {
           id: 4,
+          avatar: avatar4,
           isFavourite: false,
           name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
           email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
@@ -49,6 +59,7 @@ class AddressbookList extends Component {
         },
         {
           id: 5,
+          avatar: avatar5,
           isFavourite: false,
           name: 'Fake Contact Name 2',
           email: 'fake2@contact.com',
@@ -57,6 +68,7 @@ class AddressbookList extends Component {
         },
         {
           id: 6,
+          avatar: avatar6,
           isFavourite: false,
           name: 'Fake Contact Name !!!',
           email: 'fake55@contact.com',
@@ -65,6 +77,7 @@ class AddressbookList extends Component {
         },
         {
           id: 7,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
           email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
@@ -73,6 +86,7 @@ class AddressbookList extends Component {
         },
         {
           id: 8,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name 2',
           email: 'fake2@contact.com',
@@ -81,6 +95,7 @@ class AddressbookList extends Component {
         },
         {
           id: 9,
+          avatar: null,
           isFavourite: true,
           name: 'Fake Contact Name !!!',
           email: 'fake55@contact.com',
@@ -89,6 +104,7 @@ class AddressbookList extends Component {
         },
         {
           id: 10,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
           email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
@@ -97,6 +113,7 @@ class AddressbookList extends Component {
         },
         {
           id: 11,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name 2',
           email: 'fake2@contact.com',
@@ -105,6 +122,7 @@ class AddressbookList extends Component {
         },
         {
           id: 12,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name !!!',
           email: 'fake55@contact.com',
@@ -113,6 +131,7 @@ class AddressbookList extends Component {
         },
         {
           id: 13,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
           email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
@@ -121,6 +140,7 @@ class AddressbookList extends Component {
         },
         {
           id: 14,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name 2',
           email: 'fake2@contact.com',
@@ -129,6 +149,7 @@ class AddressbookList extends Component {
         },
         {
           id: 15,
+          avatar: null,
           isFavourite: false,
           name: 'Fake Contact Name !!!',
           email: 'fake55@contact.com',
@@ -154,13 +175,16 @@ class AddressbookList extends Component {
   renderTable() {
     const currentFolder = this.props.match.params.folder;
     const { data } = this.state;
+
     if (data === null) return;
 
     const addressbookTable = data.map(item => (
       <div className='addressbook-table-row' key={item.id}>
-        <div className="addressbook-table-item addressbook-table-checkbox">
+        <div className="addressbook-table-item addressbook-table-avatar">
           <div className="addressbook-table-cell">
-            <input type="checkbox" name="" id="" />
+            {item.avatar ?
+              <img src={item.avatar} alt="Contact avatar" />
+              : <i className="fas fa-user-astronaut"></i>}
           </div>
         </div>
         <div className="addressbook-table-item addressbook-table-favourite">

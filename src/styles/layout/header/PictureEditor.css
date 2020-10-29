@@ -5,7 +5,7 @@
    
    .picture-editor-page-container {
      z-index: 1;
-     position: absolute;
+     position: fixed;
      top: 0;
      left: 0;
      width: 100%;
@@ -20,7 +20,7 @@
 
    .picture-editor-container {
      z-index: 2;
-     position: absolute;
+     position: fixed;
      top: 50%;
      left: 50%;
      transform: translate(-50%, -50%);
@@ -53,7 +53,7 @@
       align-content: space-between;
    }
 
-   .picture-editor-selector-item {
+   .picture-editor-selector-img {
       width: 80px;
       height: 80px;
       border-radius: 50%;
@@ -63,38 +63,14 @@
       transition: all 0.3s ease 0s;
    }
 
-   .picture-editor-selector-item:hover {
+   .picture-editor-selector-img:hover {
     transform: scale(1.1);
   }
 
-   .picture-editor-selector-item.active {
+   .picture-editor-selector-img.active {
     transform: scale(1.1);
     box-shadow: 0px 0px 0px 7px var(--color2-02), 0px 10px 12px 0px var(--color2-04);
     transition: all 0.3s ease 0s;
-   }
-
-   .picture-editor-selector-item:nth-of-type(1) {
-    background-image: url('../../../images/avatar1.png');
-   }
-
-   .picture-editor-selector-item:nth-of-type(2) {
-    background-image: url('../../../images/avatar2.png');
-   }
-
-   .picture-editor-selector-item:nth-of-type(3) {
-    background-image: url('../../../images/avatar3.png');
-   }
-
-   .picture-editor-selector-item:nth-of-type(4) {
-    background-image: url('../../../images/avatar4.png');
-   }
-
-   .picture-editor-selector-item:nth-of-type(5) {
-    background-image: url('../../../images/avatar5.png');
-   }
-
-   .picture-editor-selector-item:nth-of-type(6) {
-    background-image: url('../../../images/avatar6.png');
    }
 
    .picture-editor-buttons {
