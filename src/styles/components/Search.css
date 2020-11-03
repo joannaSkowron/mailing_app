@@ -10,7 +10,6 @@ width: 40%;
   border: none;
   padding: 8px 12px 8px 8px;
   background-color: var(--color2-01);
-  color: var(--color2-06);
   border-radius: 25px;
 }
 
@@ -20,7 +19,6 @@ width: 40%;
   border: none;
   background-color: transparent;
   outline: none;
-  color: var(--color2-06);
 }
 
 .input-search-container .fas:hover {

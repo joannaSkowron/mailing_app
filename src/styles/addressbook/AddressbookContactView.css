@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  color: var(--color2-05);
   background-color: var(--color1-04);
   border-radius: 7px;
   font-size: 12px;
@@ -21,7 +20,6 @@
   font-size: 25px;
   font-weight: 100;
   padding: 20px;
-  /* border-bottom: .7px solid var(--color2-01); */
 }
 
 .addressbook-contact-data-container {
@@ -75,7 +73,7 @@
 }
 
 .addressbook-contact-data-fieldnames {
-  width: 105px;
+  width: 115px;
   padding-right: 10px;
 }
 
@@ -90,7 +88,7 @@
   display: flex;
   flex-direction: column;
   height: calc(100% - 40px);
-  width: calc(100% - 105px);
+  width: calc(100% - 115px);
 }
 
 .addressbook-contact-data-fields p {
@@ -99,11 +97,11 @@
   height: 20px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--color2-06);
 }
 
 .addressbook-contact-data-fields p.note {
-  height: 40px;
+  min-height: 40px;
+  flex-grow: 1;
 }
 
 .addressbook-contact-data-map-container {
@@ -123,7 +121,6 @@
   width: 150px;
   height: 100%;
   min-height: 170px;
-
   font-size: 99px;
   color: var(--color2-01);
 }

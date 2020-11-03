@@ -45,7 +45,6 @@
 
 .calendar-newtask-form-input-container i {
   margin: 0 5px;
-  color: var(--color2-06);
 }
 
 .calendar-newtask-form-input {
@@ -54,7 +53,6 @@
   border: none;
   padding: 9px;
   background-color: var(--color2-01);
-  color: var(--color2-06);
   font-family: 'Montserrat','Roboto', sans-serif;
   font-size: 13px;
   border-radius: 7px;
@@ -95,7 +93,6 @@
   width: 120px;
   padding: 8px;
   background-color: var(--color2-01);
-  color: var(--color2-05);
   font-weight: 600;
   border: none;
   border-radius: 25px;

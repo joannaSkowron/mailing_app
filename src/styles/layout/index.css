@@ -16,11 +16,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
+  color: var(--color2-08);
 }
 
 body a {
   text-decoration: none;
   cursor: pointer;
+  color: var(--color2-08);
 }
 
 :root {
@@ -43,6 +45,7 @@ body a {
   --color2-04: rgba(0, 0, 0, 0.4);
   --color2-05: rgba(0, 0, 0, 0.5);
   --color2-06: rgba(0, 0, 0, 0.6);
+  --color2-08: rgba(0, 0, 0, 0.8);
 
   --color3: rgb(185, 174, 171);
   --color4: rgb(253, 238, 188); /*highlighted element */

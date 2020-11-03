@@ -14,14 +14,14 @@
 }
 
 .calendar-month_header_title {
-  /* .is-prev - when is the previous month button
-  .is-next - when is the next month button
-  .is-disabled - when the button is disabled */
   margin: 10px;
   font-size: 14px;
   font-weight: 200;
   color: var(--color1);
 }
+ /* .is-prev - when is the previous month button
+  .is-next - when is the next month button
+  .is-disabled - when the button is disabled */
 
 .calendar-header_button.is-next::after {
   content: '>';
@@ -44,17 +44,13 @@
   background-color: var(--color1-02);
   color: var(--color1);
   font-size: 14px;
-  /* box-shadow: 0px 8px 15px var(--color2-02); */
   transition: all 0.2s ease 0s;
 }
 
 .calendar-header_button:hover {
-  /* text-shadow: 0px 0px 4px var(--color2-02); */
   background-color: var(--color2-01);
   color: var(--color4);
   text-shadow: 0px 0px 10px var(--color4);
-  /* box-shadow: 0px 15px 20px var(--color1-02);
-  transform: translateY(-3px); */
 }
 
 
@@ -137,19 +133,11 @@
   border-radius: 35px;
   outline: none;
   cursor: pointer;
-  /* box-shadow: 0px 8px 15px var(--color2-02); */
   transition: all 0.2s ease 0s;
   border: 1px solid var(--color2-02);
-  color: var(--color2-06);
 }
 
 .nav-item-btn-calendar button:hover {
-  /* text-shadow: 0px 0px 4px var(--color2-02); */
-  /* background-color: var(--color1-05);
-  color: var(--color2-06);
-  box-shadow: 0px 15px 20px var(--color1-02);
-  transform: translateY(-3px); */
-
   background-color: var(--color2-01);
   color: var(--color4);
   border: 1px solid transparent;

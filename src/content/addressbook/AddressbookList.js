@@ -160,7 +160,6 @@ class AddressbookList extends Component {
     }
   }
 
-
   renderSpinner = () => {
     if (this.state.showSpinner) {
       return <Spinner />

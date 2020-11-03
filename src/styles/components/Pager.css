@@ -1,7 +1,6 @@
 .pager-container {
   display: flex;
   justify-content: space-between;
-  color: var(--color2-05);
   font-size: 12px;
 }
 
@@ -19,7 +18,6 @@ line-height: 35px;
   background-color: var(--color2-01);
   font-size: 14px;
   transition: .2s ease;
-  color: var(--color2-05);
   outline: none;
 }
 

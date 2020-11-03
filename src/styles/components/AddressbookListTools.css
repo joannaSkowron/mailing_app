@@ -26,7 +26,6 @@
   border: none;
   background-color: var(--color2-01);
   font-size: 14px;
-  color: var(--color2-05);
   outline: none;
   transition: .2s ease;
 }
