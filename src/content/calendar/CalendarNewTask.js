@@ -26,7 +26,7 @@ class CalendarNewTask extends Component {
       start: '12:00',
       end: '12:30',
       description: '',
-      validationResult: null
+      validationResult: null,
     };
 
     this.fetchService = new FetchService();
@@ -37,6 +37,7 @@ class CalendarNewTask extends Component {
     const name = event.target.name;
     this.setState({
       [name]: value,
+      validationResult: null,
     })
   }
 

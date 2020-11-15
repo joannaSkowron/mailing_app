@@ -62,13 +62,13 @@ body a {
 ::-webkit-scrollbar-track {
   background: var(--color1-02); 
   border-radius: 6px;
-  /* margin: 0 0 5px 0; */
+  margin: 5px 0 5px 0;
 }
  
 ::-webkit-scrollbar-thumb {
   background: var(--color2-02); 
   border-radius: 6px;
-  /* margin: 0 0 5px 0; */
+  margin: 5px 0 5px 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import AddressbookMap from './AddressbookMap';
 import '../../styles/addressbook/AddressbookAdd.css';
+import { Link, Prompt } from 'react-router-dom';
+import { FetchService } from '../../services/FetchService';
+import {
+  Validator,
+  ValidationConfig,
+  validateRequired,
+  useValidateMaxLenght,
+} from '../../tools/Validator';
+import avatar1 from '../../images/avatar1.png';
+import FormInputErrMsg from '../../components/FormInputErrMsg';
+
 
 
 class AddressbookAdd extends Component {
@@ -9,6 +20,8 @@ class AddressbookAdd extends Component {
     super(props);
 
     this.state = {
+      id: null,
+      avatar: null,
       name: '',
       email: '',
       phone: '',
@@ -18,7 +31,10 @@ class AddressbookAdd extends Component {
       postalCode: '',
       country: 'Poland',
       mapActive: false,
-    }
+      validationResult: null,
+    };
+
+    this.fetchSevice = new FetchService();
   }
 
   onChange = (event) => {
@@ -27,6 +43,7 @@ class AddressbookAdd extends Component {
 
     this.setState({
       [name]: value,
+      validationResult: null,
     })
   }
 
@@ -37,121 +54,170 @@ class AddressbookAdd extends Component {
     }))
   }
 
+  handleSave = (event) => {
+    event.preventDefault();
+    console.log('save')
+    const { id, name, email, phone, note, address, city, postalCode, country } = this.state;
+    const dataJSON = JSON.stringify({
+      name,
+      email,
+      phone,
+      note,
+      address,
+      city,
+      postalCode,
+      country
+    })
+
+    const validationConfigs = [
+      new ValidationConfig('name', [validateRequired, useValidateMaxLenght(50)]),
+      new ValidationConfig('email', [validateRequired, useValidateMaxLenght(50)]),
+    ];
+
+    const validationResult = new Validator(validationConfigs).validate(this.state);
+    this.setState({
+      validationResult
+    });
+
+    if (validationResult.isValid) {
+      const API = id ? `/api/addressbook/${id}` : `/api/addressbook`;
+      const options = {
+        method: id ? 'put' : 'post',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: dataJSON,
+      };
+
+      const successCallback = () => {
+        console.log('sukces')
+      };
+
+      const failureCallback = (err) => {
+        console.log('Request failed', err);
+        alert("Sorry, your request to save failed")
+      };
+
+      this.fetchService.useFetch(API, options, successCallback, failureCallback);
+    }
+  };
+
+  getValidationError = (fieldName) => {
+    if (this.state.validationResult) {
+      return this.state.validationResult.getErrorMessage(fieldName);
+    }
+  };
+
+  // getAvatar = () => {
+  //   if (this.state.avatar) 
+  // };
+
   render() {
+    const nameErrMsg = this.getValidationError('name');
+    const emailErrMsg = this.getValidationError('email');
 
     return (
       <>
+
         <div className="addressbook-add-container">
-          <div className="addressbook-add-container-forms">
 
-            <div className="addressbook-add-contact-data">
-              <div className="addressbook-add-header">
-                <p>Contact information</p>
-              </div>
-              <div className="addressbook-add-fieldnames">
-                <p>Contact name: <span>*</span></p>
-                <p>Email adress: <span>*</span></p>
-                <p>Phone number:</p>
-                <p>Note:</p>
-              </div>
+          <div className="addressbook-add-header">
+            <h1 className='addressbook-add-header-name'>New contact</h1>
+            <img src={avatar1} alt='avatar' className='addressbook-add-header-avatar'></img>
+          </div>
 
-              <form className="addressbook-add-form">
+          <form className="addressbook-add-form">
 
-                <input type="text"
-                  name="name"
-                  maxLength="50"
-                  autoComplete="new"
-                  onChange={this.onChange}
-                  value={this.state.name} />
+            <label htmlFor="name">Contact name:<span>*</span></label>
+            <input type="text"
+              name="name"
+              maxLength="50"
+              onChange={this.onChange}
+              value={this.state.name} />
+            {nameErrMsg && <FormInputErrMsg errMsg={nameErrMsg} />}
 
-                <input type="text"
-                  name="email"
-                  maxLength="50"
-                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-                  autoComplete="off"
-                  onChange={this.onChange}
-                  value={this.state.email} />
+            <label htmlFor="email">Email adress:<span>*</span></label>
+            <input type="text"
+              name="email"
+              maxLength="50"
+              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+              onChange={this.onChange}
+              value={this.state.email} />
+            {emailErrMsg && <FormInputErrMsg errMsg={emailErrMsg} />}
 
-                <input type="text"
-                  name="phone"
-                  maxLength="10"
-                  autoComplete="false1"
-                  onChange={this.onChange}
-                  value={this.state.phone} />
+            <label htmlFor="phone">Phone number:</label>
+            <input type="text"
+              name="phone"
+              maxLength="50"
+              onChange={this.onChange}
+              value={this.state.phone} />
 
-                <textarea
-                  name="note"
-                  maxLength="600"
-                  autoComplete="false2"
-                  onChange={this.onChange}
-                  value={this.state.note} />
+            <label htmlFor="note">Note:</label>
+            <textarea
+              name="note"
+              maxLength="1000"
+              onChange={this.onChange}
+              value={this.state.note} />
 
-              </form>
+            <label htmlFor="address">Address:</label>
+            <input type="text"
+              name="address"
+              maxLength="100"
+              autoComplete="new"
+              onChange={this.onChange}
+              value={this.state.address} />
+
+            <div className='wrapper'>
+              <label htmlFor="city">City:</label>
+              <input
+                type="text"
+                name="city"
+                maxLength="50"
+                autoComplete="false"
+                onChange={this.onChange}
+                value={this.state.city} />
             </div>
 
-            <div className="addressbook-add-address-data">
-              <div className="addressbook-add-header">
-                <p>Address information</p>
-              </div>
-              <div className="addressbook-add-fieldnames">
-                <p>Address:</p>
-                <p>City:</p>
-                <p>Postal code:</p>
-                <p>Country:</p>
-              </div>
+            <div className='wrapper'>
+              <label htmlFor="postalcode">Postal code:</label>
+              <input
+                type="text"
+                name="postalCode"
+                maxLength="10"
+                autoComplete="false1"
+                onChange={this.onChange}
+                value={this.state.postalCode} />
+            </div>
 
-              <form className="addressbook-add-form">
-                <input type="text"
-                  name="address"
-                  maxLength="50"
-                  autoComplete="new"
-                  onChange={this.onChange}
-                  value={this.state.address} />
+            <div className="wrapper">
+              <label htmlFor="country">Country:</label>
+              <input
+                type="text"
+                name="country"
+                maxLength="50"
+                autoComplete="false2"
+                onChange={this.onChange}
+                value={this.state.country} />
+            </div>
 
-                <input type="text"
-                  name="city"
-                  maxLength="50"
-                  autoComplete="false"
-                  onChange={this.onChange}
-                  value={this.state.city} />
-
-                <input type="text"
-                  name="postalCode"
-                  maxLength="5"
-                  autoComplete="false1"
-                  onChange={this.onChange}
-                  value={this.state.postalCode} />
-
-                <input type="text"
-                  name="country"
-                  maxLength="50"
-                  autoComplete="false2"
-                  onChange={this.onChange}
-                  value={this.state.country} />
-
-                <button className="open-map"
-                  onClick={(event) => this.handleClick(event, 'mapActive')}>
-                  <i className="fas fa-map-marker-alt"></i>
+            <button type='button' className="open-map"
+              onClick={(event) => this.handleClick(event, 'mapActive')}>
+              <i className="fas fa-map-marker-alt"></i>
                   See location on GoogleMaps
                 </button>
 
-              </form>
+            <div className="addressbook-add-form-buttons">
+              <button type='submit' className="save" onClick={(event) => this.handleSave(event)}>Save</button>
+              <Prompt
+                when={true}
+                message={'Are you sure you want to cancel?'} />
+              <Link to='/addressbook/all'>
+                <button type='button' className="cancel" >Cancel</button>
+              </Link>
             </div>
 
-            <div className="addressbook-add-upload-picture">
-              <div className="addressbook-add-header">
-                <p>Upload contact picture</p>
-              </div>
-              <form action="">
-                <input type="file" />
-              </form>
-            </div>
-
-          </div>
-          <div className="addressbook-add-form-buttons">
-            <button className="save">Save</button>
-            <button className="cancel">Cancel</button>
-          </div>
+          </form>
 
         </div>
 
