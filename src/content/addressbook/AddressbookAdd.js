@@ -11,7 +11,7 @@ import {
 } from '../../tools/Validator';
 import avatar1 from '../../images/avatar1.png';
 import FormInputErrMsg from '../../components/FormInputErrMsg';
-
+import AddressbookAddTools from '../../components/AddressbookAddTools';
 
 
 class AddressbookAdd extends Component {
@@ -21,6 +21,8 @@ class AddressbookAdd extends Component {
 
     this.state = {
       id: null,
+      isFavourite: false,
+      category: 'All',
       avatar: null,
       name: '',
       email: '',
@@ -109,6 +111,18 @@ class AddressbookAdd extends Component {
     }
   };
 
+  toggleIsFavourite = () => {
+    this.setState(prevState => ({
+      isFavourite: !prevState.isFavourite,
+    }))
+  };
+
+  setCategory = (category) => {
+    this.setState({
+      category,
+    })
+  };
+
   // getAvatar = () => {
   //   if (this.state.avatar) 
   // };
@@ -123,100 +137,115 @@ class AddressbookAdd extends Component {
         <div className="addressbook-add-container">
 
           <div className="addressbook-add-header">
-            <h1 className='addressbook-add-header-name'>New contact</h1>
-            <img src={avatar1} alt='avatar' className='addressbook-add-header-avatar'></img>
+            <AddressbookAddTools
+              isFavourite={this.state.isFavourite}
+              category={this.state.category}
+              toggleIsFavourite={this.toggleIsFavourite}
+              setCategory={this.setCategory}
+            />
+
           </div>
 
           <form className="addressbook-add-form">
+            <div className="addressbook-add-form-container">
 
-            <label htmlFor="name">Contact name:<span>*</span></label>
-            <input type="text"
-              name="name"
-              maxLength="50"
-              onChange={this.onChange}
-              value={this.state.name} />
-            {nameErrMsg && <FormInputErrMsg errMsg={nameErrMsg} />}
+              <div className="addressbook-input-wrapper-avatar">
 
-            <label htmlFor="email">Email adress:<span>*</span></label>
-            <input type="text"
-              name="email"
-              maxLength="50"
-              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-              onChange={this.onChange}
-              value={this.state.email} />
-            {emailErrMsg && <FormInputErrMsg errMsg={emailErrMsg} />}
+                <div className="addressbook-input-wrapper-basic">
+                  <label htmlFor="name">Contact name:<span>*</span></label>
+                  <input type="text"
+                    name="name"
+                    maxLength="50"
+                    onChange={this.onChange}
+                    value={this.state.name} />
+                  {nameErrMsg && <FormInputErrMsg errMsg={nameErrMsg} />}
 
-            <label htmlFor="phone">Phone number:</label>
-            <input type="text"
-              name="phone"
-              maxLength="50"
-              onChange={this.onChange}
-              value={this.state.phone} />
+                  <label htmlFor="email">Email adress:<span>*</span></label>
+                  <input type="text"
+                    name="email"
+                    maxLength="50"
+                    pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                    onChange={this.onChange}
+                    value={this.state.email} />
+                  {emailErrMsg && <FormInputErrMsg errMsg={emailErrMsg} />}
 
-            <label htmlFor="note">Note:</label>
-            <textarea
-              name="note"
-              maxLength="1000"
-              onChange={this.onChange}
-              value={this.state.note} />
+                  <label htmlFor="phone">Phone number:</label>
+                  <input type="text"
+                    name="phone"
+                    maxLength="50"
+                    onChange={this.onChange}
+                    value={this.state.phone} />
+                </div>
 
-            <label htmlFor="address">Address:</label>
-            <input type="text"
-              name="address"
-              maxLength="100"
-              autoComplete="new"
-              onChange={this.onChange}
-              value={this.state.address} />
+                <img src={avatar1} alt='avatar' className='addressbook-add-avatar'></img>
 
-            <div className='wrapper'>
-              <label htmlFor="city">City:</label>
-              <input
-                type="text"
-                name="city"
-                maxLength="50"
-                autoComplete="false"
+              </div>
+
+              <label htmlFor="note">Note:</label>
+              <textarea
+                name="note"
+                maxLength="1000"
                 onChange={this.onChange}
-                value={this.state.city} />
-            </div>
+                value={this.state.note} />
 
-            <div className='wrapper'>
-              <label htmlFor="postalcode">Postal code:</label>
-              <input
-                type="text"
-                name="postalCode"
-                maxLength="10"
-                autoComplete="false1"
+              <label htmlFor="address">Address:</label>
+              <input type="text"
+                name="address"
+                maxLength="100"
+                autoComplete="new"
                 onChange={this.onChange}
-                value={this.state.postalCode} />
-            </div>
+                value={this.state.address} />
 
-            <div className="wrapper">
-              <label htmlFor="country">Country:</label>
-              <input
-                type="text"
-                name="country"
-                maxLength="50"
-                autoComplete="false2"
-                onChange={this.onChange}
-                value={this.state.country} />
-            </div>
+              <div className='addressbook-input-wrapper-address'>
+                <label htmlFor="city">City:</label>
+                <input
+                  type="text"
+                  name="city"
+                  maxLength="50"
+                  autoComplete="false"
+                  onChange={this.onChange}
+                  value={this.state.city} />
+              </div>
 
-            <button type='button' className="open-map"
-              onClick={(event) => this.handleClick(event, 'mapActive')}>
-              <i className="fas fa-map-marker-alt"></i>
+              <div className='addressbook-input-wrapper-address'>
+                <label htmlFor="postalcode">Postal code:</label>
+                <input
+                  type="text"
+                  name="postalCode"
+                  maxLength="10"
+                  autoComplete="false1"
+                  onChange={this.onChange}
+                  value={this.state.postalCode} />
+              </div>
+
+              <div className="addressbook-input-wrapper-address">
+                <label htmlFor="country">Country:</label>
+                <input
+                  type="text"
+                  name="country"
+                  maxLength="50"
+                  autoComplete="false2"
+                  onChange={this.onChange}
+                  value={this.state.country} />
+              </div>
+
+              <button type='button' className="open-map"
+                onClick={(event) => this.handleClick(event, 'mapActive')}>
+                <i className="fas fa-map-marker-alt"></i>
                   See location on GoogleMaps
                 </button>
 
-            <div className="addressbook-add-form-buttons">
-              <button type='submit' className="save" onClick={(event) => this.handleSave(event)}>Save</button>
-              <Prompt
-                when={true}
-                message={'Are you sure you want to cancel?'} />
-              <Link to='/addressbook/all'>
-                <button type='button' className="cancel" >Cancel</button>
-              </Link>
-            </div>
+              <div className="addressbook-add-form-buttons">
+                <button type='submit' className="save" onClick={(event) => this.handleSave(event)}>Save</button>
+                <Prompt
+                  when={true}
+                  message={'Are you sure you want to cancel?'} />
+                <Link to='/addressbook/all'>
+                  <button type='button' className="cancel" >Cancel</button>
+                </Link>
+              </div>
 
+            </div>
           </form>
 
         </div>

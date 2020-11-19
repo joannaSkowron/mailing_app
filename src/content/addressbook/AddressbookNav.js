@@ -8,7 +8,6 @@ const navItems = [
   { name: 'Personal', path: '/addressbook/personal', icon: 'fas fa-users' },
   { name: 'Work', path: '/addressbook/work', icon: 'fas fa-briefcase' },
   { name: 'School', path: '/addressbook/school', icon: 'fas fa-user-graduate' },
-  { name: 'Deleted', path: '/addressbook/deleted', icon: 'far fa-trash-alt' },
 ]
 
 const NavAddressbook = () => {
