@@ -8,9 +8,11 @@ const AddressbookAddTools = (props) => {
   const renderCategories = () => {
     return categories.map(category => {
       return (
-        <div className={props.category === category
-          ? "addressbook-add-tools-category active"
-          : "addressbook-add-tools-category"}
+        <div
+          key={category}
+          className={props.category === category
+            ? "addressbook-add-tools-category active"
+            : "addressbook-add-tools-category"}
           onClick={() => props.setCategory(category)}
         >{category}
         </div>

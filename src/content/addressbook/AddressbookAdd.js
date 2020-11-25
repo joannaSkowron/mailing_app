@@ -9,9 +9,11 @@ import {
   validateRequired,
   useValidateMaxLenght,
 } from '../../tools/Validator';
-import avatar1 from '../../images/avatar1.png';
 import FormInputErrMsg from '../../components/FormInputErrMsg';
 import AddressbookAddTools from '../../components/AddressbookAddTools';
+import { COUNTRIES } from '../../constants/Countries';
+import { BASE_URL } from '../../constants/URL';
+import Spinner from '../../components/Spinner';
 
 
 class AddressbookAdd extends Component {
@@ -34,12 +36,13 @@ class AddressbookAdd extends Component {
       country: 'Poland',
       mapActive: false,
       validationResult: null,
+      showSpinner: false,
     };
 
-    this.fetchSevice = new FetchService();
+    this.fetchService = new FetchService();
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
 
@@ -123,9 +126,77 @@ class AddressbookAdd extends Component {
     })
   };
 
-  // getAvatar = () => {
-  //   if (this.state.avatar) 
-  // };
+  generateCountrySelectorOptions = () => {
+    return COUNTRIES.map(country => {
+      return (
+        <option value={country} key={country}>{country}</option>
+      )
+    })
+  };
+
+  handleAvatarUpload = (event) => {
+    this.setState({ showSpinner: true });
+
+    let formData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name)
+    const API = '/api/Avatar';
+    const options = {
+      method: 'post',
+      body: formData
+    };
+
+    const successCallback = (data) => {
+      this.setState({
+        avatar: data.id,
+        showSpinner: false,
+      });
+    };
+
+    const failureCallback = (err) => {
+      alert('Saving image file failed. Try again');
+      console.log(`Saving image failed. ${err}`)
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+  };
+
+  handleAvatarInputReset = (event) => {
+    event.target.value = null;
+  };
+
+  renderAvatarInput = () => {
+    if (this.state.avatar === null) {
+      return (
+        <>
+          <div className="addressbook-add-avatar" title="Upload avatar image">
+            <input
+              type="file"
+              accept="image/*"
+              id="addressbook-add-avatar-input"
+              hidden
+              onChange={this.handleAvatarUpload}
+            />
+            <label htmlFor="addressbook-add-avatar-input" className="addressbook-add-avatar-input"></label>
+            <i className="far fa-user"></i>
+            <p>Upload image</p>
+
+          </div>
+        </>
+      )
+    } else {
+      const imgURL = `${BASE_URL}/api/Avatar/${this.state.avatar}`;
+
+      return (
+        <div className="addressbook-add-avatar" title="Change avatar image" >
+          <input type="file" id="addressbook-add-avatar-input" hidden
+            onClick={this.handleAvatarInputReset}
+            onChange={this.handleAvatarUpload} />
+          <label htmlFor="addressbook-add-avatar-input" className="addressbook-add-avatar-input"></label>
+          <img src={imgURL} alt="avatar" className="addressbook-add-avatar-image" />
+        </div>
+      )
+    }
+  };
 
   render() {
     const nameErrMsg = this.getValidationError('name');
@@ -152,81 +223,85 @@ class AddressbookAdd extends Component {
               <div className="addressbook-input-wrapper-avatar">
 
                 <div className="addressbook-input-wrapper-basic">
-                  <label htmlFor="name">Contact name:<span>*</span></label>
+                  <label htmlFor="name" className="addressbook-add-form-label">Contact name:<span>*</span></label>
                   <input type="text"
                     name="name"
                     maxLength="50"
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.name} />
                   {nameErrMsg && <FormInputErrMsg errMsg={nameErrMsg} />}
 
-                  <label htmlFor="email">Email adress:<span>*</span></label>
+                  <label htmlFor="email" className="addressbook-add-form-label">Email adress:<span>*</span></label>
                   <input type="text"
                     name="email"
                     maxLength="50"
                     pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.email} />
                   {emailErrMsg && <FormInputErrMsg errMsg={emailErrMsg} />}
 
-                  <label htmlFor="phone">Phone number:</label>
+                  <label htmlFor="phone" className="addressbook-add-form-label">Phone number:</label>
                   <input type="text"
                     name="phone"
                     maxLength="50"
-                    onChange={this.onChange}
+                    onChange={this.handleChange}
                     value={this.state.phone} />
                 </div>
 
-                <img src={avatar1} alt='avatar' className='addressbook-add-avatar'></img>
+                <div className="addressbook-add-avatar-container">
+                  {this.renderAvatarInput()}
+
+                </div>
 
               </div>
 
-              <label htmlFor="note">Note:</label>
+              <label htmlFor="note" className="addressbook-add-form-label">Note:</label>
               <textarea
                 name="note"
                 maxLength="1000"
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 value={this.state.note} />
 
-              <label htmlFor="address">Address:</label>
+              <label htmlFor="address" className="addressbook-add-form-label">Address:</label>
               <input type="text"
                 name="address"
                 maxLength="100"
                 autoComplete="new"
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 value={this.state.address} />
 
               <div className='addressbook-input-wrapper-address'>
-                <label htmlFor="city">City:</label>
+                <label htmlFor="city" className="addressbook-add-form-label">City:</label>
                 <input
                   type="text"
                   name="city"
                   maxLength="50"
                   autoComplete="false"
-                  onChange={this.onChange}
+                  onChange={this.handleChange}
                   value={this.state.city} />
               </div>
 
               <div className='addressbook-input-wrapper-address'>
-                <label htmlFor="postalcode">Postal code:</label>
+                <label htmlFor="postalcode" className="addressbook-add-form-label">Postal code:</label>
                 <input
                   type="text"
                   name="postalCode"
                   maxLength="10"
                   autoComplete="false1"
-                  onChange={this.onChange}
+                  onChange={this.handleChange}
                   value={this.state.postalCode} />
               </div>
 
               <div className="addressbook-input-wrapper-address">
-                <label htmlFor="country">Country:</label>
-                <input
-                  type="text"
+                <label htmlFor="country" className="addressbook-add-form-label">Country:</label>
+                <select
                   name="country"
                   maxLength="50"
                   autoComplete="false2"
-                  onChange={this.onChange}
-                  value={this.state.country} />
+                  onChange={this.handleChange}
+                  value={this.state.country}>
+                  {this.generateCountrySelectorOptions()}
+                </select>
               </div>
 
               <button type='button' className="open-map"
@@ -236,7 +311,7 @@ class AddressbookAdd extends Component {
                 </button>
 
               <div className="addressbook-add-form-buttons">
-                <button type='submit' className="save" onClick={(event) => this.handleSave(event)}>Save</button>
+                <button type='submit' className="save" onClick={this.handleSave}>Save</button>
                 <Prompt
                   when={true}
                   message={'Are you sure you want to cancel?'} />
@@ -259,6 +334,8 @@ class AddressbookAdd extends Component {
           />
           : null
         }
+
+        {this.state.showSpinner ? <Spinner /> : null}
 
       </>
     );

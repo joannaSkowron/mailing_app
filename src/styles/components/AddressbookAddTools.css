@@ -45,7 +45,6 @@
   font-size: 12px;
   color: var(--color2-08);
   cursor: pointer;
-  transition: all 0.3s ease 0s;
 }
 
 .addressbook-add-tools-favourite i {

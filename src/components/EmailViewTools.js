@@ -29,8 +29,19 @@ class EmailViewTools extends Component {
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
-  restoreEmail = () => {
-    console.log(`Restore to original folder`);
+  handleRestoreFromFolder = (folderName) => {
+    console.log(`Restore to folder: ${folderName}`);
+
+    const API = `/api/Emails/${this.props.data.id}/restore/${folderName}`;
+    const options = { method: 'put' };
+    const successCallback = () => {
+      this.props.handleDeletingOrMovingEmail();
+    };
+    const failureCallback = (err) => {
+      console.log('Failed to restore email. ', err)
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
   }
 
   deleteEmail = () => {
@@ -55,11 +66,11 @@ class EmailViewTools extends Component {
       replyAll: ['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false,
       forward: ['inbox', 'outbox', 'trash', 'spam'].includes(currentFolder) ? true : false,
       edit: ['draft'].includes(currentFolder) ? true : false,
-      moveToInbox: ['spam'].includes(currentFolder) ? true : false,
       moveToSpam: ['inbox'].includes(currentFolder) ? true : false,
       moveToTrash: ['inbox', 'outbox', 'spam'].includes(currentFolder) ? true : false,
+      restoreFromTrash: ['trash'].includes(currentFolder) ? true : false,
+      restoreFromSpam: ['spam'].includes(currentFolder) ? true : false,
       deleteEmail: ['draft', 'trash'].includes(currentFolder) ? true : false,
-      restoreEmail: ['trash'].includes(currentFolder) ? true : false,
     }
 
     return (
@@ -90,14 +101,6 @@ class EmailViewTools extends Component {
             </div>
           </Link>}
 
-          {selectButtons.moveToInbox && <div
-            className="email-view-tools"
-            title="Move to inbox"
-            name="inbox"
-            onClick={() => this.handleMoveToFolder('inbox')}>
-            <i className='far fa-envelope-open'></i>
-          </div>}
-
           {selectButtons.moveToSpam && <div
             className="email-view-tools"
             title="Move to spam"
@@ -105,18 +108,25 @@ class EmailViewTools extends Component {
             <i className='fas fa-ban'></i>
           </div>}
 
+          {selectButtons.restoreFromTrash && <div
+            className="email-view-tools"
+            title="Restore to original folder"
+            onClick={() => this.handleRestoreFromFolder('trash')}>
+            <i className="fas fa-trash-restore"></i>
+          </div>}
+
+          {selectButtons.restoreFromSpam && <div
+            className="email-view-tools"
+            title="Restore to Inbox"
+            onClick={() => this.handleRestoreFromFolder('spam')}>
+            <i className="fas fa-trash-restore"></i>
+          </div>}
+
           {selectButtons.moveToTrash && <div
             className="email-view-tools"
             title="Move to trash"
             onClick={() => this.handleMoveToFolder('trash')}>
             <i className='far fa-trash-alt'></i>
-          </div>}
-
-          {selectButtons.restoreEmail && <div
-            className="email-view-tools"
-            title="Restore to original folder"
-            onClick={this.deleteEmail}>
-            <i className="fas fa-trash-restore"></i>
           </div>}
 
           {selectButtons.deleteEmail && <div
