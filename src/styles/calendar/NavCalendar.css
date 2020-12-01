@@ -71,13 +71,13 @@
   display: flex;
 }
 
-.calendar-day {
+.calendar-week-day {
   height: 30px;
   width: 30px;
   padding: 5px;
   border-radius: 50%;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   font-family: 'Montserrat','Roboto', sans-serif;
   background-color: transparent;
   color: var(--color1-08);
@@ -97,7 +97,7 @@
 .is-not_selectable - when the date can't be selected */
 }
 
-.calendar-day:hover {
+.calendar-week-day:hover {
   border: 1px solid var(--color2-02);
 }
 
@@ -111,7 +111,7 @@
 
 .is-selected, .is-start_selection, .is-end_selection {
   background-color: var(--color1-02);
-  color: var(--color2-05);
+  color: var(--color2-08);
 }
 
 .nav-item-btn-calendar {

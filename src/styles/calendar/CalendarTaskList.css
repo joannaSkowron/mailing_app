@@ -12,9 +12,10 @@
 .calendar-tasklist-btn {
   width: 60px;
   padding: 5px;
-  background-color: var(--color1-08);
-  font-weight: 600;
-  font-size: 10px;
+  background-color: var(--color2-01);
+  font-weight: 400;
+  font-size: 12px;
+  font-family: 'Montserrat','Roboto', sans-serif;
   border: none;
   border-radius: 25px;
   outline: none;

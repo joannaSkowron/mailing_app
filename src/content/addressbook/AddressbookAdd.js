@@ -34,6 +34,7 @@ class AddressbookAdd extends Component {
       city: '',
       postalCode: '',
       country: 'Poland',
+
       mapActive: false,
       validationResult: null,
       showSpinner: false,
@@ -164,6 +165,12 @@ class AddressbookAdd extends Component {
     event.target.value = null;
   };
 
+  handleDeleteAvatarImage = () => {
+    this.setState({
+      avatar: null
+    })
+  };
+
   renderAvatarInput = () => {
     if (this.state.avatar === null) {
       return (
@@ -174,10 +181,11 @@ class AddressbookAdd extends Component {
               accept="image/*"
               id="addressbook-add-avatar-input"
               hidden
+              onClick={this.handleAvatarInputReset}
               onChange={this.handleAvatarUpload}
             />
             <label htmlFor="addressbook-add-avatar-input" className="addressbook-add-avatar-input"></label>
-            <i className="far fa-user"></i>
+            <i className="fas fa-camera"></i>
             <p>Upload image</p>
 
           </div>
@@ -187,13 +195,20 @@ class AddressbookAdd extends Component {
       const imgURL = `${BASE_URL}/api/Avatar/${this.state.avatar}`;
 
       return (
-        <div className="addressbook-add-avatar" title="Change avatar image" >
-          <input type="file" id="addressbook-add-avatar-input" hidden
-            onClick={this.handleAvatarInputReset}
-            onChange={this.handleAvatarUpload} />
-          <label htmlFor="addressbook-add-avatar-input" className="addressbook-add-avatar-input"></label>
-          <img src={imgURL} alt="avatar" className="addressbook-add-avatar-image" />
-        </div>
+        <>
+          <div className="addressbook-add-avatar" title="Change avatar image" >
+            <input type="file" id="addressbook-add-avatar-input" hidden
+              onClick={this.handleAvatarInputReset}
+              onChange={this.handleAvatarUpload} />
+            <label htmlFor="addressbook-add-avatar-input" className="addressbook-add-avatar-input"></label>
+            <img src={imgURL} alt="avatar" className="addressbook-add-avatar-image" />
+          </div>
+          <div
+            className="addressbook-add-avatar-delete-image"
+            onClick={this.handleDeleteAvatarImage}>
+            <i className="far fa-times-circle"></i>
+            Delete image</div>
+        </>
       )
     }
   };
