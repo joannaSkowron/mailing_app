@@ -156,6 +156,141 @@ class AddressbookList extends Component {
           phone: '123456789',
           notes: 'This is fake contact third object.'
         },
+        {
+          id: 16,
+          avatar: avatar1,
+          isFavourite: true,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 17,
+          avatar: avatar2,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 18,
+          avatar: avatar3,
+          isFavourite: true,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 19,
+          avatar: avatar4,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 20,
+          avatar: avatar5,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 21,
+          avatar: avatar6,
+          isFavourite: false,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 22,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 23,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 24,
+          avatar: null,
+          isFavourite: true,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 25,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 26,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 27,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
+        {
+          id: 28,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
+          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
+          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
+          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
+        },
+        {
+          id: 29,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name 2',
+          email: 'fake2@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact second object.'
+        },
+        {
+          id: 30,
+          avatar: null,
+          isFavourite: false,
+          name: 'Fake Contact Name !!!',
+          email: 'fake55@contact.com',
+          phone: '123456789',
+          notes: 'This is fake contact third object.'
+        },
       ]
     }
   }
@@ -183,7 +318,7 @@ class AddressbookList extends Component {
           <div className="addressbook-table-cell">
             {item.avatar ?
               <img src={item.avatar} alt="Contact avatar" />
-              : <i className="fas fa-user-astronaut"></i>}
+              : <i className="fas fa-camera"></i>}
           </div>
         </div>
         <div className="addressbook-table-item addressbook-table-favourite">

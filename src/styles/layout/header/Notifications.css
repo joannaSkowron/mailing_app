@@ -14,7 +14,7 @@
   background-color: var(--color1);
   box-shadow: 0px 8px 15px var(--color2-02);
   border-radius: 7px;
-  color: var(--color2-05);
+  color: var(--color2-08);
   animation-name: opacity;
   animation-duration: 500ms;
 }
@@ -29,7 +29,7 @@
   align-items: center;
   height: 30px;
   font-weight: 600;
-  color: var(--color2-06);
+  color: var(--color2-08);
   padding: 5px 5px 10px 5px;
   border-bottom: 0.5px solid var(--color2-02);
 }

@@ -30,9 +30,9 @@ class EmailCompose extends Component {
     }
 
     this.validationErrorMessages = {
-      addressIncorrect: 'Please enter a valid e-mail address.',
-      subjectIncorrect: 'Please enter subject.',
-      contentIncorrect: 'Please enter content.',
+      addressIncorrect: 'Please enter a valid e-mail address',
+      subjectIncorrect: 'Please enter subject',
+      contentIncorrect: 'Please enter content',
     }
 
     this.fetchService = new FetchService();
@@ -199,6 +199,7 @@ class EmailCompose extends Component {
   componentDidMount() {
     const id = new URLSearchParams(this.props.location.search).get('id');
     const responsetype = new URLSearchParams(this.props.location.search).get('responsetype');
+    const address = new URLSearchParams(this.props.location.search).get('address');
     const API = `/api/emails/${id}`;
     const options = { method: 'get' };
     let emailResponseQuotation;
@@ -214,7 +215,14 @@ class EmailCompose extends Component {
 
     if (id) {
       this.fetchService.useFetch(API, options, successCallback, failureCallback);
+    };
+
+    if (address) {
+      this.setState({
+        address,
+      })
     }
+
   }
 
   componentWillUnmount() {

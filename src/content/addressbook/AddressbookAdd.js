@@ -10,7 +10,7 @@ import {
   useValidateMaxLenght,
 } from '../../tools/Validator';
 import FormInputErrMsg from '../../components/FormInputErrMsg';
-import AddressbookAddTools from '../../components/AddressbookAddTools';
+import AddressbookAddCategoryTools from '../../components/AddressbookAddCategoryTools';
 import { COUNTRIES } from '../../constants/Countries';
 import { BASE_URL } from '../../constants/URL';
 import Spinner from '../../components/Spinner';
@@ -223,7 +223,7 @@ class AddressbookAdd extends Component {
         <div className="addressbook-add-container">
 
           <div className="addressbook-add-header">
-            <AddressbookAddTools
+            <AddressbookAddCategoryTools
               isFavourite={this.state.isFavourite}
               category={this.state.category}
               toggleIsFavourite={this.toggleIsFavourite}

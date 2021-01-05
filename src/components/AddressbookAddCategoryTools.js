@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/components/AddressbookAddTools.css';
+import '../styles/components/AddressbookAddCategoryTools.css';
 
-const AddressbookAddTools = (props) => {
+const AddressbookAddCategoryTools = (props) => {
 
   const categories = ['All', 'Personal', 'Work', 'School'];
 
@@ -41,4 +41,4 @@ const AddressbookAddTools = (props) => {
   );
 }
 
-export default AddressbookAddTools;
+export default AddressbookAddCategoryTools;
