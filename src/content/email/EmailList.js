@@ -130,10 +130,7 @@ class Email extends Component {
   }
 
   renderEmailsTable() {
-    if (this.state.data === null) {
-      console.log("State is null... cannot render table...")
-      return;
-    }
+    if (this.state.data === null) return;
 
     const { items } = this.state.data;
     const currentFolder = this.props.match.params.folder;
@@ -185,8 +182,6 @@ class Email extends Component {
   }
 
   render() {
-
-    console.log("Render...");
 
     const { pagesCount, currentPage } = this.state;
     const currentFolder = this.props.match.params.folder;

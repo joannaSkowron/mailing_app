@@ -17,7 +17,7 @@ class PictureEditor extends Component {
     this.setState({
       selectedPicture: this.state.selectedPicture === selectedPicture ? null : selectedPicture,
     });
-    document.querySelectorAll('.picture-editor-selector-item').forEach(item => item.classList.remove('active'));
+    document.querySelectorAll('.picture-editor-selector-img').forEach(item => item.classList.remove('active'));
     event.target.classList.toggle('active');
   }
 

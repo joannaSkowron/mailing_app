@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import AddressbookListTools from '../../components/AddressbookListTools';
+import Spinner from '../../components/Spinner';
+import { FetchService } from '../../services/FetchService';
+import { BASE_URL } from '../../constants/URL';
 import '../../styles/addressbook/AddressbookContactView.css';
 
 class AddressbookContactView extends Component {
@@ -8,7 +11,9 @@ class AddressbookContactView extends Component {
     super(props);
 
     this.state = {
-      data: {
+      showSpinner: false,
+      data: null,
+      testdata: {
         id: 1,
         isFavourite: true,
         name: 'Fake Contact Name',
@@ -22,15 +27,48 @@ class AddressbookContactView extends Component {
         postalCode: '02-972',
         country: 'Poland',
       },
+    };
+
+    this.fetchService = new FetchService();
+  }
+
+  renderSpinner = () => {
+    if (this.state.showSpinner) {
+      return <Spinner />
     }
+  }
+
+  fetchData = (id) => {
+    const API = `/api/Contact/${id}`;
+    const options = { method: 'get' };
+    const successCallback = (data) => {
+      this.setState({
+        data
+      });
+    };
+    const failureCallback = (err) => {
+      console.log(err, err.name)
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.fetchData(id);
+  }
+
+  componentWillUnmount() {
+    this.fetchService.abortFetch();
   }
 
 
   renderContactContent = () => {
+    if (this.state.data === null) return;
     const { data } = this.state;
-    if (data === null) return;
 
-    const src = encodeURI(`https://maps.google.com/maps?width=100%&height=600&hl=en&q=${data.address}, ${data.city}, ${data.country}&ie=UTF8&t=&amp;z=14&iwloc=B&output=embed`);
+
+    const src = encodeURI(`https://maps.google.com/maps?width=100%&height=600&hl=en&q=${data.address.street}, ${data.address.city}, ${data.address.country}&ie=UTF8&t=&amp;z=14&iwloc=B&output=embed`);
 
     const contactContent = (
       <div className="addressbook-contact-container">
@@ -44,8 +82,8 @@ class AddressbookContactView extends Component {
 
           <div className="addressbook-contact-data-item addressbook-contact-data-picture">
             <div className="addressbook-contact-data-picture-container">
-              {data.picture
-                ? <img src={data.picture} alt="Contact" />
+              {data.avatar
+                ? <img src={`${BASE_URL}/api/Avatar/${data.avatar}`} alt="Contact" />
                 : <i className="fas fa-camera"></i>
               }
             </div>
@@ -65,7 +103,7 @@ class AddressbookContactView extends Component {
               <p>{data.name}</p>
               <p>{data.email}</p>
               <p>{data.phone}</p>
-              <p className="note">{data.note}</p>
+              <p className="note">{data.notes}</p>
             </div>
           </div>
 
@@ -80,10 +118,10 @@ class AddressbookContactView extends Component {
               <p>Country:</p>
             </div>
             <div className="addressbook-contact-data-fields">
-              <p>{data.address}</p>
-              <p>{data.city}</p>
-              <p>{data.postalCode}</p>
-              <p>{data.country}</p>
+              <p>{data.address.street}</p>
+              <p>{data.address.city}</p>
+              <p>{data.address.postCode}</p>
+              <p>{data.address.country}</p>
             </div>
           </div>
 

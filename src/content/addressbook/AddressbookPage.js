@@ -13,9 +13,9 @@ const AddressbookPage = () => {
 
       <Switch>
 
-        <Route path='/addressbook/:folder' exact component={AddressbookList} />
+        <Route path='/addressbook/:category' exact component={AddressbookList} />
         <Route path='/addressbook/add/new' component={AddressbookAdd} />
-        <Route path='/addressbook/:folder/contactview/:id' component={AddressbookContactView} />
+        <Route path='/addressbook/:category/contactview/:id' component={AddressbookContactView} />
         <Route component={Error} />
 
       </Switch>

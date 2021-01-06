@@ -5,12 +5,8 @@ import Pager from '../../components/Pager';
 import Spinner from '../../components/Spinner';
 import AddressbookListTools from '../../components/AddressbookListTools';
 import '../../styles/addressbook/AddressbookList.css';
-import avatar1 from '../../images/avatar1.png';
-import avatar2 from '../../images/avatar2.png';
-import avatar3 from '../../images/avatar3.png';
-import avatar4 from '../../images/avatar4.png';
-import avatar5 from '../../images/avatar5.png';
-import avatar6 from '../../images/avatar6.png';
+import { FetchService } from '../../services/FetchService';
+import { BASE_URL } from '../../constants/URL';
 
 
 class AddressbookList extends Component {
@@ -19,280 +15,16 @@ class AddressbookList extends Component {
     super(props);
 
     this.state = {
-      showSpinner: false,
-      data: [
-        {
-          id: 1,
-          avatar: avatar1,
-          isFavourite: true,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 2,
-          avatar: avatar2,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 3,
-          avatar: avatar3,
-          isFavourite: true,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 4,
-          avatar: avatar4,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 5,
-          avatar: avatar5,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 6,
-          avatar: avatar6,
-          isFavourite: false,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 7,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 8,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 9,
-          avatar: null,
-          isFavourite: true,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 10,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 11,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 12,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 13,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 14,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 15,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 16,
-          avatar: avatar1,
-          isFavourite: true,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 17,
-          avatar: avatar2,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 18,
-          avatar: avatar3,
-          isFavourite: true,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 19,
-          avatar: avatar4,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 20,
-          avatar: avatar5,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 21,
-          avatar: avatar6,
-          isFavourite: false,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 22,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 23,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 24,
-          avatar: null,
-          isFavourite: true,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 25,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 26,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 27,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-        {
-          id: 28,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name Fake Contact Name',
-          email: 'fake@contact.com fake@contact.com fake@contact.com fake@contact.comfake@contact.com',
-          phone: '123456789fake@contact.comfake@contact.com fake@contact.comfake@contact.comfake@contact.com',
-          notes: 'This is fake contact object.fake@contact.comfake@contact.comfake@contact.com'
-        },
-        {
-          id: 29,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name 2',
-          email: 'fake2@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact second object.'
-        },
-        {
-          id: 30,
-          avatar: null,
-          isFavourite: false,
-          name: 'Fake Contact Name !!!',
-          email: 'fake55@contact.com',
-          phone: '123456789',
-          notes: 'This is fake contact third object.'
-        },
-      ]
-    }
+      showSpinner: true,
+      data: null,
+      skip: 0,
+      take: 20,
+      currentPage: 1,
+      pagesCount: null,
+      searchText: '',
+    };
+
+    this.fetchService = new FetchService();
   }
 
   renderSpinner = () => {
@@ -301,23 +33,102 @@ class AddressbookList extends Component {
     }
   }
 
-  handleFavourites = (event, id) => {
-    console.log("love" + id);
-    console.log(event.target)
+  handleFavourites = (id, index) => {
+    const API = `/api/Contact/${id}/favourite`;
+    const options = { method: 'put' };
+    const successCallback = (newValue) => {
+      const dataCopy = JSON.parse(JSON.stringify(this.state.data));
+      dataCopy.items[index].isFavourite = newValue;
+      this.setState({
+        data: dataCopy,
+      })
+    };
+    const failureCallback = (err) => {
+      console.log(err, err.name)
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+  }
+
+  handleSearch = (value) => {
+    this.setState({
+      searchText: value,
+    });
+
+    const { skip, take } = this.state;
+    const category = this.props.match.params.category;
+    this.fetchData(value, category, skip, take);
+  }
+
+  handlePageChange = (value) => {
+    const { take, currentPage, pagesCount, searchText } = this.state;
+    if (currentPage + value >= 1 && currentPage + value <= pagesCount) {
+      const newCurrentPage = currentPage + value;
+      const newSkip = (newCurrentPage - 1) * take;
+
+      this.setState({
+        currentPage: newCurrentPage,
+        skip: newSkip,
+      })
+
+      const category = this.props.match.params.category;
+      this.fetchData(category, newSkip, take, searchText);
+    }
+  };
+
+  fetchData(searchText, category, skip, take) {
+    this.renderSpinner();
+    const API = `/api/Contact?searchText=${searchText}&category=${category}&skip=${skip}&take=${take}`;
+    const options = { method: 'get' };
+    const successCallback = (data) => {
+      const pagesCount = Math.ceil(data.itemsCount / take);
+      this.setState({
+        data,
+        pagesCount,
+        showSpinner: false,
+      })
+    };
+    const failureCallback = (err) => {
+      console.log('Fetch failure callback in component AddressbookList');
+      console.log(err, err.name);
+    };
+
+    this.fetchService.useFetch(API, options, successCallback, failureCallback);
+  }
+
+  componentDidMount() {
+    const { searchText, skip, take } = this.state;
+    const category = this.props.match.params.category;
+    this.fetchData(searchText, category, skip, take);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      this.setState({
+        currentPage: 1,
+      });
+      const category = this.props.match.params.category;
+      const { searchText, skip, take } = this.state;
+      this.fetchData(searchText, category, skip, take);
+    }
+  }
+
+  componentWillUnmount() {
+    this.fetchService.abortFetch();
   }
 
   renderTable() {
-    const currentFolder = this.props.match.params.folder;
-    const { data } = this.state;
+    if (this.state.data === null) return;
+    const currentCategory = this.props.match.params.category;
+    const { items } = this.state.data;
+    if (items.length === 0) return `This list is empty`;
 
-    if (data === null) return;
-
-    const addressbookTable = data.map(item => (
+    const addressbookTable = items.map((item, index) => (
       <div className='addressbook-table-row' key={item.id}>
         <div className="addressbook-table-item addressbook-table-avatar">
           <div className="addressbook-table-cell">
             {item.avatar ?
-              <img src={item.avatar} alt="Contact avatar" />
+              <img src={`${BASE_URL}/api/Avatar/${item.avatar}`} alt="Contact avatar" />
               : <i className="fas fa-camera"></i>}
           </div>
         </div>
@@ -325,12 +136,12 @@ class AddressbookList extends Component {
           <div className="addressbook-table-cell">
             <i title={item.isFavourite ? "Remove from favourites" : "Add to favourites"}
               className={item.isFavourite ? "far fa-heart favourite" : "far fa-heart"}
-              onClick={(event) => this.handleFavourites(event, item.id)}
+              onClick={() => this.handleFavourites(item.id, index)}
             ></i>
           </div>
         </div>
 
-        <NavLink to={`/addressbook/${currentFolder}/contactview/${item.id}`} >
+        <NavLink to={`/addressbook/${currentCategory}/contactview/${item.id}`} >
           <div className='addressbook-table-item addressbook-table-name'>
             <div className="addressbook-table-cell">{item.name}</div>
           </div>
@@ -363,8 +174,8 @@ class AddressbookList extends Component {
             handleSearch={this.handleSearch}
           />}</div>
           <div className="pager">{<Pager
-            pagesCount={2}
-            currentPage={1}
+            pagesCount={this.state.pagesCount}
+            currentPage={this.state.currentPage}
             handlePageChange={this.handlePageChange}
           />}</div>
         </div>
