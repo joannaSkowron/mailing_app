@@ -30,6 +30,12 @@ class Email extends Component {
     this.fetchService = new FetchService();
   }
 
+  renderSpinner = () => {
+    this.setState({
+      showSpinner: true,
+    })
+  }
+
   fetchData(folder, skip, take, searchText, newestFirst) {
     this.renderSpinner();
 

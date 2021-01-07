@@ -27,6 +27,12 @@ class AddressbookList extends Component {
     this.fetchService = new FetchService();
   }
 
+  renderSpinner = () => {
+    this.setState({
+      showSpinner: true,
+    })
+  }
+
   handleFavourites = (id, index) => {
     const API = `/api/Contact/${id}/favourite`;
     const options = { method: 'put' };
@@ -84,6 +90,7 @@ class AddressbookList extends Component {
   }
 
   fetchData(searchText, category, skip, take) {
+    this.renderSpinner();
     const API = `/api/Contact?searchText=${searchText}&category=${category}&skip=${skip}&take=${take}`;
     const options = { method: 'get' };
     const successCallback = (data) => {
