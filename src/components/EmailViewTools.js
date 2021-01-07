@@ -8,15 +8,10 @@ class EmailViewTools extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {};
-
     this.fetchService = new FetchService();
   }
 
   handleMoveToFolder = (folderName) => {
-    console.log(`Move to folder: ${folderName}`);
-
     const API = `/api/Emails/${this.props.data.id}/move/${folderName}`;
     const options = { method: 'put' };
     const successCallback = () => {
@@ -30,8 +25,6 @@ class EmailViewTools extends Component {
   }
 
   handleRestoreFromFolder = (folderName) => {
-    console.log(`Restore to folder: ${folderName}`);
-
     const API = `/api/Emails/${this.props.data.id}/restore/${folderName}`;
     const options = { method: 'put' };
     const successCallback = () => {
@@ -47,6 +40,7 @@ class EmailViewTools extends Component {
   deleteEmail = () => {
     const API = `/api/Emails/${this.props.data.id}`;
     const options = { method: 'delete' }
+
     const successCallback = () => {
       this.props.handleDeletingOrMovingEmail();
     };

@@ -10,7 +10,7 @@ const AddressbookAddCategoryTools = (props) => {
       return (
         <div
           key={category}
-          className={props.category === category
+          className={props.category.toLowerCase() === category.toLowerCase()
             ? "addressbook-add-tools-category active"
             : "addressbook-add-tools-category"}
           onClick={() => props.setCategory(category)}

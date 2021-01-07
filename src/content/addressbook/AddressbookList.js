@@ -27,12 +27,6 @@ class AddressbookList extends Component {
     this.fetchService = new FetchService();
   }
 
-  renderSpinner = () => {
-    if (this.state.showSpinner) {
-      return <Spinner />
-    }
-  }
-
   handleFavourites = (id, index) => {
     const API = `/api/Contact/${id}/favourite`;
     const options = { method: 'put' };
@@ -72,12 +66,24 @@ class AddressbookList extends Component {
       })
 
       const category = this.props.match.params.category;
-      this.fetchData(category, newSkip, take, searchText);
+      this.fetchData(searchText, category, newSkip, take);
     }
-  };
+  }
+
+  handleDeletingContact = () => {
+    if (this.state.data.items.length === 1 && this.state.pagesCount > 1) {
+      this.setState(prevState => ({
+        currentPage: prevState.currentPage - 1,
+      }))
+    };
+
+    const category = this.props.match.params.category;
+    const { searchText, currentPage, take } = this.state;
+    const newSkip = (currentPage - 1) * take;
+    this.fetchData(searchText, category, newSkip, take);
+  }
 
   fetchData(searchText, category, skip, take) {
-    this.renderSpinner();
     const API = `/api/Contact?searchText=${searchText}&category=${category}&skip=${skip}&take=${take}`;
     const options = { method: 'get' };
     const successCallback = (data) => {
@@ -155,7 +161,10 @@ class AddressbookList extends Component {
 
         <div className="addressbook-table-item addressbook-table-tools">
           <div className="addressbook-table-cell">
-            <AddressbookListTools id={item.id} />
+            <AddressbookListTools
+              id={item.id}
+              email={item.email}
+              handleDeletingContact={this.handleDeletingContact} />
           </div>
         </div>
 
@@ -189,7 +198,7 @@ class AddressbookList extends Component {
           </div>
           <div className="addressbook-table-inner-container">
             {this.renderTable()}
-            {this.renderSpinner()}
+            {this.state.showSpinner && <Spinner />}
           </div>
 
         </div>

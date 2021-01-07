@@ -89,12 +89,6 @@ class Email extends Component {
     this.fetchData(folder, skip, take, searchText, value);
   }
 
-  renderSpinner = () => {
-    this.setState({
-      showSpinner: true,
-    })
-  }
-
   handleDeletingOrMovingEmail = () => {
     if (this.state.data.items.length === 1 && this.state.pagesCount > 1) {
       this.setState(prevState => ({

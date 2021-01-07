@@ -222,7 +222,6 @@ class EmailCompose extends Component {
         address,
       })
     }
-
   }
 
   componentWillUnmount() {

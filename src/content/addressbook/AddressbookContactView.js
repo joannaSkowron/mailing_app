@@ -3,6 +3,7 @@ import AddressbookListTools from '../../components/AddressbookListTools';
 import Spinner from '../../components/Spinner';
 import { FetchService } from '../../services/FetchService';
 import { BASE_URL } from '../../constants/URL';
+import { Redirect } from 'react-router-dom';
 import '../../styles/addressbook/AddressbookContactView.css';
 
 class AddressbookContactView extends Component {
@@ -11,31 +12,19 @@ class AddressbookContactView extends Component {
     super(props);
 
     this.state = {
-      showSpinner: false,
+      showSpinner: true,
       data: null,
-      testdata: {
-        id: 1,
-        isFavourite: true,
-        name: 'Fake Contact Name',
-        email: 'fake@contact.com',
-        phone: '123456789fake',
-        note: 'This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet. This is fake contact object. Presented for testing only. Fetch not included yet.',
-        //picture: null,
-        picture: 'https://cdn.pixabay.com/photo/2016/03/26/19/15/iceland-1281141_1280.jpg',
-        address: 'Branickiego 18',
-        city: 'Warszawa',
-        postalCode: '02-972',
-        country: 'Poland',
-      },
+      redirectToCategory: false,
     };
 
     this.fetchService = new FetchService();
   }
 
-  renderSpinner = () => {
-    if (this.state.showSpinner) {
-      return <Spinner />
-    }
+  handleDeletingContact = () => {
+    const category = this.props.match.params.category;
+    this.setState({
+      redirectToCategory: category,
+    })
   }
 
   fetchData = (id) => {
@@ -43,7 +32,8 @@ class AddressbookContactView extends Component {
     const options = { method: 'get' };
     const successCallback = (data) => {
       this.setState({
-        data
+        data,
+        showSpinner: false,
       });
     };
     const failureCallback = (err) => {
@@ -62,7 +52,6 @@ class AddressbookContactView extends Component {
     this.fetchService.abortFetch();
   }
 
-
   renderContactContent = () => {
     if (this.state.data === null) return;
     const { data } = this.state;
@@ -74,7 +63,10 @@ class AddressbookContactView extends Component {
       <div className="addressbook-contact-container">
 
         <div className="addressbook-contact-tools-container">
-          <AddressbookListTools />
+          <AddressbookListTools
+            id={data.id}
+            email={data.email}
+            handleDeletingContact={this.handleDeletingContact} />
         </div>
 
         <h1 className="addressbook-contact-name">{data.name}</h1>
@@ -150,10 +142,16 @@ class AddressbookContactView extends Component {
   }
 
   render() {
+
+    if (this.state.redirectToCategory) {
+      return <Redirect to={`/addressbook/${this.state.redirectToCategory}`} />;
+    }
+
     return (
       <>
 
         {this.renderContactContent()}
+        {this.state.showSpinner && <Spinner />}
 
       </>
     );

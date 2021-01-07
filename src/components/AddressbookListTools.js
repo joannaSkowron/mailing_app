@@ -1,18 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FetchService } from '../services/FetchService';
 import '../styles/components/AddressbookListTools.css';
 
 
 
 const AddressbookListTools = (props) => {
 
-  const { id, address } = props;
+  const { id, email, handleDeletingContact } = props;
+  const fetchService = new FetchService();
+
+  const deleteContact = () => {
+    const API = `/api/Contact/${id}`;
+    const options = { method: 'delete' };
+    const successCallback = () => {
+      handleDeletingContact();
+      console.log('delete contact działa');
+    };
+    const failureCallback = (err) => {
+      console.log(err, err.name);
+    };
+
+    fetchService.useFetch(API, options, successCallback, failureCallback);
+  }
 
   return (
     <>
       <div className="addressbook-list-tools-container">
 
-        <Link to={`/email/compose/new?address=${address}`} className="addressbook-list-tools" title="Compose e-mail">
+        <Link to={`/email/compose/new?address=${email}`} className="addressbook-list-tools" title="Compose e-mail">
           <i className="far fa-envelope"></i>
         </Link>
 
@@ -20,7 +36,9 @@ const AddressbookListTools = (props) => {
           <i className="far fa-edit"></i>
         </Link>
 
-        <div className="addressbook-list-tools" title="Delete">
+        <div className="addressbook-list-tools"
+          title="Delete"
+          onClick={deleteContact}>
           <i className="far fa-trash-alt"></i>
         </div>
 

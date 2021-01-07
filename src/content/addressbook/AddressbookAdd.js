@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddressbookMap from './AddressbookMap';
 import '../../styles/addressbook/AddressbookAdd.css';
-import { Link, Prompt } from 'react-router-dom';
+import { Link, Prompt, Redirect } from 'react-router-dom';
 import { FetchService } from '../../services/FetchService';
 import {
   Validator,
@@ -22,7 +22,7 @@ class AddressbookAdd extends Component {
     super(props);
 
     this.state = {
-      id: null,
+      id: '',
       isFavourite: false,
       category: 'All',
       avatar: null,
@@ -38,6 +38,7 @@ class AddressbookAdd extends Component {
       mapActive: false,
       validationResult: null,
       showSpinner: false,
+      redirectToAddressbookList: false,
     };
 
     this.fetchService = new FetchService();
@@ -62,17 +63,21 @@ class AddressbookAdd extends Component {
 
   handleSave = (event) => {
     event.preventDefault();
-    console.log('save')
-    const { id, name, email, phone, note, address, city, postalCode, country } = this.state;
+    const { id, name, email, phone, note, address, city, postalCode, country, category, isFavourite, avatar } = this.state;
     const dataJSON = JSON.stringify({
       name,
       email,
       phone,
-      note,
-      address,
-      city,
-      postalCode,
-      country
+      notes: note,
+      address: {
+        street: address,
+        postCode: postalCode,
+        city: city,
+        country: country,
+      },
+      category,
+      isFavourite,
+      avatar,
     })
 
     const validationConfigs = [
@@ -86,7 +91,7 @@ class AddressbookAdd extends Component {
     });
 
     if (validationResult.isValid) {
-      const API = id ? `/api/addressbook/${id}` : `/api/addressbook`;
+      const API = id ? `/api/contact/${id}` : `/api/contact`;
       const options = {
         method: id ? 'put' : 'post',
         headers: {
@@ -97,7 +102,9 @@ class AddressbookAdd extends Component {
       };
 
       const successCallback = () => {
-        console.log('sukces')
+        this.setState({
+          redirectToAddressbookList: true,
+        })
       };
 
       const failureCallback = (err) => {
@@ -213,9 +220,42 @@ class AddressbookAdd extends Component {
     }
   };
 
+  componentDidMount() {
+    const id = new URLSearchParams(this.props.location.search).get('id');
+    const API = `/api/Contact/${id}`;
+    const options = { method: 'get' };
+    const successCallback = (data) => {
+      this.setState({
+        id,
+        isFavourite: data.isFavourite,
+        category: data.category,
+        avatar: data.avatar,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        note: data.notes,
+        address: data.address.street,
+        city: data.address.city,
+        postalCode: data.address.postalCode,
+        country: data.address.country,
+      });
+    };
+    const failureCallback = (err) => {
+      console.log(err, err.name)
+    };
+
+    if (id) {
+      this.fetchService.useFetch(API, options, successCallback, failureCallback);
+    };
+  }
+
   render() {
     const nameErrMsg = this.getValidationError('name');
     const emailErrMsg = this.getValidationError('email');
+
+    if (this.state.redirectToAddressbookList) {
+      return <Redirect to='/addressbook/all' />
+    }
 
     return (
       <>
@@ -243,7 +283,7 @@ class AddressbookAdd extends Component {
                     name="name"
                     maxLength="50"
                     onChange={this.handleChange}
-                    value={this.state.name} />
+                    value={this.state.name || ''} />
                   {nameErrMsg && <FormInputErrMsg errMsg={nameErrMsg} />}
 
                   <label htmlFor="email" className="addressbook-add-form-label">Email adress:<span>*</span></label>
@@ -252,7 +292,7 @@ class AddressbookAdd extends Component {
                     maxLength="50"
                     pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                     onChange={this.handleChange}
-                    value={this.state.email} />
+                    value={this.state.email || ''} />
                   {emailErrMsg && <FormInputErrMsg errMsg={emailErrMsg} />}
 
                   <label htmlFor="phone" className="addressbook-add-form-label">Phone number:</label>
@@ -260,7 +300,7 @@ class AddressbookAdd extends Component {
                     name="phone"
                     maxLength="50"
                     onChange={this.handleChange}
-                    value={this.state.phone} />
+                    value={this.state.phone || ''} />
                 </div>
 
                 <div className="addressbook-add-avatar-container">
@@ -275,7 +315,7 @@ class AddressbookAdd extends Component {
                 name="note"
                 maxLength="1000"
                 onChange={this.handleChange}
-                value={this.state.note} />
+                value={this.state.note || ''} />
 
               <label htmlFor="address" className="addressbook-add-form-label">Address:</label>
               <input type="text"
@@ -283,7 +323,7 @@ class AddressbookAdd extends Component {
                 maxLength="100"
                 autoComplete="new"
                 onChange={this.handleChange}
-                value={this.state.address} />
+                value={this.state.address || ''} />
 
               <div className='addressbook-input-wrapper-address'>
                 <label htmlFor="city" className="addressbook-add-form-label">City:</label>
@@ -293,7 +333,7 @@ class AddressbookAdd extends Component {
                   maxLength="50"
                   autoComplete="false"
                   onChange={this.handleChange}
-                  value={this.state.city} />
+                  value={this.state.city || ''} />
               </div>
 
               <div className='addressbook-input-wrapper-address'>
@@ -304,7 +344,7 @@ class AddressbookAdd extends Component {
                   maxLength="10"
                   autoComplete="false1"
                   onChange={this.handleChange}
-                  value={this.state.postalCode} />
+                  value={this.state.postalCode || ''} />
               </div>
 
               <div className="addressbook-input-wrapper-address">
@@ -314,7 +354,7 @@ class AddressbookAdd extends Component {
                   maxLength="50"
                   autoComplete="false2"
                   onChange={this.handleChange}
-                  value={this.state.country}>
+                  value={this.state.country || ''}>
                   {this.generateCountrySelectorOptions()}
                 </select>
               </div>
