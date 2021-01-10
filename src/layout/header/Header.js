@@ -32,7 +32,7 @@ class Header extends Component {
           </div>
           <div className="header-content">
 
-            <NotificationsBar />
+            <NotificationsBar handleBackgroundChange={this.props.handleBackgroundChange} />
 
             <div className="header-picture"
               onClick={() => this.handleClick('pictureEditorActive')}

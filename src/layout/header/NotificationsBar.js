@@ -34,7 +34,7 @@ class NotificationsBar extends Component {
           onMouseLeave={() => this.handleMouseMovement('settingsActive')}
         >
           <i className="fas fa-cog"></i>
-          {this.state.settingsActive ? <Settings /> : null}
+          {this.state.settingsActive ? <Settings handleBackgroundChange={this.props.handleBackgroundChange} /> : null}
         </div>
         <div className="notifications-item" title="Help"
           onMouseEnter={() => this.handleMouseMovement('helpActive')}

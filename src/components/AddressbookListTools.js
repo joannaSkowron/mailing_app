@@ -15,7 +15,6 @@ const AddressbookListTools = (props) => {
     const options = { method: 'delete' };
     const successCallback = () => {
       handleDeletingContact();
-      console.log('delete contact działa');
     };
     const failureCallback = (err) => {
       console.log(err, err.name);

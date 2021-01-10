@@ -14,7 +14,7 @@
   background-color: var(--color1);
   box-shadow: 0px 8px 15px var(--color2-02);
   border-radius: 7px;
-  color: var(--color2-05);
+  color: var(--color2-08);
   animation-name: opacity;
   animation-duration: 500ms;
 }

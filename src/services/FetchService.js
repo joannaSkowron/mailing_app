@@ -19,8 +19,9 @@ export class FetchService {
           return response;
 
         } else if (response.status === 400) {
-          alert("Request is not valid, Validation Error");
-          throw Error('Error'); //użycie throw spowoduje, że obietnica uzyska stan rejected, wywoła się metoda catch
+          response.text()
+            .then(text => text ? alert(text) : 'Request is not valid')
+          throw Error(response); //użycie throw spowoduje, że obietnica uzyska stan rejected, wywoła się metoda catch
 
         } else if (response.status === 401) {
           alert("Access to this feature is only for logged users, Unauthorized");
@@ -49,6 +50,7 @@ export class FetchService {
       })
 
       .catch(err => {
+        console.log(err)
         failureCallback(err);
       })
   }

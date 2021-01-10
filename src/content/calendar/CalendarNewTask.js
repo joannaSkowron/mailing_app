@@ -93,8 +93,7 @@ class CalendarNewTask extends Component {
       };
 
       const failureCallback = (err) => {
-        console.log('Request failed', err);
-        alert("Sorry, your request to save failed")
+        console.log(err.name);
       };
 
       this.fetchService.useFetch(API, options, successCallback, failureCallback);
