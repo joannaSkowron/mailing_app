@@ -31,7 +31,6 @@
   background-color: var(--color1-06);
   color: var(--color2-08);
   transition: all 0.3s ease 0s;
-  background-image: url('../../../images/avatar1.png');
   background-size: cover;
 }
 

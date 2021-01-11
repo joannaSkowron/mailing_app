@@ -4,14 +4,16 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Menubar from './Menubar';
 import Header from './header/Header';
 import Content from './Content';
+import bgcImage1 from '../images/bgc-image1.jpg';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
 
+    const localStorageTheme = JSON.parse(localStorage.getItem('appTheme'));
     this.state = {
-      appTheme: {},
+      appTheme: localStorageTheme ?? { backgroundImage: `url(${bgcImage1})` },
     }
   }
 

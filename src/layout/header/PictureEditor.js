@@ -10,7 +10,7 @@ import '../../styles/layout/header/PictureEditor.css';
 class PictureEditor extends Component {
 
   state = {
-    selectedPicture: null,
+    selectedPicture: {},
   }
 
   handleSelector(event, selectedPicture) {
@@ -37,27 +37,27 @@ class PictureEditor extends Component {
 
             <img src={avatar1} alt="Avatar"
               className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, avatar1)} />
+              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar1})` })} />
 
             <img src={avatar2} alt="Avatar"
               className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, avatar2)} />
+              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar2})` })} />
 
             <img src={avatar3} alt="Avatar"
               className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, avatar3)} />
+              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar3})` })} />
 
             <img src={avatar4} alt="Avatar"
               className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, avatar4)} />
+              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar4})` })} />
 
             <img src={avatar5} alt="Avatar"
               className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, avatar5)} />
+              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar5})` })} />
 
             <img src={avatar6} alt="Avatar"
               className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, avatar6)} />
+              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar6})` })} />
 
           </div>
 
