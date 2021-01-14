@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Email from '../content/email/Email';
 import Calendar from '../content/calendar/Calendar';
 import Addressbook from '../content/addressbook/Addressbook';
-import Account from '../content/account/Account';
+import About from '../content/about/About';
 import '../styles/layout/Content.css';
 
 const Content = () => {
@@ -28,10 +28,10 @@ const Content = () => {
           )} />
           <Route path='/addressbook' component={Addressbook} />
 
-          <Route path='/account' exact render={() => (
+          {/* <Route path='/account' exact render={() => (
             <Redirect to='/account/info' />
-          )} />
-          <Route path='/account' component={Account} />
+          )} /> */}
+          <Route path='/about' component={About} />
 
           <Route render={() => (
             <Redirect to='/email/inbox' />

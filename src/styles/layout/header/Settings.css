@@ -64,10 +64,6 @@
   transform: scale(1.2) translate(20%, 5%);
 }
 
-.settings-content-theme:hover {
-  
-}
-
 .settings-content-theme-name {
   transition: all 0.3s ease 0s;
 }

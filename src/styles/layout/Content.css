@@ -15,7 +15,7 @@ border-bottom-left-radius: 7px;
 }
 
 .page {
-  position: relative;
+position: relative;
 width: calc(100% - 250px);
 height: 100%;
 padding: 45px 45px 30px 45px;

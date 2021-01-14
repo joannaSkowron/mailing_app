@@ -6,7 +6,7 @@ const menuItems = [
   { name: 'Email', path: '/email/', icon: "far fa-envelope-open" },
   { name: 'Calendar', path: '/calendar/', icon: "far fa-calendar-alt" },
   { name: 'Addressbook', path: '/addressbook/', icon: "far fa-address-book" },
-  { name: 'Account', path: '/account/', icon: "far fa-user" },
+  { name: 'About', path: '/about/', icon: "fas fa-info" },
 ]
 
 const Menubar = () => {
