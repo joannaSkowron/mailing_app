@@ -26,12 +26,6 @@ body a {
 }
 
 :root {
-  /* --bgc-trans: rgba(256, 256, 256, 0.2);
-  --font-main: white;
-  --font-active: rgb(255, 251, 233);
-  --font-trans-black: rgba(0, 0, 0, 0.2);
-  --font-trans-white: rgba(256, 256, 256, 0.8); */
-  
   --color1: white;
   --color1-02: rgba(256, 256, 256, 0.2);
   --color1-04: rgba(256, 256, 256, 0.4);
@@ -56,8 +50,6 @@ body a {
   --primary-hover:  rgba(0, 0, 0, 0.45);
   --secondary:  rgba(0, 0, 0, 0.15);
   --secondary-hover:  rgba(0, 0, 0, 0.25);
-
-
 }
 
 /* Custom scrollbar: */
