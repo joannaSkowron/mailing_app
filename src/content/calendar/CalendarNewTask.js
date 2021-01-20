@@ -13,6 +13,7 @@ import {
   generateTimeOptions,
   getISODateFromSelectedDateAndTime
 } from '../../tools/CalendarHelper';
+import Button from '../../components/Button';
 
 class CalendarNewTask extends Component {
 
@@ -190,12 +191,16 @@ class CalendarNewTask extends Component {
             </div>
 
             <div className="calendar-newtask-form-buttons">
-              <button className="calendar-newtask-form-btn"
-                onClick={this.handleSave}
-              >Save</button>
-              <button className="calendar-newtask-form-btn"
-                onClick={this.props.handleCancelBtn}
-              >Cancel</button>
+              <Button
+                type='button'
+                buttonStyle='primary'
+                handleClick={this.handleSave}
+                text='Save' />
+              <Button
+                type='button'
+                buttonStyle='secondary'
+                handleClick={this.props.handleCancelBtn}
+                text='Cancel' />
             </div>
 
           </div>

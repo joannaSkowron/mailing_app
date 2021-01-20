@@ -14,6 +14,7 @@ import AddressbookAddCategoryTools from '../../components/AddressbookAddCategory
 import { COUNTRIES } from '../../constants/Countries';
 import { BASE_URL } from '../../constants/URL';
 import Spinner from '../../components/Spinner';
+import Button from '../../components/Button';
 
 
 class AddressbookAdd extends Component {
@@ -359,20 +360,41 @@ class AddressbookAdd extends Component {
                 </select>
               </div>
 
-              <button type='button' className="open-map"
+              <div className="addressbook-input-wrapper-address">
+                <label htmlFor="open-map" className="addressbook-add-form-label">Open map window:</label>
+                <Button
+                  name='open-map'
+                  type='button'
+                  buttonStyle='secondary'
+                  handleClick={(event) => this.handleClick(event, 'mapActive')}
+                  text='See location on GoogleMaps' />
+              </div>
+
+
+              {/* <button type='button' className="open-map"
                 onClick={(event) => this.handleClick(event, 'mapActive')}>
                 <i className="fas fa-map-marker-alt"></i>
                   See location on GoogleMaps
-                </button>
+                </button> */}
 
               <div className="addressbook-add-form-buttons">
-                <button type='submit' className="save" onClick={this.handleSave}>Save</button>
+
+                <Button
+                  type='submit'
+                  buttonStyle='primary'
+                  handleClick={this.handleSave}
+                  text='Save' />
+
                 <Prompt
                   when={true}
                   message={'Are you sure you want to cancel?'} />
                 <Link to='/addressbook/all'>
-                  <button type='button' className="cancel" >Cancel</button>
+                  <Button
+                    type='button'
+                    buttonStyle='secondary'
+                    text='Cancel' />
                 </Link>
+
               </div>
 
             </div>

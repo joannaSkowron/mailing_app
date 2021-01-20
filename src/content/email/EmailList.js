@@ -52,7 +52,6 @@ class Email extends Component {
     };
 
     const failureCallback = (err) => {
-      console.log('Fetch failure callback in component EmailList');
       console.log(err, err.name);
     };
 

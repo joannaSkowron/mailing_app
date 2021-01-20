@@ -4,6 +4,7 @@ import { Link, Prompt, Redirect } from 'react-router-dom';
 import { FetchService } from '../../services/FetchService';
 import { emailResponseQuotationHelper, stateUpdateBasedOnResponseType } from '../../tools/EmailResponseHelper';
 import '../../styles/email/EmailCompose.css';
+import Button from '../../components/Button';
 
 
 class EmailCompose extends Component {
@@ -294,14 +295,28 @@ class EmailCompose extends Component {
                 <span className="email-compose-error-message">{this.validationErrorMessages.contentIncorrect}</span>}
             </div>
             <div className="email-compose-form-buttons">
-              <button className="email-compose-btn" onClick={this.handleSend}>Send</button>
-              <button className="email-compose-btn" onClick={this.handleSaveAsDraft}>Save as draft</button>
+
+              <Button
+                type='button'
+                buttonStyle='primary'
+                handleClick={this.handleSend}
+                text='Send' />
+
+              <Button
+                type='button'
+                buttonStyle='secondary'
+                handleClick={this.handleSaveAsDraft}
+                text='Save as draft' />
+
               <Prompt
                 when={true}
                 message={'Are you sure you want to cancel?'}
               />
               <Link to='/email/inbox'>
-                <button className="email-compose-btn">Cancel</button>
+                <Button
+                  type='button'
+                  buttonStyle='secondary'
+                  text='Cancel' />
               </Link>
 
             </div>
