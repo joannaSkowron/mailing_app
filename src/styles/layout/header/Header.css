@@ -7,6 +7,7 @@
 }
 
 .header-logo {
+  margin-left: 85px;
   width: 50%;
   display: flex;
   font-size: 40px;

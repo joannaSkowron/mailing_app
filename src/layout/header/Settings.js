@@ -52,22 +52,24 @@ class Settings extends Component {
   render() {
 
     return (
+      <>
 
-      <div className="settings-container">
-        <div className="settings-header">
-          <p>Settings</p>
-        </div>
-        <div className="settings-content">
-          <p>Change theme:</p>
-          <div className="settings-content-themes-container">
+        <div className="settings-container">
+          <div className="settings-header">
+            <p>Settings</p>
+          </div>
+          <div className="settings-content">
+            <p>Change theme:</p>
+            <div className="settings-content-themes-container">
 
-            {this.generateThemes()}
+              {this.generateThemes()}
+
+            </div>
 
           </div>
-
         </div>
-      </div>
 
+      </>
     );
   }
 }

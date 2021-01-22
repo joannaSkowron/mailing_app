@@ -6,6 +6,7 @@ import avatar4 from '../../images/avatar4.png';
 import avatar5 from '../../images/avatar5.png';
 import avatar6 from '../../images/avatar6.png';
 import '../../styles/layout/header/PictureEditor.css';
+import Button from '../../components/Button';
 
 class PictureEditor extends Component {
 
@@ -19,6 +20,18 @@ class PictureEditor extends Component {
     });
     document.querySelectorAll('.picture-editor-selector-img').forEach(item => item.classList.remove('active'));
     event.target.classList.toggle('active');
+  }
+
+  generatePictureEditorSelectorOptions = () => {
+    const options = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
+
+    const selectorOptions = options.map(option => (
+      <img src={option} alt="Avatar" key={option}
+        className="picture-editor-selector-img"
+        onClick={event => this.handleSelector(event, { backgroundImage: `url(${option})` })} />
+    ))
+
+    return selectorOptions;
   }
 
   render() {
@@ -35,40 +48,24 @@ class PictureEditor extends Component {
 
           <div className="picture-editor-selector">
 
-            <img src={avatar1} alt="Avatar"
-              className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar1})` })} />
-
-            <img src={avatar2} alt="Avatar"
-              className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar2})` })} />
-
-            <img src={avatar3} alt="Avatar"
-              className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar3})` })} />
-
-            <img src={avatar4} alt="Avatar"
-              className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar4})` })} />
-
-            <img src={avatar5} alt="Avatar"
-              className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar5})` })} />
-
-            <img src={avatar6} alt="Avatar"
-              className="picture-editor-selector-img"
-              onClick={event => this.handleSelector(event, { backgroundImage: `url(${avatar6})` })} />
+            {this.generatePictureEditorSelectorOptions()}
 
           </div>
 
           <div className="picture-editor-buttons">
-            <button className="picture-editor-button"
-              onClick={() => this.props.handlePictureChange(this.state.selectedPicture)}>
-              Apply</button>
-            <button className="picture-editor-button"
-              onClick={() => this.props.handleClick('pictureEditorActive')}>
-              Cancel
-            </button>
+
+            <Button
+              type='button'
+              buttonStyle='primary'
+              handleClick={() => this.props.handlePictureChange(this.state.selectedPicture)}
+              text='Apply' />
+
+            <Button
+              type='button'
+              buttonStyle='secondary'
+              handleClick={() => this.props.handleClick('pictureEditorActive')}
+              text='Cancel' />
+
           </div>
 
         </div>
