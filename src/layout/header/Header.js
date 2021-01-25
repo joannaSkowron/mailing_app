@@ -34,15 +34,6 @@ class Header extends Component {
     })
   }
 
-  componentDidMount() {
-    const localStorageHeaderPicture = localStorage.getItem('headerPicture');
-    if (localStorageHeaderPicture) {
-      this.setState({
-        headerPicture: JSON.parse(localStorageHeaderPicture),
-      })
-    }
-  }
-
   render() {
     return (
       <>

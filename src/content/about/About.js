@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/about/About.css';
 
-const Account = () => {
+const About = () => {
   return (
 
 
@@ -44,4 +44,4 @@ const Account = () => {
   );
 }
 
-export default Account;
+export default About;

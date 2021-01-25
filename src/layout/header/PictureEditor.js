@@ -14,7 +14,7 @@ class PictureEditor extends Component {
     selectedPicture: {},
   }
 
-  handleSelector(event, selectedPicture) {
+  handleSelector = (event, selectedPicture) => {
     this.setState({
       selectedPicture: this.state.selectedPicture === selectedPicture ? null : selectedPicture,
     });

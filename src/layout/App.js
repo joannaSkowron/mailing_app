@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Menubar from './Menubar';
 import Header from './header/Header';
 import Content from './Content';
-import bgcImage1 from '../images/bgc-image1.jpg';
 
 class App extends Component {
 
@@ -13,7 +12,7 @@ class App extends Component {
 
     const localStorageTheme = JSON.parse(localStorage.getItem('appTheme'));
     this.state = {
-      appTheme: localStorageTheme ?? { backgroundImage: `url(${bgcImage1})` },
+      appTheme: localStorageTheme ?? { backgroundImage: 'linear-gradient(120deg, #96adcb 50%, #c2e9fb 100%)' },
     }
   }
 
@@ -24,15 +23,6 @@ class App extends Component {
 
     const styleJSON = JSON.stringify(style);
     localStorage.setItem('appTheme', styleJSON);
-  }
-
-  componentDidMount() {
-    const localStorageTheme = JSON.parse(localStorage.getItem('appTheme'));
-    if (localStorageTheme) {
-      this.setState({
-        appTheme: localStorageTheme,
-      });
-    }
   }
 
   render() {

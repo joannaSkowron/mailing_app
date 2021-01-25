@@ -17,6 +17,7 @@
   color: var(--color2-08);
   animation-name: opacity;
   animation-duration: 500ms;
+  cursor: auto;
 }
 
 .help-container:hover {
@@ -36,5 +37,10 @@
 
 .help-content {
   height: calc(100% - 30px);
+  padding: 20px 10px;
   overflow: auto;
+}
+
+.help-content a {
+  font-weight: 600;
 }

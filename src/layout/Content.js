@@ -28,9 +28,6 @@ const Content = () => {
           )} />
           <Route path='/addressbook' component={Addressbook} />
 
-          {/* <Route path='/account' exact render={() => (
-            <Redirect to='/account/info' />
-          )} /> */}
           <Route path='/about' component={About} />
 
           <Route render={() => (
