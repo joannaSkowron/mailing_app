@@ -82,7 +82,7 @@ class Notifications extends Component {
       <div className="notifications-container">
         <div className="notifications-header">
           <p>Notifications:</p>
-          <p className="notifications-header-counter">69</p>
+          <p className="notifications-header-counter">{this.data.length}</p>
         </div>
         <div className="notifications-content">
 

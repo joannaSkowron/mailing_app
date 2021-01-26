@@ -68,9 +68,3 @@
   width: 380px;
   padding: 10px 0 0 0;
 }
-
-.email-compose-error-message {
-  color: rgb(250, 3, 127);
-  font-weight: 200;
-  font-style: italic;
-}

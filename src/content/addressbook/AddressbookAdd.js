@@ -370,13 +370,6 @@ class AddressbookAdd extends Component {
                   text='See location on GoogleMaps' />
               </div>
 
-
-              {/* <button type='button' className="open-map"
-                onClick={(event) => this.handleClick(event, 'mapActive')}>
-                <i className="fas fa-map-marker-alt"></i>
-                  See location on GoogleMaps
-                </button> */}
-
               <div className="addressbook-add-form-buttons">
 
                 <Button

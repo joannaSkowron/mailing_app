@@ -38,7 +38,7 @@ class NotificationsBar extends Component {
           onMouseLeave={() => this.handleMouseLeave('notificationsActive')}
         >
           <i className="fas fa-bell"></i>
-          <div className="notifications-item-counter">12</div>
+          <div className="notifications-item-counter">9</div>
           {this.state.notificationsActive ? <Notifications /> : null}
         </div>
         <div className="notifications-item" title="Settings"

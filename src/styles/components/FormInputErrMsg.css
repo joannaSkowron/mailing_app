@@ -6,6 +6,7 @@
 .form-input-error-msg {
   padding: 0 5px;
   color: var(--color5);
+  font-size: 12px;
   font-style: italic;
   font-weight: 600;
   animation: opacity 500ms;

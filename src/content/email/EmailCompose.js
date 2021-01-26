@@ -5,6 +5,7 @@ import { FetchService } from '../../services/FetchService';
 import { emailResponseQuotationHelper, stateUpdateBasedOnResponseType } from '../../tools/EmailResponseHelper';
 import '../../styles/email/EmailCompose.css';
 import Button from '../../components/Button';
+import FormInputErrMsg from '../../components/FormInputErrMsg';
 
 
 class EmailCompose extends Component {
@@ -31,9 +32,9 @@ class EmailCompose extends Component {
     }
 
     this.validationErrorMessages = {
-      addressIncorrect: 'Please enter a valid e-mail address',
-      subjectIncorrect: 'Please enter subject',
-      contentIncorrect: 'Please enter content',
+      addressIncorrect: 'Enter a valid e-mail address',
+      subjectIncorrect: 'Subject is required',
+      contentIncorrect: 'Content is required',
     }
 
     this.fetchService = new FetchService();
@@ -239,6 +240,8 @@ class EmailCompose extends Component {
       return <Redirect to='/email/inbox' />
     }
 
+    const { addressIncorrect, subjectIncorrect, contentIncorrect } = this.validationErrorMessages;
+
     return (
       <>
         <div className="email-compose-container">
@@ -252,8 +255,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.address}
               />
-              {this.state.errors.address &&
-                <span className="email-compose-error-message">{this.validationErrorMessages.addressIncorrect}</span>}
+              {this.state.errors.address && <FormInputErrMsg errMsg={addressIncorrect} />}
+
               <input type="text"
                 name="addressCC"
                 placeholder="CC"
@@ -261,8 +264,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.addressCC}
               />
-              {this.state.errors.addressCC &&
-                <span className="email-compose-error-message">{this.validationErrorMessages.addressIncorrect}</span>}
+              {this.state.errors.addressCC && <FormInputErrMsg errMsg={addressIncorrect} />}
+
               <input type="text"
                 name="addressBCC"
                 placeholder="BCC"
@@ -270,8 +273,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.addressBCC}
               />
-              {this.state.errors.addressBCC &&
-                <span className="email-compose-error-message">{this.validationErrorMessages.addressIncorrect}</span>}
+              {this.state.errors.addressBCC && <FormInputErrMsg errMsg={addressIncorrect} />}
+
               <input type="text"
                 name="subject"
                 placeholder="Subject"
@@ -279,8 +282,8 @@ class EmailCompose extends Component {
                 onChange={this.handleChange}
                 value={this.state.subject}
               />
-              {this.state.errors.subject &&
-                <span className="email-compose-error-message">{this.validationErrorMessages.subjectIncorrect}</span>}
+              {this.state.errors.subject && <FormInputErrMsg errMsg={subjectIncorrect} />}
+
             </div>
             <div className="email-compose-form-content">
               <Editor
@@ -291,8 +294,9 @@ class EmailCompose extends Component {
                 className="email-compose-form-editor"
                 value={this.state.content}
               />
-              {this.state.errors.content &&
-                <span className="email-compose-error-message">{this.validationErrorMessages.contentIncorrect}</span>}
+              {/* {this.state.errors.content &&
+                <span className="email-compose-error-message">{this.validationErrorMessages.contentIncorrect}</span>} */}
+              {this.state.errors.content && <FormInputErrMsg errMsg={contentIncorrect} />}
             </div>
             <div className="email-compose-form-buttons">
 

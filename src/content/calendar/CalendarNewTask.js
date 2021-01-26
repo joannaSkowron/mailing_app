@@ -14,6 +14,7 @@ import {
   getISODateFromSelectedDateAndTime
 } from '../../tools/CalendarHelper';
 import Button from '../../components/Button';
+import FormInputErrMsg from '../../components/FormInputErrMsg';
 
 class CalendarNewTask extends Component {
 
@@ -129,6 +130,11 @@ class CalendarNewTask extends Component {
   }
 
   render() {
+    const titleErrMsg = this.getValidationError('title');
+    const dateErrMsg = this.getValidationError('date');
+    const startErrMsg = this.getValidationError('start');
+    const endErrMsg = this.getValidationError('end');
+
     return (
       <>
         <div className="calendar-newtask-page-container" onClick={this.props.handleCancelBtn}>
@@ -136,7 +142,8 @@ class CalendarNewTask extends Component {
         <div className="calendar-newtask-container">
           <div className="calendar-newtask-form">
 
-            <span className='calendar-newtask-error-message'>{this.getValidationError('title')}</span>
+            {titleErrMsg && <FormInputErrMsg errMsg={titleErrMsg} />}
+
             <div className="calendar-newtask-form-input-container">
               <input type="text"
                 className="calendar-newtask-form-input calendar-newtask-form-input-title"
@@ -149,9 +156,11 @@ class CalendarNewTask extends Component {
             </div>
 
             <p className='calendar-newtask-error-messages-container'>
-              <span className='calendar-newtask-error-message'>{this.getValidationError('date')}</span>
-              <span className='calendar-newtask-error-message'>{this.getValidationError('start')}</span>
-              <span className='calendar-newtask-error-message'>{this.getValidationError('end')}</span>
+
+              {dateErrMsg && <FormInputErrMsg errMsg={dateErrMsg} />}
+              {startErrMsg && <FormInputErrMsg errMsg={startErrMsg} />}
+              {endErrMsg && <FormInputErrMsg errMsg={endErrMsg} />}
+
             </p>
 
             <div className="calendar-newtask-form-input-container">
