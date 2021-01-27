@@ -15,6 +15,7 @@ import { COUNTRIES } from '../../constants/Countries';
 import { BASE_URL } from '../../constants/URL';
 import Spinner from '../../components/Spinner';
 import Button from '../../components/Button';
+import { toast } from 'react-toastify';
 
 
 class AddressbookAdd extends Component {
@@ -105,12 +106,13 @@ class AddressbookAdd extends Component {
       const successCallback = () => {
         this.setState({
           redirectToAddressbookList: true,
-        })
+        });
+        toast('Contact saved');
       };
 
       const failureCallback = (err) => {
         console.log('Request failed', err);
-        alert("Sorry, your request to save failed")
+        toast.error('Failed to save contact');
       };
 
       this.fetchService.useFetch(API, options, successCallback, failureCallback);

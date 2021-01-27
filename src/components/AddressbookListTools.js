@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FetchService } from '../services/FetchService';
 import '../styles/components/AddressbookListTools.css';
+import { toast } from 'react-toastify';
 
 
 
@@ -15,9 +16,11 @@ const AddressbookListTools = (props) => {
     const options = { method: 'delete' };
     const successCallback = () => {
       handleDeletingContact();
+      toast('Contact deleted');
     };
     const failureCallback = (err) => {
       console.log(err, err.name);
+      toast.error('Failed to delete contact');
     };
 
     fetchService.useFetch(API, options, successCallback, failureCallback);

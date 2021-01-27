@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Menubar from './Menubar';
 import Header from './header/Header';
 import Content from './Content';
+import { ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
 
@@ -27,16 +29,24 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div className="app" style={this.state.appTheme}>
-          <div className="header">{<Header handleBackgroundChange={this.handleBackgroundChange} />}</div>
-          <div className="main-container">
-            <div className="menubar">{<Menubar />}</div>
-            <div className="content">{<Content />}</div>
-          </div>
+      <>
+        <Router>
+          <div className="app" style={this.state.appTheme}>
+            <div className="header">{<Header handleBackgroundChange={this.handleBackgroundChange} />}</div>
+            <div className="main-container">
+              <div className="menubar">{<Menubar />}</div>
+              <div className="content">{<Content />}</div>
+            </div>
 
-        </div>
-      </Router >
+          </div>
+        </Router >
+
+        <ToastContainer
+          position="bottom-left"
+          limit={3}
+          autoClose={2500}
+          transition={Zoom} />
+      </>
     )
   };
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/components/EmailViewTools.css';
 import { FetchService } from '../services/FetchService';
+import { toast } from 'react-toastify';
 
 
 class EmailViewTools extends Component {
@@ -16,9 +17,11 @@ class EmailViewTools extends Component {
     const options = { method: 'put' };
     const successCallback = () => {
       this.props.handleDeletingOrMovingEmail();
+      toast(`Email moved to ${folderName}`)
     };
     const failureCallback = (err) => {
       console.log('Failed to move email. ', err)
+      toast.error('Failed to move email')
     };
 
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
@@ -29,9 +32,11 @@ class EmailViewTools extends Component {
     const options = { method: 'put' };
     const successCallback = () => {
       this.props.handleDeletingOrMovingEmail();
+      toast('Email restored')
     };
     const failureCallback = (err) => {
-      console.log('Failed to restore email. ', err)
+      console.log('Failed to restore email. ', err);
+      toast.error('Failed to restore email')
     };
 
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
@@ -43,9 +48,11 @@ class EmailViewTools extends Component {
 
     const successCallback = () => {
       this.props.handleDeletingOrMovingEmail();
+      toast("Email deleted");
     };
     const failureCallback = (err) => {
       console.log('Failed to delete email. ', err);
+      toast.error("Failed to delete email");
     };
 
     this.fetchService.useFetch(API, options, successCallback, failureCallback);

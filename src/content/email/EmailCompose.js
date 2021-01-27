@@ -6,6 +6,7 @@ import { emailResponseQuotationHelper, stateUpdateBasedOnResponseType } from '..
 import '../../styles/email/EmailCompose.css';
 import Button from '../../components/Button';
 import FormInputErrMsg from '../../components/FormInputErrMsg';
+import { toast } from 'react-toastify';
 
 
 class EmailCompose extends Component {
@@ -149,11 +150,12 @@ class EmailCompose extends Component {
       const successCallback = () => {
         this.setState({
           redirectToInbox: true,
-        })
+        });
+        toast('Email send');
       }
       const failureCallback = (error) => {
         console.log('Request failed', error);
-        alert("Sorry, your request to send this e-mail failed");
+        toast.error('Failed to send email');
       }
 
       this.fetchService.useFetch(API, options, successCallback, failureCallback);
@@ -188,11 +190,11 @@ class EmailCompose extends Component {
       this.setState({
         redirectToDrafts: true,
       })
-      alert('Saved as draft');
+      toast('Saved as draft');
     };
     const failureCallback = (err) => {
       console.log('Request failed', err);
-      alert("Sorry, your request to save as draft failed")
+      toast.error('Failed to save as draft');
     };
 
     this.fetchService.useFetch(API, options, successCallback, failureCallback);
