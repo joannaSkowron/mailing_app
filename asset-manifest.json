@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/mailing_app/static/css/main.bc5ce90c.chunk.css",
+    "main.js": "/mailing_app/static/js/main.82c9f233.chunk.js",
+    "main.js.map": "/mailing_app/static/js/main.82c9f233.chunk.js.map",
+    "runtime-main.js": "/mailing_app/static/js/runtime-main.fefd652e.js",
+    "runtime-main.js.map": "/mailing_app/static/js/runtime-main.fefd652e.js.map",
+    "static/css/2.214e3fa5.chunk.css": "/mailing_app/static/css/2.214e3fa5.chunk.css",
+    "static/js/2.45c62ac9.chunk.js": "/mailing_app/static/js/2.45c62ac9.chunk.js",
+    "static/js/2.45c62ac9.chunk.js.map": "/mailing_app/static/js/2.45c62ac9.chunk.js.map",
+    "index.html": "/mailing_app/index.html",
+    "precache-manifest.172bd4f6f4f672aed1f653e449b4262f.js": "/mailing_app/precache-manifest.172bd4f6f4f672aed1f653e449b4262f.js",
+    "service-worker.js": "/mailing_app/service-worker.js",
+    "static/css/2.214e3fa5.chunk.css.map": "/mailing_app/static/css/2.214e3fa5.chunk.css.map",
+    "static/css/main.bc5ce90c.chunk.css.map": "/mailing_app/static/css/main.bc5ce90c.chunk.css.map",
+    "static/js/2.45c62ac9.chunk.js.LICENSE.txt": "/mailing_app/static/js/2.45c62ac9.chunk.js.LICENSE.txt",
+    "static/media/avatar1.png": "/mailing_app/static/media/avatar1.7d0f3836.png",
+    "static/media/avatar2.png": "/mailing_app/static/media/avatar2.b9546314.png",
+    "static/media/avatar3.png": "/mailing_app/static/media/avatar3.5a4e7d16.png",
+    "static/media/avatar4.png": "/mailing_app/static/media/avatar4.224f59a4.png",
+    "static/media/avatar5.png": "/mailing_app/static/media/avatar5.8e318d8a.png",
+    "static/media/avatar6.png": "/mailing_app/static/media/avatar6.11b3efc7.png",
+    "static/media/bgc-image1.jpg": "/mailing_app/static/media/bgc-image1.f139e585.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fefd652e.js",
+    "static/css/2.214e3fa5.chunk.css",
+    "static/js/2.45c62ac9.chunk.js",
+    "static/css/main.bc5ce90c.chunk.css",
+    "static/js/main.82c9f233.chunk.js"
+  ]
+}
