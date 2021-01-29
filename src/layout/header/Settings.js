@@ -18,11 +18,12 @@ class Settings extends Component {
       },
       {
         name: 'Salmon',
-        style: { backgroundImage: 'linear-gradient(142deg, rgba(222,160,155,1) 40%, rgba(245,239,239,1) 100%)' }
+        style: { backgroundImage: 'linear-gradient(142deg, rgb(227 160 154) 20%, rgb(255 253 233) 100%)' }
       },
       {
-        name: 'Pastel forest',
-        style: { backgroundImage: 'linear-gradient(142deg, rgba(161,189,163,1) 40%, rgba(222,236,221,1) 100%)' }
+        name: 'Cucumber water',
+        style: { backgroundImage: 'linear-gradient(90deg, rgb(187 206 239) 0%, rgb(216 241 219) 100%)' }
+        // style: { backgroundImage: 'linear-gradient(142deg, rgba(161,189,163,1) 40%, rgba(222,236,221,1) 100%)' }
       },
       {
         name: 'Colorful background',
@@ -32,8 +33,8 @@ class Settings extends Component {
         }
       },
       {
-        name: 'Intesive',
-        style: { backgroundImage: 'linear-gradient( 291.1deg,  rgba(0,40,70,0.8) -4.8%, rgba(255,115,115,0.6) 82.7%, rgba(255,175,123,0.4) 97.2% )' }
+        name: 'Sunset',
+        style: { backgroundImage: 'linear-gradient(45deg, rgba(0, 40, 70, 0.85) -5%, rgba(255, 115, 115, 0.6) 80%, rgba(255, 175, 123, 0.4) 99%)' }
       },
     ];
 
