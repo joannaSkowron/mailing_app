@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Router basename="/mailing_app">
+        <Router basename="/mailing_app/#">
           <div className="app" style={this.state.appTheme}>
             <div className="header">{<Header handleBackgroundChange={this.handleBackgroundChange} />}</div>
             <div className="main-container">
