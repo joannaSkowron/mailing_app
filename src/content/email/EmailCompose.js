@@ -151,7 +151,7 @@ class EmailCompose extends Component {
         this.setState({
           redirectToInbox: true,
         });
-        toast('Email send');
+        toast('Email sent');
       }
       const failureCallback = (error) => {
         console.log('Request failed', error);
